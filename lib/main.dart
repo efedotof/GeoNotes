@@ -6,10 +6,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'Theme/cubit/theme_cubit.dart';
 import 'Theme/repositories/theme_settings.dart';
 import 'Theme/theme.dart';
+import 'features/map/cubit/map_cubit.dart';
 import 'route/app_route.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.
+  ensureInitialized();
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -24,6 +26,7 @@ void main() async {
       BlocProvider(
         create: (context) => ThemeCubit(interf: themeRepository),
       ),
+      BlocProvider(create: (context) => MapCubit())
       
     ],
     child: const MyApp(),

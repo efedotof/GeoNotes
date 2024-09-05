@@ -7,6 +7,12 @@ class RouteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+     return Container(
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.only(topRight: Radius.circular(14), topLeft: Radius.circular(14)),
+        color: Color(0xFFF7F6F2)
+      ),
+      child: const Center(child: Text('Route'),),
+    );
   }
 }
