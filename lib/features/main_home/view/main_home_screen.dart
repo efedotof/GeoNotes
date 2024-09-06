@@ -10,35 +10,35 @@ class MainHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AutoTabsRouter(
+      // Устанавливаем начальный индекс на MapRoute (индекс 2)
       homeIndex: 2,
       routes: const [
         SearchRoute(),
         RouteRoute(),
+        MapRoute(),
         SavedRoute(),
         SettingRoute(),
       ],
-      transitionBuilder: (context, child, animation) => FadeTransition(
-        opacity: animation,
-        child: child,
-      ),
-      builder: (context, childs) {
+      builder: (context, child) {
         final tabsRouter = AutoTabsRouter.of(context);
         return Scaffold(
-          body: Stack(children: [
-            const MapScreen(),
-            Positioned(
-              bottom: 0,
-              child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.1,
-                  child: childs),
-            )
-          ]),
+          body: Stack(
+            children: [
+              // MapScreen всегда на фоне
+              const Positioned.fill(
+                child: MapScreen(),
+              ),
+              // Остальные экраны поверх MapScreen
+              if (tabsRouter.activeIndex != 2) // Показываем только если активен не MapRoute
+                Positioned.fill(
+                  child: child,
+                ),
+            ],
+          ),
           bottomNavigationBar: BottomNavigationBar(
-            currentIndex: tabsRouter.activeIndex,
+            currentIndex: tabsRouter.activeIndex, // Выделяем текущую вкладку
             onTap: (index) {
-              if (tabsRouter.activeIndex == 2) {}
-              tabsRouter.setActiveIndex(index);
+              tabsRouter.setActiveIndex(index); // Переключаем на выбранную вкладку
             },
             items: const [
               BottomNavigationBarItem(
@@ -56,6 +56,13 @@ class MainHomeScreen extends StatelessWidget {
                 ),
               ),
               BottomNavigationBarItem(
+                label: 'Map',
+                icon: Icon(
+                  Icons.map_outlined,
+                  color: Color(0xFF232425),
+                ),
+              ),
+              BottomNavigationBarItem(
                 label: 'Saved',
                 icon: Icon(
                   Icons.book_outlined,
@@ -63,9 +70,9 @@ class MainHomeScreen extends StatelessWidget {
                 ),
               ),
               BottomNavigationBarItem(
-                label: 'Profile',
+                label: 'Setting',
                 icon: Icon(
-                  Icons.person_outline,
+                  Icons.settings,
                   color: Color(0xFF232425),
                 ),
               ),
