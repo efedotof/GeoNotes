@@ -7,12 +7,28 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(topRight: Radius.circular(14), topLeft: Radius.circular(14)),
-        color: Color(0xFFF7F6F2)
-      ),
-      child: const Center(child: Text('Searche'),),
+    return DraggableScrollableSheet(
+      initialChildSize: 0.1,  // Начальный размер
+      minChildSize: 0.1,      // Минимальный размер
+      maxChildSize: 0.8,      // Максимальный размер
+      builder: (BuildContext context, ScrollController scrollController) {
+        return Container(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(14), 
+              topLeft: Radius.circular(14)
+            ),
+            color: Color(0xFFF7F6F2),
+          ),
+          child: ListView(
+            controller: scrollController,
+            children: const [
+              Center(child: Text('Searche')),
+              // Другие виджеты здесь
+            ],
+          ),
+        );
+      },
     );
   }
 }

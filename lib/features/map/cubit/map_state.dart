@@ -1,10 +1,21 @@
 part of 'map_cubit.dart';
 
-sealed class MapState extends Equatable {
+abstract class MapState extends Equatable {
   const MapState();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
-final class MapInitial extends MapState {}
+class MapInitial extends MapState {}
+
+class MapLocationUpdated extends MapState {
+  final LatLng location;
+
+  const MapLocationUpdated({required this.location});
+
+  @override
+  List<Object?> get props => [location];
+}
+
+class MapLoading extends MapState {}
