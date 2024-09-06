@@ -1,16 +1,8 @@
-# geo_notes
+# geo_notes v.1.0.1
 
-A new Flutter project.
+# Example Images
 
-## Getting Started
+<img  width = '200' heigth = '200' src ='https://github.com/user-attachments/assets/5071fb3f-562b-40a4-a3a1-1486ea5eb112' />
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Thank you so much, Maksym Klodchyk!
+You can see his work here:  <a href ="https://www.behance.net/33272d7d"> link </a>
