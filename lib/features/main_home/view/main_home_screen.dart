@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7004069dcc966194bb1c81015e376a046fa04b45
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:geo_notes/features/map/map.dart';
@@ -11,7 +14,6 @@ class MainHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AutoTabsRouter(
-      // Устанавливаем начальный индекс на MapRoute (индекс 2)
       homeIndex: 2,
       routes: const [
         SearchRoute(),
@@ -25,21 +27,21 @@ class MainHomeScreen extends StatelessWidget {
         return Scaffold(
           body: Stack(
             children: [
-              // MapScreen всегда на фоне
+
               const Positioned.fill(
                 child: MapScreen(),
               ),
-              // Остальные экраны поверх MapScreen
-              if (tabsRouter.activeIndex != 2) // Показываем только если активен не MapRoute
+           
+              if (tabsRouter.activeIndex != 2) 
                 Positioned.fill(
                   child: child,
                 ),
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(
-            currentIndex: tabsRouter.activeIndex, // Выделяем текущую вкладку
+            currentIndex: tabsRouter.activeIndex, 
             onTap: (index) {
-              tabsRouter.setActiveIndex(index); // Переключаем на выбранную вкладку
+              tabsRouter.setActiveIndex(index); 
             },
             items: const [
               BottomNavigationBarItem(
@@ -84,4 +86,7 @@ class MainHomeScreen extends StatelessWidget {
     );
   }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7004069dcc966194bb1c81015e376a046fa04b45

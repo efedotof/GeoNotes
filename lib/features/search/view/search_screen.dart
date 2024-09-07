@@ -25,7 +25,7 @@ class SearchScreen extends StatelessWidget {
             controller: scrollController,
             children: const [
               Center(child: Text('Searche')),
-     
+
             ],
           ),
         );

@@ -9,9 +9,9 @@ class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-      initialChildSize: 0.3,  
-      minChildSize: 0.1,      
-      maxChildSize: 0.8,    
+      initialChildSize: 0.3,  // Начальный размер (30% экрана)
+      minChildSize: 0.1,      // Минимальный размер (10% экрана)
+      maxChildSize: 0.8,      // Максимальный размер (80% экрана)
       builder: (BuildContext context, ScrollController scrollController) {
         return Container(
           decoration: const BoxDecoration(
@@ -25,12 +25,11 @@ class SettingScreen extends StatelessWidget {
             controller: scrollController,
             children: const [
               Center(child: Text('Setting')),
-              
+              // Добавьте сюда любые дополнительные виджеты для экрана настроек
             ],
           ),
         );
       },
     );
   }
-
 }
