@@ -28,12 +28,13 @@ class MapCubit extends Cubit<MapState> {
 
   Future<void> _getCurrentLocation(MapController mapController) async {
     try {
-      emit(MapLoading()); 
+      emit(MapLoading());
       final status = await Permission.location.request();
       if (status.isGranted) {
         final position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high,
-          forceAndroidLocationManager: true,
+          locationSettings: const LocationSettings(
+            accuracy: LocationAccuracy.high,
+          ),
         );
         final location = LatLng(position.latitude, position.longitude);
 
@@ -52,12 +53,13 @@ class MapCubit extends Cubit<MapState> {
 
   Future<void> updateCurrentLocation(MapController mapController) async {
     try {
-      emit(MapLoading()); 
+      emit(MapLoading());
       final status = await Permission.location.request();
       if (status.isGranted) {
         final position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high,
-          forceAndroidLocationManager: true,
+          locationSettings: const LocationSettings(
+            accuracy: LocationAccuracy.high,
+          ),
         );
         final location = LatLng(position.latitude, position.longitude);
 
@@ -79,4 +81,8 @@ class MapCubit extends Cubit<MapState> {
     mapController.move(location, 17);
     emit(MapLocationUpdated(location: location));
   }
+
+
+  
+
 }

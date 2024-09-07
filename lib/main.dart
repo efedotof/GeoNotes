@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geo_notes/features/map/cubit/cubit/marker_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Theme/cubit/theme_cubit.dart';
@@ -26,7 +27,8 @@ void main() async {
       BlocProvider(
         create: (context) => ThemeCubit(interf: themeRepository),
       ),
-      BlocProvider(create: (context) => MapCubit())
+      BlocProvider(create: (context) => MapCubit()),
+       BlocProvider(create: (context) => MarkerCubit())
       
     ],
     child: const MyApp(),
