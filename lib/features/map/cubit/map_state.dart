@@ -20,3 +20,4 @@ class MapLocationUpdated extends MapState {
 }
 
 class MapLoading extends MapState {}
+class MapPermissionDenied extends MapState {}

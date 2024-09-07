@@ -13,7 +13,6 @@ import 'package:geocoding/geocoding.dart';
 part 'map_state.dart';
 
 
-
 class MapCubit extends Cubit<MapState> {
   MapCubit() : super(MapInitial());
 
@@ -29,64 +28,58 @@ class MapCubit extends Cubit<MapState> {
   }
 
   Future<void> _getCurrentLocation(MapController mapController) async {
-    try {
-      emit(MapLoading());
-      final status = await Permission.location.request();
-      if (status.isGranted) {
-        final position = await Geolocator.getCurrentPosition(
-          locationSettings: const LocationSettings(
-            accuracy: LocationAccuracy.high,
-          ),
-        );
-        final location = LatLng(position.latitude, position.longitude);
+  try {
+    emit(MapLoading());
+    final status = await Permission.location.request();
+    if (status.isGranted) {
+      final position = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.high,
+        ),
+      );
+      final location = LatLng(position.latitude, position.longitude);
+      final cityName = await _getCityNameFromCoordinates(position.latitude, position.longitude);
 
-        // Обратное геокодирование для определения города
-        final cityName = await _getCityNameFromCoordinates(
-            position.latitude, position.longitude);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        mapController.move(location, 17);
+      });
 
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          mapController.move(location, 17);
-        });
-
-        emit(MapLocationUpdated(location: location, cityName: cityName));
-      } else {
-        log('Location permission denied');
-      }
-    } catch (e) {
-      log('Error: $e');
+      emit(MapLocationUpdated(location: location, cityName: cityName));
+    } else {
+      emit(MapPermissionDenied());
     }
+  } catch (e) {
+    log('Error: $e');
   }
+}
 
   Future<void> updateCurrentLocation(MapController mapController) async {
-    try {
-      emit(MapLoading());
-      final status = await Permission.location.request();
-      if (status.isGranted) {
-        final position = await Geolocator.getCurrentPosition(
-          locationSettings: const LocationSettings(
-            accuracy: LocationAccuracy.high,
-          ),
-        );
-        final location = LatLng(position.latitude, position.longitude);
+  try {
+    emit(MapLoading());
+    final status = await Permission.location.request();
+    if (status.isGranted) {
+      final position = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.high,
+        ),
+      );
+      final location = LatLng(position.latitude, position.longitude);
+      final cityName = await _getCityNameFromCoordinates(position.latitude, position.longitude);
 
-        // Обратное геокодирование для определения города
-        final cityName = await _getCityNameFromCoordinates(
-            position.latitude, position.longitude);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        mapController.move(location, 17);
+      });
 
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          mapController.move(location, 17);
-        });
-
-        emit(MapLocationUpdated(location: location, cityName: cityName));
-      } else {
-        log('Location permission denied');
-      }
-    } catch (e) {
-      log('Error: $e');
+      emit(MapLocationUpdated(location: location, cityName: cityName));
+    } else {
+      emit(MapPermissionDenied());
     }
+  } catch (e) {
+    log('Error: $e');
   }
+}
 
-  // Новая функция для обратного геокодирования координат в название города
+
   Future<String> _getCityNameFromCoordinates(
       double latitude, double longitude) async {
     try {

@@ -4,8 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geo_notes/features/map/cubit/cubit/marker_cubit.dart';
 import 'package:geo_notes/features/map/cubit/map_cubit.dart';
-
-import 'package:geo_notes/features/map/widget/model/city_model.dart';
+import 'package:latlong2/latlong.dart';
 
 @RoutePage()
 class MapScreen extends StatefulWidget {
@@ -17,12 +16,12 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   MapController mapController = MapController();
-  CityModel? selectedCity;
 
   @override
   Widget build(BuildContext context) {
     context.read<MapCubit>().initializeMap(mapController);
     context.read<MarkerCubit>();
+
     return Scaffold(
       body: BlocBuilder<MapCubit, MapState>(
         builder: (context, mapState) {
@@ -70,7 +69,7 @@ class _MapScreenState extends State<MapScreen> {
                           ],
                         );
                       },
-                    ),
+                    )
                   ],
                 ),
                 Positioned(
@@ -103,27 +102,28 @@ class _MapScreenState extends State<MapScreen> {
                       color: Color(0xFFF2ECEC),
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                     ),
-                    child: DropdownButton<CityModel>(
-                      value: selectedCity,
-                      hint: const Text('Select City'),
-                      items: context.read<MapCubit>().cities.map((city) {
-                        return DropdownMenuItem<CityModel>(
-                          value: city,
-                          child: Text(city.name),
-                        );
-                      }).toList(),
-                      onChanged: (city) {
-                        setState(() {
-                          selectedCity = city;
-                        });
-                        if (city != null) {
-                          context
-                              .read<MapCubit>()
-                              .moveToCity(city, mapController);
-                        }
-                      },
+                    child: Text(
+                      mapState.cityName,
+                      style: const TextStyle(fontSize: 16, color: Colors.black),
                     ),
                   ),
+                ),
+              ],
+            );
+          } else if (mapState is MapPermissionDenied) {
+            return FlutterMap(
+              mapController: mapController,
+              options: const MapOptions(
+                initialCenter: LatLng(0, 0),
+                initialZoom: 2.5,
+                maxZoom: 17,
+                minZoom: 3.5,
+              ),
+              children: [
+                TileLayer(
+                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  userAgentPackageName: 'com.efedotov.notes_on_the_map',
+                  retinaMode: true,
                 ),
               ],
             );
