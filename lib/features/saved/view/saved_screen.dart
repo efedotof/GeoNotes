@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> 7004069dcc966194bb1c81015e376a046fa04b45
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 
@@ -14,19 +10,11 @@ class SavedScreen extends StatelessWidget {
     return DraggableScrollableSheet(
       initialChildSize: 0.3,  
       minChildSize: 0.1,      
-<<<<<<< HEAD
       maxChildSize: 0.8,     
       builder: (BuildContext context, ScrollController scrollController) {
         return GestureDetector(
           onTap: () {
     
-=======
-      maxChildSize: 0.8,      
-      builder: (BuildContext context, ScrollController scrollController) {
-        return GestureDetector(
-          onTap: () {
-       
->>>>>>> 7004069dcc966194bb1c81015e376a046fa04b45
             AutoRouter.of(context).popUntilRoot();
           },
           child: Container(
@@ -39,15 +27,49 @@ class SavedScreen extends StatelessWidget {
             ),
             child: ListView(
               controller: scrollController,
-              children: const [
+              children:  [
                 Center(
-                  child: Text('Saved'),
+                  child: Text('Your list', style: Theme.of(context).textTheme.titleSmall,),
                 ),
-<<<<<<< HEAD
-           
-=======
-
->>>>>>> 7004069dcc966194bb1c81015e376a046fa04b45
+                const SizedBox(height: 30,),
+                Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05),
+                  child: Wrap(
+                    runSpacing: 15,
+                    children: [
+                       Card(
+                  child: ListTile(
+                    title:  Text('Italian Restaurant', style: Theme.of(context).textTheme.titleMedium),
+                    subtitle:  Text('Cet C, 60-62, 1072 Amsterdam, The Netherlands', style: Theme.of(context).textTheme.titleSmall),
+                    trailing:  const Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                  
+                    },
+                  ),
+                                ),
+                                 Card(
+                  child: ListTile(
+                    title:  Text('Italian Restaurant', style: Theme.of(context).textTheme.titleMedium),
+                    subtitle:  Text('Cet C, 60-62, 1072 Amsterdam, The Netherlands', style: Theme.of(context).textTheme.titleSmall),
+                    trailing:   const Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                  
+                    },
+                  ),
+                                ),
+                                 Card(
+                  child: ListTile(
+                    title:  Text('Italian Restaurant', style: Theme.of(context).textTheme.titleMedium),
+                    subtitle:  Text('Cet C, 60-62, 1072 Amsterdam, The Netherlands', style: Theme.of(context).textTheme.titleSmall),
+                    trailing:   const Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                  
+                    },
+                  ),
+                                ),
+                    ],
+                  ),
+                )
               ],
             ),
           ),
@@ -56,7 +78,3 @@ class SavedScreen extends StatelessWidget {
     );
   }
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 7004069dcc966194bb1c81015e376a046fa04b45
