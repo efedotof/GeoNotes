@@ -28,9 +28,9 @@ class SearchScreen extends StatelessWidget {
                 child: TextField(
                   decoration: InputDecoration(
                     hintText: 'Search',
-                    prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                    prefixIcon: const Icon(Icons.search),
                     suffixIcon: IconButton(
-                      icon: const Icon(Icons.cancel, color: Colors.grey),
+                      icon: const Icon(Icons.cancel),
                       onPressed: () {
         
                       },
@@ -44,27 +44,31 @@ class SearchScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              ListTile(
-                title: const Text('Hotel Couture', style: TextStyle(color: Colors.black)),
-                subtitle: const Text('XO Hotels | T, 1062 EA Amsterdam', style: TextStyle(color: Colors.grey)),
-                trailing: const Text('2 km', style: TextStyle(color: Colors.black)),
-                onTap: () {
-
-                },
+              Card(
+                child: ListTile(
+                  title:  Text('Hotel Couture', style: Theme.of(context).textTheme.titleMedium),
+                  subtitle:  Text('XO Hotels | T, 1062 EA Amsterdam', style: Theme.of(context).textTheme.titleSmall),
+                  trailing:  Text('2 km', style: Theme.of(context).textTheme.titleMedium),
+                  onTap: () {
+                
+                  },
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  title:  Text('Italian Restaurant', style: Theme.of(context).textTheme.titleMedium),
+                  subtitle:  Text('Cet C, 60-62, 1072 Amsterdam, The Netherlands', style: Theme.of(context).textTheme.titleSmall),
+                  trailing:  Text('4 km', style: Theme.of(context).textTheme.titleMedium),
+                  onTap: () {
+                
+                  },
+                ),
               ),
               ListTile(
-                title: const Text('Italian Restaurant', style: TextStyle(color: Colors.black)),
-                subtitle: const Text('Cet C, 60-62, 1072 Amsterdam, The Netherlands', style: TextStyle(color: Colors.grey)),
-                trailing: const Text('4 km', style: TextStyle(color: Colors.black)),
-                onTap: () {
-
-                },
-              ),
-              ListTile(
-                title: const Text(
+                title:  Text(
                   'Clear search history',
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.black87),
+                  style:Theme.of(context).textTheme.titleMedium,
                 ),
                 onTap: () {
     

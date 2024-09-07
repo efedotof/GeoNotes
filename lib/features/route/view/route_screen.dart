@@ -8,9 +8,9 @@ class RouteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-      initialChildSize: 0.3,  // Adjusted to the height you may want
-      minChildSize: 0.1,      // Minimum drag extent
-      maxChildSize: 0.8,      // Maximum drag extent
+      initialChildSize: 0.5,  
+      minChildSize: 0.1,      
+      maxChildSize: 0.8,     
       builder: (BuildContext context, ScrollController scrollController) {
         return GestureDetector(
           onTap: () {
@@ -22,7 +22,7 @@ class RouteScreen extends StatelessWidget {
                 topRight: Radius.circular(14),
                 topLeft: Radius.circular(14),
               ),
-              color: Color(0xFFF7F6F2), // Off-white background color
+              color: Color(0xFFF7F6F2),
             ),
             child: ListView(
               controller: scrollController,
@@ -31,9 +31,7 @@ class RouteScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
                   child: Column(
                     children: [
-                    
                       const SizedBox(height: 8),
-                      // Title and icons row
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -45,17 +43,17 @@ class RouteScreen extends StatelessWidget {
                               color: Colors.grey[200],
                               borderRadius: BorderRadius.circular(14)
                             ),
-                            child: const Center(
+                            child:  Center(
                               child: ListTile(
-                                leading: Icon(Icons.directions_walk, color: Colors.grey),
+                                leading: const Icon(Icons.directions_walk),
                                 title: Text(
                                 '1 hr, 05 min',
-                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                style: Theme.of(context).textTheme.titleMedium,
                                 
                               ),
                               subtitle:  Text(
                                 '6 km',
-                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.grey),
+                                style: Theme.of(context).textTheme.titleSmall,
                               
                               )),
                             ),
@@ -63,24 +61,20 @@ class RouteScreen extends StatelessWidget {
                           const Wrap(
                             spacing: 14,
                             children: [
-                              Icon(Icons.directions_car, color: Colors.grey),
-                              Icon(Icons.train, color: Colors.grey),
-                              Icon(Icons.directions_walk, color: Colors.grey),
-                              Icon(Icons.pedal_bike, color: Colors.grey),
+                              Icon(Icons.directions_car),
+                              Icon(Icons.train),
+                              Icon(Icons.directions_walk),
+                              Icon(Icons.pedal_bike),
                             ],
                           )
                         ],
                       ),
                       const SizedBox(height: 12),
                       // Locations
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(14)
-                        ),
+                      Card(
                         child: ListTile(
-                          tileColor:Colors.grey[200],
-                          leading: Icon(Icons.location_pin, color: Theme.of(context).primaryColor),
+                     
+                          leading: const Icon(Icons.location_pin),
                           title: const Text('My location'),
                           trailing:const Text(
                                 'Map',
@@ -92,13 +86,9 @@ class RouteScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 10,),
-                      Container(
-                         decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(14)
-                        ),
+                      Card(
                         child: ListTile(
-                          leading: Icon(Icons.restaurant, color: Theme.of(context).primaryColor),
+                          leading: const Icon(Icons.restaurant),
                           title: const Text("Restaurant Zaza's"),
                           trailing:  const Text(
                                 'Map',
@@ -112,11 +102,7 @@ class RouteScreen extends StatelessWidget {
                       const SizedBox(height: 12),
                       ElevatedButton(
                         onPressed: () {},
-                        child: const Text('Start', style: TextStyle (color: Colors.white),),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF102930),
-                          minimumSize: const Size.fromHeight(50), // Button height
-                        ),
+                        child:  Text('Start', style: Theme.of(context).textTheme.titleLarge,),
                       ),
                     ],
                   ),

@@ -3,7 +3,40 @@ import 'package:flutter/material.dart';
 
 
 final dartTheme = ThemeData(
-  //  dartTheme
+  scaffoldBackgroundColor: const Color(0xFF101721),
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    
+    backgroundColor: Color(0xFFF2EDED),
+    selectedIconTheme: IconThemeData(
+      color: Color(0xFFDBDDDF),
+
+    ),
+    unselectedIconTheme: IconThemeData(
+      color: Color(0xFFDBDDDF),
+    ),
+    selectedItemColor: Color(0xFF7C7F85)
+  ),
+  cardTheme: const CardTheme(
+    color: Color(0xFFEFEEEA),
+  ),
+
+ textTheme: const TextTheme(
+    titleMedium: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+    titleSmall:  TextStyle(color: Colors.grey),
+  ),
+
+  iconTheme: const IconThemeData(
+    color: Color(0xFF72777F),
+  ),
+
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: const Color(0xFF102930),
+      minimumSize: const Size.fromHeight(50), 
+    )
+  )
+
+  
 );
 
 final lightTheme = ThemeData(

@@ -9,8 +9,10 @@ import 'package:latlong2/latlong.dart';
 import 'package:flutter/widgets.dart';
 
 import '../widget/model/city_model.dart';
-
+import 'package:geocoding/geocoding.dart';
 part 'map_state.dart';
+
+
 
 class MapCubit extends Cubit<MapState> {
   MapCubit() : super(MapInitial());
@@ -38,11 +40,15 @@ class MapCubit extends Cubit<MapState> {
         );
         final location = LatLng(position.latitude, position.longitude);
 
+        // Обратное геокодирование для определения города
+        final cityName = await _getCityNameFromCoordinates(
+            position.latitude, position.longitude);
+
         WidgetsBinding.instance.addPostFrameCallback((_) {
           mapController.move(location, 17);
         });
 
-        emit(MapLocationUpdated(location: location));
+        emit(MapLocationUpdated(location: location, cityName: cityName));
       } else {
         log('Location permission denied');
       }
@@ -63,11 +69,15 @@ class MapCubit extends Cubit<MapState> {
         );
         final location = LatLng(position.latitude, position.longitude);
 
+        // Обратное геокодирование для определения города
+        final cityName = await _getCityNameFromCoordinates(
+            position.latitude, position.longitude);
+
         WidgetsBinding.instance.addPostFrameCallback((_) {
           mapController.move(location, 17);
         });
 
-        emit(MapLocationUpdated(location: location));
+        emit(MapLocationUpdated(location: location, cityName: cityName));
       } else {
         log('Location permission denied');
       }
@@ -76,13 +86,25 @@ class MapCubit extends Cubit<MapState> {
     }
   }
 
+  // Новая функция для обратного геокодирования координат в название города
+  Future<String> _getCityNameFromCoordinates(
+      double latitude, double longitude) async {
+    try {
+      final placemarks = await placemarkFromCoordinates(latitude, longitude);
+      if (placemarks.isNotEmpty) {
+        return placemarks.first.locality ?? 'Unknown City';
+      } else {
+        return 'Unknown City';
+      }
+    } catch (e) {
+      log('Error in geocoding: $e');
+      return 'Unknown City';
+    }
+  }
+
   void moveToCity(CityModel city, MapController mapController) {
     final location = LatLng(city.idx, city.idy);
     mapController.move(location, 17);
-    emit(MapLocationUpdated(location: location));
+    emit(MapLocationUpdated(location: location, cityName: city.name));
   }
-
-
-  
-
 }

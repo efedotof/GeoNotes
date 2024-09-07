@@ -11,8 +11,9 @@ class MapInitial extends MapState {}
 
 class MapLocationUpdated extends MapState {
   final LatLng location;
+  final String cityName;
 
-  const MapLocationUpdated({required this.location});
+  const MapLocationUpdated( {required this.location, required this.cityName,});
 
   @override
   List<Object?> get props => [location];

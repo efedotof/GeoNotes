@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> 7004069dcc966194bb1c81015e376a046fa04b45
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:geo_notes/features/map/map.dart';
@@ -86,7 +83,3 @@ class MainHomeScreen extends StatelessWidget {
     );
   }
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 7004069dcc966194bb1c81015e376a046fa04b45

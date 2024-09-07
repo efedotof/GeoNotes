@@ -11,8 +11,7 @@ import 'features/map/cubit/map_cubit.dart';
 import 'route/app_route.dart';
 
 void main() async {
-  WidgetsFlutterBinding.
-  ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -50,7 +49,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, state) {
         return MaterialApp.router(
-          theme: state.isDark ? lightTheme : dartTheme,
+          theme: state.isDark ? dartTheme: lightTheme ,
           routerConfig: _appRouter.config(),
           debugShowCheckedModeBanner: false,
         );
