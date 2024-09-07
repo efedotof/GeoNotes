@@ -41,7 +41,8 @@ class _MapScreenState extends State<MapScreen> {
                   ),
                   children: [
                     TileLayer(
-                      urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                      urlTemplate:
+                          'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                       userAgentPackageName: 'com.efedotov.notes_on_the_map',
                       retinaMode: true,
                     ),
@@ -59,7 +60,7 @@ class _MapScreenState extends State<MapScreen> {
                               width: 40,
                               height: 40,
                               child: Transform.rotate(
-                                angle: rotation * (3.14159 / 180), 
+                                angle: rotation * (3.14159 / 180),
                                 child: const Icon(
                                   Icons.send_rounded,
                                   color: Color(0xFF10282E),
@@ -76,7 +77,9 @@ class _MapScreenState extends State<MapScreen> {
                   bottom: 30,
                   right: 10,
                   child: GestureDetector(
-                    onTap: () => context.read<MapCubit>().updateCurrentLocation(mapController),
+                    onTap: () => context
+                        .read<MapCubit>()
+                        .updateCurrentLocation(mapController),
                     child: Container(
                       width: 50,
                       height: 50,
@@ -114,7 +117,9 @@ class _MapScreenState extends State<MapScreen> {
                           selectedCity = city;
                         });
                         if (city != null) {
-                          context.read<MapCubit>().moveToCity(city, mapController);
+                          context
+                              .read<MapCubit>()
+                              .moveToCity(city, mapController);
                         }
                       },
                     ),
