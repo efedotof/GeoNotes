@@ -1,0 +1,2 @@
+D:/programm/geo_notes/android/app/.cxx/Debug/1cw1i442/x86_64/CMakeFiles/edit_cache.dir
+D:/programm/geo_notes/android/app/.cxx/Debug/1cw1i442/x86_64/CMakeFiles/rebuild_cache.dir

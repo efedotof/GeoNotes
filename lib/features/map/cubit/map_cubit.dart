@@ -100,4 +100,9 @@ class MapCubit extends Cubit<MapState> {
     mapController.move(location, 17);
     emit(MapLocationUpdated(location: location, cityName: city.name));
   }
+
+  void addMarkerAtLocation(LatLng location, String cityName) {
+    emit(MapMarkerAdded(location: location, cityName: cityName));
+  }
+
 }

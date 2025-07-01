@@ -28,15 +28,28 @@ class _MapScreenState extends State<MapScreen> {
         builder: (context, mapState) {
           if (mapState is MapLoading) {
             return const Center(child: CircularProgressIndicator());
-          } else if (mapState is MapLocationUpdated) {
+          } else if (mapState is MapLocationUpdated ||
+              mapState is MapMarkerAdded) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              mapController.move(mapState.location, 17);
+              final location = (mapState as dynamic).location;
+              mapController.move(location, 17);
             });
+
+            final location =
+                mapState is MapLocationUpdated
+                    ? mapState.location
+                    : (mapState as MapMarkerAdded).location;
+            final cityName =
+                mapState is MapLocationUpdated
+                    ? mapState.cityName
+                    : (mapState as MapMarkerAdded).cityName;
 
             return MapContent(
               mapController: mapController,
-              location: mapState.location,
-              cityName: mapState.cityName,
+              location: location,
+              cityName: cityName,
+              markerLocation: mapState is MapMarkerAdded ? location : null,
+              markerCityName: mapState is MapMarkerAdded ? cityName : null,
             );
           } else if (mapState is MapPermissionDenied) {
             return const MapPermissionDeniedContent();

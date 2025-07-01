@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:http/http.dart' as http;
@@ -22,8 +24,8 @@ class SearcheCubit extends Cubit<SearcheState> {
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
+        log('Raw JSON data: $data');
         if (data.isNotEmpty) {
-          // Собираем список результатов поиска
           final locations = data.map<Location>((item) => Location.fromJson(item)).toList();
           emit(SearcheSuccess(locations: locations));
         } else {
@@ -44,12 +46,20 @@ class SearcheCubit extends Cubit<SearcheState> {
 
 class Location {
   final String displayName;
+  final double latitude;
+  final double longitude;
 
-  Location({required this.displayName});
+  Location({
+    required this.displayName,
+    required this.latitude,
+    required this.longitude,
+  });
 
   factory Location.fromJson(Map<String, dynamic> json) {
     return Location(
       displayName: json['display_name'] ?? 'Unnamed location',
+      latitude: double.tryParse(json['lat']?.toString() ?? '0.0') ?? 0.0,
+      longitude: double.tryParse(json['lon']?.toString() ?? '0.0') ?? 0.0,
     );
   }
 }

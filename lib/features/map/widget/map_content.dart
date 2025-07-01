@@ -8,14 +8,18 @@ import 'city_name_display.dart';
 
 class MapContent extends StatelessWidget {
   final MapController mapController;
-  final LatLng location;
+  final LatLng location; // User's current location
   final String cityName;
+  final LatLng? markerLocation; // Predefined marker location
+  final String? markerCityName;
 
   const MapContent({
     super.key,
     required this.mapController,
     required this.location,
     required this.cityName,
+    this.markerLocation,
+    this.markerCityName,
   });
 
   @override
@@ -45,14 +49,27 @@ class MapContent extends StatelessWidget {
 
                 return MarkerLayer(
                   markers: [
+                    if (markerLocation != null)
+                      Marker(
+                        point: markerLocation!,
+                        width: 40,
+                        height: 40,
+                        child: Transform.rotate(
+                          angle: rotation * (3.14159 / 180), // Rotation in radians
+                          child: const Icon(
+                            Icons.flag, // Marker icon
+                            color: Colors.red,
+                          ),
+                        ),
+                      ),
                     Marker(
                       point: location,
                       width: 40,
                       height: 40,
                       child: Transform.rotate(
-                        angle: rotation * (3.14159 / 180), // Поворот маркера в радианах
+                        angle: rotation * (3.14159 / 180), // Rotation in radians
                         child: const Icon(
-                          Icons.send_rounded, // Иконка маркера
+                          Icons.send_rounded, // Marker icon
                           color: Color(0xFF10282E),
                         ),
                       ),
