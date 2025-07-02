@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geo_notes/features/map/cubit/cubit/marker_cubit.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:geo_notes/features/home/cubit/cubit/marker_cubit.dart';
 import 'location_button.dart';
 import 'city_name_display.dart';
 
 class MapContent extends StatelessWidget {
   final MapController mapController;
-  final LatLng location; // User's current location
+  final LatLng location;
   final String cityName;
-  final LatLng? markerLocation; // Predefined marker location
+  final LatLng? markerLocation;
   final String? markerCityName;
 
   const MapContent({
@@ -40,44 +40,44 @@ class MapContent extends StatelessWidget {
               userAgentPackageName: 'com.efedotov.notes_on_the_map',
               retinaMode: true,
             ),
-            BlocBuilder<MarkerCubit, MarkerState>(
-              builder: (context, markerState) {
-                double rotation = 0;
-                if (markerState is MarkerRotationUpdated) {
-                  rotation = markerState.heading;
-                }
+            // BlocBuilder<MarkerCubit, MarkerState>(
+            //   builder: (context, markerState) {
+            //     double rotation = 0;
+            //     if (markerState is MarkerRotationUpdated) {
+            //       rotation = markerState.heading;
+            //     }
 
-                return MarkerLayer(
-                  markers: [
-                    if (markerLocation != null)
-                      Marker(
-                        point: markerLocation!,
-                        width: 40,
-                        height: 40,
-                        child: Transform.rotate(
-                          angle: rotation * (3.14159 / 180), // Rotation in radians
-                          child: const Icon(
-                            Icons.flag, // Marker icon
-                            color: Colors.red,
-                          ),
-                        ),
-                      ),
-                    Marker(
-                      point: location,
-                      width: 40,
-                      height: 40,
-                      child: Transform.rotate(
-                        angle: rotation * (3.14159 / 180), // Rotation in radians
-                        child: const Icon(
-                          Icons.send_rounded, // Marker icon
-                          color: Color(0xFF10282E),
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
+            //     return MarkerLayer(
+            //       markers: [
+            //         if (markerLocation != null)
+            //           Marker(
+            //             point: markerLocation!,
+            //             width: 40,
+            //             height: 40,
+            //             child: Transform.rotate(
+            //               angle: rotation * (3.14159 / 180),
+            //               child: const Icon(
+            //                 Icons.flag,
+            //                 color: Colors.red,
+            //               ),
+            //             ),
+            //           ),
+            //         Marker(
+            //           point: location,
+            //           width: 40,
+            //           height: 40,
+            //           child: Transform.rotate(
+            //             angle: rotation * (3.14159 / 180),
+            //             child: const Icon(
+            //               Icons.send_rounded,
+            //               color: Color(0xFF10282E),
+            //             ),
+            //           ),
+            //         ),
+            //       ],
+            //     );
+            //   },
+            // ),
           ],
         ),
         LocationButton(mapController: mapController),

@@ -1,10 +1,6 @@
 part of 'splash_cubit.dart';
 
-sealed class SplashState extends Equatable {
-  const SplashState();
-
-  @override
-  List<Object> get props => [];
+@freezed
+class SplashState with _$SplashState {
+  const factory SplashState.initial() = _Initial;
 }
-
-final class SplashInitial extends SplashState {}

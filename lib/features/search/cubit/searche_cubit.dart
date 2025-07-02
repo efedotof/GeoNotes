@@ -1,65 +1,47 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:geocoding/geocoding.dart';
 
 part 'searche_state.dart';
+part 'searche_cubit.freezed.dart';
 
 class SearcheCubit extends Cubit<SearcheState> {
-  SearcheCubit() : super(SearcheInitial());
+  SearcheCubit() : super(SearcheState.initial());
 
   Future<void> searchLocation(String query) async {
     if (query.isEmpty) {
-      emit(SearcheInitial());
+      emit(SearcheState.initial());
       return;
     }
 
-    emit(SearcheLoading());
+    emit(SearcheState.searcheLoading());
     try {
       final response = await http.get(
-        Uri.parse('https://nominatim.openstreetmap.org/search?q=$query&format=json'),
+        Uri.parse(
+            'https://nominatim.openstreetmap.org/search?q=$query&format=json'),
       );
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        log('Raw JSON data: $data');
+        debugPrint('Raw JSON data: $data');
         if (data.isNotEmpty) {
-          final locations = data.map<Location>((item) => Location.fromJson(item)).toList();
-          emit(SearcheSuccess(locations: locations));
+          final locations = data
+              .map<Location>((item) => LocationModel.fromJson(item))
+              .toList();
+          emit(SearcheState.searcheSuccess(locations: locations));
         } else {
-          emit(const SearcheError('No results found'));
+          emit(const SearcheState.searcheError('No results found'));
         }
       } else {
-        emit(const SearcheError('Failed to load search results'));
+        emit(const SearcheState.searcheError('Failed to load search results'));
       }
     } catch (e) {
-      emit(SearcheError('Error: ${e.toString()}'));
+      emit(SearcheState.searcheError('Error: ${e.toString()}'));
     }
   }
 
   void clearSearch() {
-    emit(SearcheInitial());
-  }
-}
-
-class Location {
-  final String displayName;
-  final double latitude;
-  final double longitude;
-
-  Location({
-    required this.displayName,
-    required this.latitude,
-    required this.longitude,
-  });
-
-  factory Location.fromJson(Map<String, dynamic> json) {
-    return Location(
-      displayName: json['display_name'] ?? 'Unnamed location',
-      latitude: double.tryParse(json['lat']?.toString() ?? '0.0') ?? 0.0,
-      longitude: double.tryParse(json['lon']?.toString() ?? '0.0') ?? 0.0,
-    );
+    emit(SearcheState.initial());
   }
 }

@@ -1,11 +1,10 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'theme_interf.dart';
+import 'theme_interface.dart';
 
-class  ThemeRepository implements ThemeInterf {
+class ThemeRepository implements ThemeInterface {
   ThemeRepository({required this.preferences});
-  
-  
+
   final SharedPreferences preferences;
 
   static const _isDarkThemeSelectedKey = 'dark_theme_selected_key';
@@ -20,7 +19,4 @@ class  ThemeRepository implements ThemeInterf {
   Future<void> setDarkThemeSelected(bool selected) async {
     await preferences.setBool(_isDarkThemeSelectedKey, selected);
   }
-  
-
-
 }

@@ -39,15 +39,15 @@ class OnboardingScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TextButton(onPressed: (){}, child: const Text('Skip')),
+                  TextButton(onPressed: () {}, child: const Text('Skip')),
                   GestureDetector(
-                    onTap: () => context.read<OnboardingCubit>().nextPage(context,tabsRouter ),
+                    // onTap: () => context.read<OnboardingCubit>().nextPage(context,tabsRouter ),
                     child: Container(
                       decoration: BoxDecoration(
                           color: const Color(0xFF102930),
                           borderRadius: BorderRadius.circular(18)),
                       width: MediaQuery.of(context).size.width * 0.25,
-                      height:40,
+                      height: 40,
                       padding: const EdgeInsets.all(10),
                       alignment: Alignment.center,
                       child: const Row(

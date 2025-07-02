@@ -1,12 +1,14 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter_compass/flutter_compass.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'marker_state.dart';
+part 'marker_cubit.freezed.dart';
 
 class MarkerCubit extends Cubit<MarkerState> {
-  MarkerCubit() : super(MarkerInitial()) {
+  MarkerCubit() : super(MarkerState.initial()) {
     _listenToCompass();
   }
 
@@ -29,12 +31,12 @@ class MarkerCubit extends Cubit<MarkerState> {
       final delta = (_targetHeading - _currentHeading).abs();
       if (delta < 1) {
         _currentHeading = _targetHeading;
-        emit(MarkerRotationUpdated(_currentHeading));
+        emit(MarkerState.markerRotationUpdated(_currentHeading));
         timer.cancel();
       } else {
-        final step = delta / 10; 
+        final step = delta / 10;
         _currentHeading += (step * (_targetHeading > _currentHeading ? 1 : -1));
-        emit(MarkerRotationUpdated(_currentHeading));
+        emit(MarkerState.markerRotationUpdated(_currentHeading));
       }
     });
   }

@@ -1,4 +1,3 @@
-
 import 'package:auto_route/auto_route.dart';
 import 'package:geo_notes/features/home/home.dart';
 import 'package:geo_notes/features/main_home/main_home.dart';
@@ -15,39 +14,22 @@ import 'package:geo_notes/features/splash/splash.dart';
 
 part 'app_route.gr.dart';
 
-
 @AutoRouterConfig()
 class AppRouter extends RootStackRouter {
-
- @override
- List<AutoRoute> get routes => [
-    AutoRoute(page: SplashRoute.page, path: '/'),
-
-    AutoRoute(
-      page: OnboardingRoute.page,
-      path: '/onboarding',
-      children: [
-        AutoRoute(page: RouteOneRoute.page, path: 'page_one'),
-        AutoRoute(page: RouteTwoRoute.page, path: 'page_two'),
-        AutoRoute(page: RouteThreeRoute.page, path: 'page_three'),
-      ]
-    ),
-
-    AutoRoute(
-      page: MainHomeRoute.page,
-      path: '/main_home',
-      children: [
-        AutoRoute(page: MapRoute.page, path: 'map'),
-        AutoRoute(page: SearchRoute.page, path: 'search'),
-        AutoRoute(page: RouteRoute.page, path: 'route'),
-       
-        AutoRoute(page: SavedRoute.page, path: 'saved'),
-        AutoRoute(page: SettingRoute.page, path: 'setting'),
-      ]
-    ),
-
-    
-
-
- ];
+  @override
+  List<AutoRoute> get routes => [
+        AutoRoute(page: SplashRoute.page, path: '/'),
+        AutoRoute(page: OnboardingRoute.page, path: '/onboarding', children: [
+          AutoRoute(page: RouteOneRoute.page, path: 'page_one'),
+          AutoRoute(page: RouteTwoRoute.page, path: 'page_two'),
+          AutoRoute(page: RouteThreeRoute.page, path: 'page_three'),
+        ]),
+        AutoRoute(page: MainHomeRoute.page, path: '/main_home', children: [
+          AutoRoute(page: MapRoute.page, path: 'map'),
+          AutoRoute(page: SearchRoute.page, path: 'search'),
+          AutoRoute(page: RouteRoute.page, path: 'route'),
+          AutoRoute(page: SavedRoute.page, path: 'saved'),
+          AutoRoute(page: SettingRoute.page, path: 'setting'),
+        ])
+      ];
 }

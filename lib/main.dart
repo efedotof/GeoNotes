@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geo_notes/features/map/cubit/cubit/marker_cubit.dart';
+import 'package:geo_notes/features/map/cubit/marker/marker_cubit.dart';
 import 'package:geo_notes/features/search/cubit/searche_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Theme/cubit/theme_cubit.dart';
 import 'Theme/repositories/theme_settings.dart';
 import 'Theme/theme.dart';
-import 'features/map/cubit/map_cubit.dart';
+import 'features/map/cubit/map/map_cubit.dart';
 import 'route/app_route.dart';
 
 void main() async {
@@ -24,12 +24,12 @@ void main() async {
 
   runApp(MultiBlocProvider(
     providers: [
-      BlocProvider(
-        create: (context) => ThemeCubit(interf: themeRepository),
-      ),
-      BlocProvider(create: (context) => MapCubit()),
-      BlocProvider(create: (context) => MarkerCubit()),
-      BlocProvider(create: (context) => SearcheCubit())
+      // BlocProvider(
+      //   create: (context) => ThemeCubit(interf: themeRepository),
+      // ),
+      // BlocProvider(create: (context) => MapCubit()),
+      // BlocProvider(create: (context) => MarkerCubit()),
+      // BlocProvider(create: (context) => SearcheCubit())
     ],
     child: const MyApp(),
   ));

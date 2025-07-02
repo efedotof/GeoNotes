@@ -1,37 +1,38 @@
-import 'dart:developer';
+import 'dart:ui';
 
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:equatable/equatable.dart';
-
-import '../repositories/theme_interf.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:geo_notes/theme/repositories/theme_interface.dart';
 
 part 'theme_state.dart';
+part 'theme_cubit.freezed.dart';
 
 class ThemeCubit extends Cubit<ThemeState> {
-  ThemeCubit({required ThemeInterf interf})
-      : _interf = interf,
-        super(const ThemeState(Brightness.light)) {
-    _checkSelectedTheme();
+  ThemeCubit({required ThemeInterface themeInterface})
+      : _themeInterface = themeInterface,
+        super(ThemeState(brightness: Brightness.light)) {
+    _initializeTheme();
   }
 
-  final ThemeInterf _interf;
+  final ThemeInterface _themeInterface;
 
-  Future<void> setThemBrigth(Brightness bright) async {
+  Future<void> setThemeBrightness(Brightness brightness) async {
     try {
-      emit(ThemeState(bright));
-      await _interf.setDarkThemeSelected(bright == Brightness.dark);
-    } on Exception catch (e) {
-      log(e.toString());
+      emit(ThemeState(brightness: brightness));
+      await _themeInterface.setDarkThemeSelected(brightness == Brightness.dark);
+    } catch (e) {
+      debugPrint('Error setting theme: \$e');
     }
   }
 
-  void _checkSelectedTheme() {
+  void _initializeTheme() {
     try {
-      final bright = _interf.isDarkTheme() ? Brightness.dark : Brightness.light;
-      emit(ThemeState(bright));
-    } on Exception catch (e) {
-      log(e.toString());
+      final isDark = _themeInterface.isDarkTheme();
+      final brightness = isDark ? Brightness.dark : Brightness.light;
+      emit(ThemeState(brightness: brightness));
+    } catch (e) {
+      debugPrint('Error initializing theme: \$e');
     }
   }
 }

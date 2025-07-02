@@ -1,19 +1,17 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:latlong2/latlong.dart';
-import 'package:flutter/widgets.dart';
-
-import '../widget/model/city_model.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 part 'map_state.dart';
+part 'map_cubit.freezed.dart';
 
 class MapCubit extends Cubit<MapState> {
-  MapCubit() : super(MapInitial());
+  MapCubit() : super(MapState.initial());
 
   final List<CityModel> cities = [
     CityModel(name: 'New York', idx: 40.7128, idy: -74.0060),
@@ -28,7 +26,7 @@ class MapCubit extends Cubit<MapState> {
 
   Future<void> _getCurrentLocation(MapController mapController) async {
     try {
-      emit(MapLoading());
+      emit(MapState.mapLoading());
       final status = await Permission.location.request();
       if (status.isGranted) {
         final position = await Geolocator.getCurrentPosition(
@@ -44,9 +42,10 @@ class MapCubit extends Cubit<MapState> {
           mapController.move(location, 17);
         });
 
-        emit(MapLocationUpdated(location: location, cityName: cityName));
+        emit(MapState.mapLocationUpdated(
+            location: location, cityName: cityName));
       } else {
-        emit(MapPermissionDenied());
+        emit(MapState.mapPermissionDenied());
       }
     } catch (e) {
       log('Error: $e');
@@ -55,7 +54,7 @@ class MapCubit extends Cubit<MapState> {
 
   Future<void> updateCurrentLocation(MapController mapController) async {
     try {
-      emit(MapLoading());
+      emit(MapState.mapLoading());
       final status = await Permission.location.request();
       if (status.isGranted) {
         final position = await Geolocator.getCurrentPosition(
@@ -71,12 +70,13 @@ class MapCubit extends Cubit<MapState> {
           mapController.move(location, 17);
         });
 
-        emit(MapLocationUpdated(location: location, cityName: cityName));
+        emit(MapState.mapLocationUpdated(
+            location: location, cityName: cityName));
       } else {
-        emit(MapPermissionDenied());
+        emit(MapState.mapPermissionDenied());
       }
     } catch (e) {
-      log('Error: $e');
+      debugPrint('Error: $e');
     }
   }
 
@@ -98,11 +98,10 @@ class MapCubit extends Cubit<MapState> {
   void moveToCity(CityModel city, MapController mapController) {
     final location = LatLng(city.idx, city.idy);
     mapController.move(location, 17);
-    emit(MapLocationUpdated(location: location, cityName: city.name));
+    emit(MapState.mapLocationUpdated(location: location, cityName: city.name));
   }
 
   void addMarkerAtLocation(LatLng location, String cityName) {
-    emit(MapMarkerAdded(location: location, cityName: cityName));
+    emit(MapState.mapMarkerAdded(location: location, cityName: cityName));
   }
-
 }

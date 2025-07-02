@@ -1,15 +1,10 @@
 part of 'theme_cubit.dart';
 
-class ThemeState extends Equatable {
-  const ThemeState(this.brightness);
+@freezed
+abstract class ThemeState with _$ThemeState {
+  const factory ThemeState({required Brightness brightness}) = _ThemeState;
 
-  final Brightness brightness;
+  const ThemeState._();
 
   bool get isDark => brightness == Brightness.dark;
-
-
-  @override
-  List<Object> get props => [brightness];
 }
-
-
