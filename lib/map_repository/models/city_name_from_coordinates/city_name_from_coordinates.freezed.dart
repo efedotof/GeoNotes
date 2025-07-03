@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'theme_cubit.dart';
+part of 'city_name_from_coordinates.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,68 +13,78 @@ part of 'theme_cubit.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$ThemeState {
-  Brightness get brightness;
+mixin _$CityNameFromCoordinates {
+  double get latitude;
+  double get longitude;
 
-  /// Create a copy of ThemeState
+  /// Create a copy of CityNameFromCoordinates
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $ThemeStateCopyWith<ThemeState> get copyWith =>
-      _$ThemeStateCopyWithImpl<ThemeState>(this as ThemeState, _$identity);
+  $CityNameFromCoordinatesCopyWith<CityNameFromCoordinates> get copyWith =>
+      _$CityNameFromCoordinatesCopyWithImpl<CityNameFromCoordinates>(
+          this as CityNameFromCoordinates, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is ThemeState &&
-            (identical(other.brightness, brightness) ||
-                other.brightness == brightness));
+            other is CityNameFromCoordinates &&
+            (identical(other.latitude, latitude) ||
+                other.latitude == latitude) &&
+            (identical(other.longitude, longitude) ||
+                other.longitude == longitude));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, brightness);
+  int get hashCode => Object.hash(runtimeType, latitude, longitude);
 
   @override
   String toString() {
-    return 'ThemeState(brightness: $brightness)';
+    return 'CityNameFromCoordinates(latitude: $latitude, longitude: $longitude)';
   }
 }
 
 /// @nodoc
-abstract mixin class $ThemeStateCopyWith<$Res> {
-  factory $ThemeStateCopyWith(
-          ThemeState value, $Res Function(ThemeState) _then) =
-      _$ThemeStateCopyWithImpl;
+abstract mixin class $CityNameFromCoordinatesCopyWith<$Res> {
+  factory $CityNameFromCoordinatesCopyWith(CityNameFromCoordinates value,
+          $Res Function(CityNameFromCoordinates) _then) =
+      _$CityNameFromCoordinatesCopyWithImpl;
   @useResult
-  $Res call({Brightness brightness});
+  $Res call({double latitude, double longitude});
 }
 
 /// @nodoc
-class _$ThemeStateCopyWithImpl<$Res> implements $ThemeStateCopyWith<$Res> {
-  _$ThemeStateCopyWithImpl(this._self, this._then);
+class _$CityNameFromCoordinatesCopyWithImpl<$Res>
+    implements $CityNameFromCoordinatesCopyWith<$Res> {
+  _$CityNameFromCoordinatesCopyWithImpl(this._self, this._then);
 
-  final ThemeState _self;
-  final $Res Function(ThemeState) _then;
+  final CityNameFromCoordinates _self;
+  final $Res Function(CityNameFromCoordinates) _then;
 
-  /// Create a copy of ThemeState
+  /// Create a copy of CityNameFromCoordinates
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? brightness = null,
+    Object? latitude = null,
+    Object? longitude = null,
   }) {
     return _then(_self.copyWith(
-      brightness: null == brightness
-          ? _self.brightness
-          : brightness // ignore: cast_nullable_to_non_nullable
-              as Brightness,
+      latitude: null == latitude
+          ? _self.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      longitude: null == longitude
+          ? _self.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
 
-/// Adds pattern-matching-related methods to [ThemeState].
-extension ThemeStatePatterns on ThemeState {
+/// Adds pattern-matching-related methods to [CityNameFromCoordinates].
+extension CityNameFromCoordinatesPatterns on CityNameFromCoordinates {
   /// A variant of `map` that fallback to returning `orElse`.
   ///
   /// It is equivalent to doing:
@@ -89,12 +99,12 @@ extension ThemeStatePatterns on ThemeState {
 
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_ThemeState value)? $default, {
+    TResult Function(_CityNameFromCoordinates value)? $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _ThemeState() when $default != null:
+      case _CityNameFromCoordinates() when $default != null:
         return $default(_that);
       case _:
         return orElse();
@@ -116,11 +126,11 @@ extension ThemeStatePatterns on ThemeState {
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_ThemeState value) $default,
+    TResult Function(_CityNameFromCoordinates value) $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _ThemeState():
+      case _CityNameFromCoordinates():
         return $default(_that);
       case _:
         throw StateError('Unexpected subclass');
@@ -141,11 +151,11 @@ extension ThemeStatePatterns on ThemeState {
 
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_ThemeState value)? $default,
+    TResult? Function(_CityNameFromCoordinates value)? $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _ThemeState() when $default != null:
+      case _CityNameFromCoordinates() when $default != null:
         return $default(_that);
       case _:
         return null;
@@ -166,13 +176,13 @@ extension ThemeStatePatterns on ThemeState {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(Brightness brightness)? $default, {
+    TResult Function(double latitude, double longitude)? $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _ThemeState() when $default != null:
-        return $default(_that.brightness);
+      case _CityNameFromCoordinates() when $default != null:
+        return $default(_that.latitude, _that.longitude);
       case _:
         return orElse();
     }
@@ -193,12 +203,12 @@ extension ThemeStatePatterns on ThemeState {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(Brightness brightness) $default,
+    TResult Function(double latitude, double longitude) $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _ThemeState():
-        return $default(_that.brightness);
+      case _CityNameFromCoordinates():
+        return $default(_that.latitude, _that.longitude);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -218,12 +228,12 @@ extension ThemeStatePatterns on ThemeState {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(Brightness brightness)? $default,
+    TResult? Function(double latitude, double longitude)? $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _ThemeState() when $default != null:
-        return $default(_that.brightness);
+      case _CityNameFromCoordinates() when $default != null:
+        return $default(_that.latitude, _that.longitude);
       case _:
         return null;
     }
@@ -232,68 +242,79 @@ extension ThemeStatePatterns on ThemeState {
 
 /// @nodoc
 
-class _ThemeState extends ThemeState {
-  const _ThemeState({required this.brightness}) : super._();
+class _CityNameFromCoordinates implements CityNameFromCoordinates {
+  _CityNameFromCoordinates({required this.latitude, required this.longitude});
 
   @override
-  final Brightness brightness;
+  final double latitude;
+  @override
+  final double longitude;
 
-  /// Create a copy of ThemeState
+  /// Create a copy of CityNameFromCoordinates
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$ThemeStateCopyWith<_ThemeState> get copyWith =>
-      __$ThemeStateCopyWithImpl<_ThemeState>(this, _$identity);
+  _$CityNameFromCoordinatesCopyWith<_CityNameFromCoordinates> get copyWith =>
+      __$CityNameFromCoordinatesCopyWithImpl<_CityNameFromCoordinates>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ThemeState &&
-            (identical(other.brightness, brightness) ||
-                other.brightness == brightness));
+            other is _CityNameFromCoordinates &&
+            (identical(other.latitude, latitude) ||
+                other.latitude == latitude) &&
+            (identical(other.longitude, longitude) ||
+                other.longitude == longitude));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, brightness);
+  int get hashCode => Object.hash(runtimeType, latitude, longitude);
 
   @override
   String toString() {
-    return 'ThemeState(brightness: $brightness)';
+    return 'CityNameFromCoordinates(latitude: $latitude, longitude: $longitude)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$ThemeStateCopyWith<$Res>
-    implements $ThemeStateCopyWith<$Res> {
-  factory _$ThemeStateCopyWith(
-          _ThemeState value, $Res Function(_ThemeState) _then) =
-      __$ThemeStateCopyWithImpl;
+abstract mixin class _$CityNameFromCoordinatesCopyWith<$Res>
+    implements $CityNameFromCoordinatesCopyWith<$Res> {
+  factory _$CityNameFromCoordinatesCopyWith(_CityNameFromCoordinates value,
+          $Res Function(_CityNameFromCoordinates) _then) =
+      __$CityNameFromCoordinatesCopyWithImpl;
   @override
   @useResult
-  $Res call({Brightness brightness});
+  $Res call({double latitude, double longitude});
 }
 
 /// @nodoc
-class __$ThemeStateCopyWithImpl<$Res> implements _$ThemeStateCopyWith<$Res> {
-  __$ThemeStateCopyWithImpl(this._self, this._then);
+class __$CityNameFromCoordinatesCopyWithImpl<$Res>
+    implements _$CityNameFromCoordinatesCopyWith<$Res> {
+  __$CityNameFromCoordinatesCopyWithImpl(this._self, this._then);
 
-  final _ThemeState _self;
-  final $Res Function(_ThemeState) _then;
+  final _CityNameFromCoordinates _self;
+  final $Res Function(_CityNameFromCoordinates) _then;
 
-  /// Create a copy of ThemeState
+  /// Create a copy of CityNameFromCoordinates
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? brightness = null,
+    Object? latitude = null,
+    Object? longitude = null,
   }) {
-    return _then(_ThemeState(
-      brightness: null == brightness
-          ? _self.brightness
-          : brightness // ignore: cast_nullable_to_non_nullable
-              as Brightness,
+    return _then(_CityNameFromCoordinates(
+      latitude: null == latitude
+          ? _self.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      longitude: null == longitude
+          ? _self.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }

@@ -13,9 +13,6 @@ class OnboardingScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => OnboardingCubit(),
       child: AutoTabsRouter(
-        // list of your tab routes
-        // routes used here must be declared as children
-        // routes of /dashboard
         routes: const [
           RouteOneRoute(),
           RouteTwoRoute(),
@@ -41,7 +38,9 @@ class OnboardingScreen extends StatelessWidget {
                 children: [
                   TextButton(onPressed: () {}, child: const Text('Skip')),
                   GestureDetector(
-                    // onTap: () => context.read<OnboardingCubit>().nextPage(context,tabsRouter ),
+                    onTap: () => context
+                        .read<OnboardingCubit>()
+                        .nextPage(context: context, tabs: tabsRouter),
                     child: Container(
                       decoration: BoxDecoration(
                           color: const Color(0xFF102930),

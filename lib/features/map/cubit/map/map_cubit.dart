@@ -1,17 +1,16 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:geo_notes/map_repository/map/map_interface.dart';
+import 'package:geo_notes/map_repository/models/city_model/city_model.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 part 'map_state.dart';
 part 'map_cubit.freezed.dart';
 
 class MapCubit extends Cubit<MapState> {
-  MapCubit() : super(MapState.initial());
+  MapCubit({required this.mapInterface}) : super(const MapState.initial());
+
+  final MapInterface mapInterface;
 
   final List<CityModel> cities = [
     CityModel(name: 'New York', idx: 40.7128, idy: -74.0060),
@@ -19,89 +18,48 @@ class MapCubit extends Cubit<MapState> {
     CityModel(name: 'Tokyo', idx: 35.6895, idy: 139.6917),
   ];
 
-  Future<void> initializeMap(MapController mapController) async {
-    if (state is MapLocationUpdated) return;
-    await _getCurrentLocation(mapController);
-  }
+  Future<void> initializeMap() async {
+    emit(const MapState.mapLoading());
+    final result = await mapInterface.initializeMap();
 
-  Future<void> _getCurrentLocation(MapController mapController) async {
-    try {
-      emit(MapState.mapLoading());
-      final status = await Permission.location.request();
-      if (status.isGranted) {
-        final position = await Geolocator.getCurrentPosition(
-          locationSettings: const LocationSettings(
-            accuracy: LocationAccuracy.high,
-          ),
-        );
-        final location = LatLng(position.latitude, position.longitude);
-        final cityName = await _getCityNameFromCoordinates(
-            position.latitude, position.longitude);
-
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          mapController.move(location, 17);
-        });
-
-        emit(MapState.mapLocationUpdated(
-            location: location, cityName: cityName));
-      } else {
-        emit(MapState.mapPermissionDenied());
-      }
-    } catch (e) {
-      log('Error: $e');
+    if (result.location != null && result.cityModel != null) {
+      emit(MapState.mapLocationUpdated(
+        location: result.location!,
+        cityName: result.cityModel!.name,
+      ));
+    } else {
+      emit(const MapState.mapPermissionDenied());
     }
   }
 
-  Future<void> updateCurrentLocation(MapController mapController) async {
-    try {
-      emit(MapState.mapLoading());
-      final status = await Permission.location.request();
-      if (status.isGranted) {
-        final position = await Geolocator.getCurrentPosition(
-          locationSettings: const LocationSettings(
-            accuracy: LocationAccuracy.high,
-          ),
-        );
-        final location = LatLng(position.latitude, position.longitude);
-        final cityName = await _getCityNameFromCoordinates(
-            position.latitude, position.longitude);
+  Future<void> updateCurrentLocation() async {
+    emit(const MapState.mapLoading());
+    final result = await mapInterface.updateCurrentLocation();
 
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          mapController.move(location, 17);
-        });
-
-        emit(MapState.mapLocationUpdated(
-            location: location, cityName: cityName));
-      } else {
-        emit(MapState.mapPermissionDenied());
-      }
-    } catch (e) {
-      debugPrint('Error: $e');
+    if (result.location != null && result.cityModel != null) {
+      emit(MapState.mapLocationUpdated(
+        location: result.location!,
+        cityName: result.cityModel!.name,
+      ));
+    } else {
+      emit(const MapState.mapPermissionDenied());
     }
   }
 
-  Future<String> _getCityNameFromCoordinates(
-      double latitude, double longitude) async {
-    try {
-      final placemarks = await placemarkFromCoordinates(latitude, longitude);
-      if (placemarks.isNotEmpty) {
-        return placemarks.first.locality ?? 'Unknown City';
-      } else {
-        return 'Unknown City';
-      }
-    } catch (e) {
-      log('Error in geocoding: $e');
-      return 'Unknown City';
+  Future<void> moveToCity({required CityModel city}) async {
+    final result = await mapInterface.moveToCity(city: city);
+    if (result.location != null && result.cityModel != null) {
+      emit(MapState.mapLocationUpdated(
+          location: result.location!, cityName: result.cityModel!.name));
     }
   }
 
-  void moveToCity(CityModel city, MapController mapController) {
-    final location = LatLng(city.idx, city.idy);
-    mapController.move(location, 17);
-    emit(MapState.mapLocationUpdated(location: location, cityName: city.name));
-  }
-
-  void addMarkerAtLocation(LatLng location, String cityName) {
+  Future<void> addMarkerAtLocation({
+    required LatLng location,
+    required String cityName,
+  }) async {
+    await mapInterface.addMarkerAtLocation(
+        location: location, cityName: cityName);
     emit(MapState.mapMarkerAdded(location: location, cityName: cityName));
   }
 }

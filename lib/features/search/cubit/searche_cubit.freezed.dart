@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -33,6 +32,235 @@ mixin _$SearcheState {
 /// @nodoc
 class $SearcheStateCopyWith<$Res> {
   $SearcheStateCopyWith(SearcheState _, $Res Function(SearcheState) __);
+}
+
+/// Adds pattern-matching-related methods to [SearcheState].
+extension SearcheStatePatterns on SearcheState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_SearcheLoading value)? searcheLoading,
+    TResult Function(_SearcheSuccess value)? searcheSuccess,
+    TResult Function(_SearcheError value)? searcheError,
+    TResult Function(_SearcheEmpty value)? searcheEmpty,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Initial() when initial != null:
+        return initial(_that);
+      case _SearcheLoading() when searcheLoading != null:
+        return searcheLoading(_that);
+      case _SearcheSuccess() when searcheSuccess != null:
+        return searcheSuccess(_that);
+      case _SearcheError() when searcheError != null:
+        return searcheError(_that);
+      case _SearcheEmpty() when searcheEmpty != null:
+        return searcheEmpty(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_SearcheLoading value) searcheLoading,
+    required TResult Function(_SearcheSuccess value) searcheSuccess,
+    required TResult Function(_SearcheError value) searcheError,
+    required TResult Function(_SearcheEmpty value) searcheEmpty,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Initial():
+        return initial(_that);
+      case _SearcheLoading():
+        return searcheLoading(_that);
+      case _SearcheSuccess():
+        return searcheSuccess(_that);
+      case _SearcheError():
+        return searcheError(_that);
+      case _SearcheEmpty():
+        return searcheEmpty(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_SearcheLoading value)? searcheLoading,
+    TResult? Function(_SearcheSuccess value)? searcheSuccess,
+    TResult? Function(_SearcheError value)? searcheError,
+    TResult? Function(_SearcheEmpty value)? searcheEmpty,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Initial() when initial != null:
+        return initial(_that);
+      case _SearcheLoading() when searcheLoading != null:
+        return searcheLoading(_that);
+      case _SearcheSuccess() when searcheSuccess != null:
+        return searcheSuccess(_that);
+      case _SearcheError() when searcheError != null:
+        return searcheError(_that);
+      case _SearcheEmpty() when searcheEmpty != null:
+        return searcheEmpty(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? searcheLoading,
+    TResult Function(List<LocationModel> locations)? searcheSuccess,
+    TResult Function(String message)? searcheError,
+    TResult Function(String text)? searcheEmpty,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Initial() when initial != null:
+        return initial();
+      case _SearcheLoading() when searcheLoading != null:
+        return searcheLoading();
+      case _SearcheSuccess() when searcheSuccess != null:
+        return searcheSuccess(_that.locations);
+      case _SearcheError() when searcheError != null:
+        return searcheError(_that.message);
+      case _SearcheEmpty() when searcheEmpty != null:
+        return searcheEmpty(_that.text);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() searcheLoading,
+    required TResult Function(List<LocationModel> locations) searcheSuccess,
+    required TResult Function(String message) searcheError,
+    required TResult Function(String text) searcheEmpty,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Initial():
+        return initial();
+      case _SearcheLoading():
+        return searcheLoading();
+      case _SearcheSuccess():
+        return searcheSuccess(_that.locations);
+      case _SearcheError():
+        return searcheError(_that.message);
+      case _SearcheEmpty():
+        return searcheEmpty(_that.text);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? searcheLoading,
+    TResult? Function(List<LocationModel> locations)? searcheSuccess,
+    TResult? Function(String message)? searcheError,
+    TResult? Function(String text)? searcheEmpty,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Initial() when initial != null:
+        return initial();
+      case _SearcheLoading() when searcheLoading != null:
+        return searcheLoading();
+      case _SearcheSuccess() when searcheSuccess != null:
+        return searcheSuccess(_that.locations);
+      case _SearcheError() when searcheError != null:
+        return searcheError(_that.message);
+      case _SearcheEmpty() when searcheEmpty != null:
+        return searcheEmpty(_that.text);
+      case _:
+        return null;
+    }
+  }
 }
 
 /// @nodoc
@@ -78,11 +306,11 @@ class _SearcheLoading implements SearcheState {
 /// @nodoc
 
 class _SearcheSuccess implements SearcheState {
-  const _SearcheSuccess({required final List<Location> locations})
+  const _SearcheSuccess({required final List<LocationModel> locations})
       : _locations = locations;
 
-  final List<Location> _locations;
-  List<Location> get locations {
+  final List<LocationModel> _locations;
+  List<LocationModel> get locations {
     if (_locations is EqualUnmodifiableListView) return _locations;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_locations);
@@ -121,7 +349,7 @@ abstract mixin class _$SearcheSuccessCopyWith<$Res>
           _SearcheSuccess value, $Res Function(_SearcheSuccess) _then) =
       __$SearcheSuccessCopyWithImpl;
   @useResult
-  $Res call({List<Location> locations});
+  $Res call({List<LocationModel> locations});
 }
 
 /// @nodoc
@@ -142,7 +370,7 @@ class __$SearcheSuccessCopyWithImpl<$Res>
       locations: null == locations
           ? _self._locations
           : locations // ignore: cast_nullable_to_non_nullable
-              as List<Location>,
+              as List<LocationModel>,
     ));
   }
 }
@@ -150,7 +378,7 @@ class __$SearcheSuccessCopyWithImpl<$Res>
 /// @nodoc
 
 class _SearcheError implements SearcheState {
-  const _SearcheError(this.message);
+  const _SearcheError({required this.message});
 
   final String message;
 
@@ -203,9 +431,73 @@ class __$SearcheErrorCopyWithImpl<$Res>
     Object? message = null,
   }) {
     return _then(_SearcheError(
-      null == message
+      message: null == message
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _SearcheEmpty implements SearcheState {
+  const _SearcheEmpty({required this.text});
+
+  final String text;
+
+  /// Create a copy of SearcheState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$SearcheEmptyCopyWith<_SearcheEmpty> get copyWith =>
+      __$SearcheEmptyCopyWithImpl<_SearcheEmpty>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _SearcheEmpty &&
+            (identical(other.text, text) || other.text == text));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, text);
+
+  @override
+  String toString() {
+    return 'SearcheState.searcheEmpty(text: $text)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$SearcheEmptyCopyWith<$Res>
+    implements $SearcheStateCopyWith<$Res> {
+  factory _$SearcheEmptyCopyWith(
+          _SearcheEmpty value, $Res Function(_SearcheEmpty) _then) =
+      __$SearcheEmptyCopyWithImpl;
+  @useResult
+  $Res call({String text});
+}
+
+/// @nodoc
+class __$SearcheEmptyCopyWithImpl<$Res>
+    implements _$SearcheEmptyCopyWith<$Res> {
+  __$SearcheEmptyCopyWithImpl(this._self, this._then);
+
+  final _SearcheEmpty _self;
+  final $Res Function(_SearcheEmpty) _then;
+
+  /// Create a copy of SearcheState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? text = null,
+  }) {
+    return _then(_SearcheEmpty(
+      text: null == text
+          ? _self.text
+          : text // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }

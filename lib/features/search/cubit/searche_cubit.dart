@@ -1,43 +1,38 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:geocoding/geocoding.dart';
+import 'package:geo_notes/map_repository/models/location_model/location_model.dart';
+import 'package:geo_notes/map_repository/search/search_interface.dart';
+// import 'package:geocoding/geocoding.dart';
 
 part 'searche_state.dart';
 part 'searche_cubit.freezed.dart';
 
 class SearcheCubit extends Cubit<SearcheState> {
-  SearcheCubit() : super(SearcheState.initial());
+  SearcheCubit({required SearchInterface searchInterface})
+      : _searchInterface = searchInterface,
+        super(SearcheState.initial());
 
-  Future<void> searchLocation(String query) async {
+  final SearchInterface _searchInterface;
+
+  Future<void> searchLocations({required String query}) async {
     if (query.isEmpty) {
       emit(SearcheState.initial());
-      return;
     }
 
     emit(SearcheState.searcheLoading());
     try {
-      final response = await http.get(
-        Uri.parse(
-            'https://nominatim.openstreetmap.org/search?q=$query&format=json'),
-      );
+      final locations = await _searchInterface.searchLocation(query: query);
 
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        debugPrint('Raw JSON data: $data');
-        if (data.isNotEmpty) {
-          final locations = data
-              .map<Location>((item) => LocationModel.fromJson(item))
-              .toList();
-          emit(SearcheState.searcheSuccess(locations: locations));
-        } else {
-          emit(const SearcheState.searcheError('No results found'));
-        }
+      if (locations.isEmpty) {
+        emit(SearcheState.searcheEmpty(
+            text: "По вашему запросу ничего не найдено"));
       } else {
-        emit(const SearcheState.searcheError('Failed to load search results'));
+        emit(SearcheState.searcheSuccess(locations: locations));
       }
     } catch (e) {
-      emit(SearcheState.searcheError('Error: ${e.toString()}'));
+      debugPrint("Произошла ошибка: ${e.toString()}");
+      emit(SearcheState.searcheError(message: e.toString()));
     }
   }
 

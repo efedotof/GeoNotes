@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'search_Input_field.dart';
+import 'search_field_input.dart';
 import 'search_results_list.dart';
 
 class SearchDraggableSheet extends StatelessWidget {
@@ -24,7 +24,7 @@ class SearchDraggableSheet extends StatelessWidget {
           child: ListView(
             controller: scrollController,
             children: const [
-              SearchInputField(),
+              SearchFieldInput(),
               SearchResultsList(),
             ],
           ),

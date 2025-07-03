@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geo_notes/features/search/cubit/searche_cubit.dart';
 
-class SearchInputField extends StatelessWidget {
-  const SearchInputField({super.key});
+class SearchFieldInput extends StatelessWidget {
+  const SearchFieldInput({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class SearchInputField extends StatelessWidget {
           if (value.isEmpty) {
             context.read<SearcheCubit>().clearSearch();
           } else {
-            context.read<SearcheCubit>().searchLocation(value);
+            context.read<SearcheCubit>().searchLocations(query: value);
           }
         },
       ),
