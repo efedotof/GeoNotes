@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geo_notes/features/map/cubit/map/map_cubit.dart';
+import 'package:geo_notes/features/route/cubit/selected_item/selected_item_cubit.dart';
 import 'package:geo_notes/features/search/cubit/searche_cubit.dart';
+import 'package:geo_notes/map_repository/models/city_model/city_model.dart';
 import 'package:latlong2/latlong.dart';
 
 class SearchResultsList extends StatelessWidget {
@@ -35,6 +37,10 @@ class SearchResultsList extends StatelessWidget {
                         LatLng(location.latitude, location.longitude);
                     context.read<MapCubit>().addMarkerAtLocation(
                         location: latLng, cityName: location.displayName);
+                    context.read<SelectedItemCubit>().setEndRoute(CityModel(
+                        name: location.displayName,
+                        idx: location.latitude,
+                        idy: location.longitude));
                   },
                 ),
               );

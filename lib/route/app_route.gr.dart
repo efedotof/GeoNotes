@@ -156,18 +156,38 @@ class SavedRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [SearchScreen]
-class SearchRoute extends PageRouteInfo<void> {
-  const SearchRoute({List<PageRouteInfo>? children})
-    : super(SearchRoute.name, initialChildren: children);
+class SearchRoute extends PageRouteInfo<SearchRouteArgs> {
+  SearchRoute({Key? key, bool? isRouting, List<PageRouteInfo>? children})
+    : super(
+        SearchRoute.name,
+        args: SearchRouteArgs(key: key, isRouting: isRouting),
+        initialChildren: children,
+      );
 
   static const String name = 'SearchRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const SearchScreen();
+      final args = data.argsAs<SearchRouteArgs>(
+        orElse: () => const SearchRouteArgs(),
+      );
+      return SearchScreen(key: args.key, isRouting: args.isRouting);
     },
   );
+}
+
+class SearchRouteArgs {
+  const SearchRouteArgs({this.key, this.isRouting});
+
+  final Key? key;
+
+  final bool? isRouting;
+
+  @override
+  String toString() {
+    return 'SearchRouteArgs{key: $key, isRouting: $isRouting}';
+  }
 }
 
 /// generated route for

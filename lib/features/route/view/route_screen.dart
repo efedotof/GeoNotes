@@ -1,122 +1,111 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:geo_notes/features/route/widget/widget.dart';
 
 @RoutePage()
-class RouteScreen extends StatelessWidget {
+class RouteScreen extends StatefulWidget {
   const RouteScreen({super.key});
+
+  @override
+  State<RouteScreen> createState() => _RouteScreenState();
+}
+
+class _RouteScreenState extends State<RouteScreen>
+    with TickerProviderStateMixin {
+  final ValueNotifier<String> selectedTransport = ValueNotifier<String>('walk');
+
+  final List<_TransportOption> options = [
+    _TransportOption('routed-foot', Icons.directions_walk),
+    _TransportOption('routed-car', Icons.directions_car),
+    _TransportOption('routed-bike', Icons.pedal_bike),
+  ];
+
+  @override
+  void dispose() {
+    selectedTransport.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-      initialChildSize: 0.5,
+      initialChildSize: 0.6,
       minChildSize: 0.1,
-      maxChildSize: 0.8,
+      maxChildSize: 0.9,
       builder: (BuildContext context, ScrollController scrollController) {
-        return GestureDetector(
-          onTap: () {
-            AutoRouter.of(context).popUntilRoot();
-          },
-          child: Container(
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(14),
-                topLeft: Radius.circular(14),
+        return Container(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+            color: Color(0xFFF7F6F2),
+          ),
+          child: ListView(
+            controller: scrollController,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            children: [
+              Row(
+                children: [
+                  const Expanded(
+                    child: Text(
+                      'Построение маршрута',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              color: Color(0xFFF7F6F2),
-            ),
-            child: ListView(
-              controller: scrollController,
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 8),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            height: MediaQuery.of(context).size.height * 0.09,
-                            decoration: BoxDecoration(
-                                color: Colors.grey[200],
-                                borderRadius: BorderRadius.circular(14)),
-                            child: Center(
-                              child: ListTile(
-                                  leading: const Icon(Icons.directions_walk),
-                                  title: Text(
-                                    '1 hr, 05 min',
-                                    style:
-                                        Theme.of(context).textTheme.titleMedium,
-                                  ),
-                                  subtitle: Text(
-                                    '6 km',
-                                    style:
-                                        Theme.of(context).textTheme.titleSmall,
-                                  )),
+              const SizedBox(height: 12),
+              ValueListenableBuilder<String>(
+                valueListenable: selectedTransport,
+                builder: (context, value, _) {
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: options.map((option) {
+                        final isSelected = value == option.key;
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 14),
+                          child: GestureDetector(
+                            onTap: () {
+                              if (!isSelected) {
+                                selectedTransport.value = option.key;
+                              }
+                            },
+                            child: TransportOption(
+                              key: ValueKey(option.key),
+                              isSelected: isSelected,
+                              icon: option.icon,
                             ),
                           ),
-                          const Wrap(
-                            spacing: 14,
-                            children: [
-                              Icon(Icons.directions_car),
-                              Icon(Icons.train),
-                              Icon(Icons.directions_walk),
-                              Icon(Icons.pedal_bike),
-                            ],
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 12),
-                      // Locations
-                      Card(
-                        child: ListTile(
-                          leading: const Icon(Icons.location_pin),
-                          title: const Text('My location'),
-                          trailing: const Text(
-                            'Map',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: Colors.grey),
-                          ),
-                          onTap: () {},
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Card(
-                        child: ListTile(
-                          leading: const Icon(Icons.restaurant),
-                          title: const Text("Restaurant Zaza's"),
-                          trailing: const Text(
-                            'Map',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: Colors.grey),
-                          ),
-                          onTap: () {},
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Start',
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+                        );
+                      }).toList(),
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 20),
+              const LocationWidgetStart(),
+              const SizedBox(height: 12),
+              const LocationWidgetEnd(),
+              const SizedBox(height: 24),
+              ValueListenableBuilder<String>(
+                valueListenable: selectedTransport,
+                builder: (context, transportType, _) {
+                  return RouteButton(type: transportType);
+                },
+              ),
+            ],
           ),
         );
       },
     );
   }
+}
+
+class _TransportOption {
+  final String key;
+  final IconData icon;
+
+  _TransportOption(this.key, this.icon);
 }

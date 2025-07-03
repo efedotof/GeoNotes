@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part "location_model.freezed.dart";
@@ -25,7 +27,6 @@ abstract class LocationModel with _$LocationModel {
       _$LocationModelFromJson(json);
 }
 
-// Функции для конвертации String <-> double
 double _stringToDouble(dynamic value) {
   if (value is String) {
     return double.tryParse(value) ?? 0.0;

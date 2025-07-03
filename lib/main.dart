@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geo_notes/features/route/cubit/cubit/distance_and_time_cubit.dart';
+import 'package:geo_notes/features/route/cubit/selected_item/selected_item_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:geo_notes/features/map/cubit/map/map_cubit.dart';
 import 'package:geo_notes/features/map/cubit/marker/marker_cubit.dart';
-import 'package:geo_notes/features/route/cubit/route_cubit.dart';
+import 'package:geo_notes/features/route/cubit/route/route_cubit.dart';
 import 'package:geo_notes/features/search/cubit/searche_cubit.dart';
 import 'package:geo_notes/features/splash/cubit/splash_cubit.dart';
 import 'package:geo_notes/map_repository/map/map_repository.dart';
@@ -39,6 +41,8 @@ void main() async {
         BlocProvider(
           create: (context) => ThemeCubit(themeInterface: themeRepository),
         ),
+        BlocProvider(create: (context) => SelectedItemCubit()),
+        BlocProvider(create: (context) => DistanceAndTimeCubit()),
         BlocProvider(
           create: (context) => MapCubit(mapInterface: mapRepository),
         ),

@@ -156,7 +156,7 @@ extension RouteStatePatterns on RouteState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(ReverseGeocodingModel address)? loaded,
+    TResult Function(RouteModel route)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -167,7 +167,7 @@ extension RouteStatePatterns on RouteState {
       case _Loading() when loading != null:
         return loading();
       case _Loaded() when loaded != null:
-        return loaded(_that.address);
+        return loaded(_that.route);
       case _Error() when error != null:
         return error(_that.message);
       case _:
@@ -192,7 +192,7 @@ extension RouteStatePatterns on RouteState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(ReverseGeocodingModel address) loaded,
+    required TResult Function(RouteModel route) loaded,
     required TResult Function(String message) error,
   }) {
     final _that = this;
@@ -202,7 +202,7 @@ extension RouteStatePatterns on RouteState {
       case _Loading():
         return loading();
       case _Loaded():
-        return loaded(_that.address);
+        return loaded(_that.route);
       case _Error():
         return error(_that.message);
       case _:
@@ -226,7 +226,7 @@ extension RouteStatePatterns on RouteState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(ReverseGeocodingModel address)? loaded,
+    TResult? Function(RouteModel route)? loaded,
     TResult? Function(String message)? error,
   }) {
     final _that = this;
@@ -236,7 +236,7 @@ extension RouteStatePatterns on RouteState {
       case _Loading() when loading != null:
         return loading();
       case _Loaded() when loaded != null:
-        return loaded(_that.address);
+        return loaded(_that.route);
       case _Error() when error != null:
         return error(_that.message);
       case _:
@@ -288,9 +288,9 @@ class _Loading implements RouteState {
 /// @nodoc
 
 class _Loaded implements RouteState {
-  const _Loaded({required this.address});
+  const _Loaded({required this.route});
 
-  final ReverseGeocodingModel address;
+  final RouteModel route;
 
   /// Create a copy of RouteState
   /// with the given fields replaced by the non-null parameter values.
@@ -304,15 +304,15 @@ class _Loaded implements RouteState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Loaded &&
-            (identical(other.address, address) || other.address == address));
+            (identical(other.route, route) || other.route == route));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, address);
+  int get hashCode => Object.hash(runtimeType, route);
 
   @override
   String toString() {
-    return 'RouteState.loaded(address: $address)';
+    return 'RouteState.loaded(route: $route)';
   }
 }
 
@@ -322,9 +322,9 @@ abstract mixin class _$LoadedCopyWith<$Res>
   factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) _then) =
       __$LoadedCopyWithImpl;
   @useResult
-  $Res call({ReverseGeocodingModel address});
+  $Res call({RouteModel route});
 
-  $ReverseGeocodingModelCopyWith<$Res> get address;
+  $RouteModelCopyWith<$Res> get route;
 }
 
 /// @nodoc
@@ -338,13 +338,13 @@ class __$LoadedCopyWithImpl<$Res> implements _$LoadedCopyWith<$Res> {
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? address = null,
+    Object? route = null,
   }) {
     return _then(_Loaded(
-      address: null == address
-          ? _self.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as ReverseGeocodingModel,
+      route: null == route
+          ? _self.route
+          : route // ignore: cast_nullable_to_non_nullable
+              as RouteModel,
     ));
   }
 
@@ -352,9 +352,9 @@ class __$LoadedCopyWithImpl<$Res> implements _$LoadedCopyWith<$Res> {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $ReverseGeocodingModelCopyWith<$Res> get address {
-    return $ReverseGeocodingModelCopyWith<$Res>(_self.address, (value) {
-      return _then(_self.copyWith(address: value));
+  $RouteModelCopyWith<$Res> get route {
+    return $RouteModelCopyWith<$Res>(_self.route, (value) {
+      return _then(_self.copyWith(route: value));
     });
   }
 }

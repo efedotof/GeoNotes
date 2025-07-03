@@ -12,7 +12,7 @@ class MapContent extends StatelessWidget {
   final String cityName;
   final LatLng? markerLocation;
   final String? markerCityName;
-
+  final List<LatLng>? routePoints;
   const MapContent({
     super.key,
     required this.mapController,
@@ -20,6 +20,7 @@ class MapContent extends StatelessWidget {
     required this.cityName,
     this.markerLocation,
     this.markerCityName,
+    this.routePoints,
   });
 
   @override
@@ -29,7 +30,6 @@ class MapContent extends StatelessWidget {
         FlutterMap(
           mapController: mapController,
           options: MapOptions(
-              // initialCenter: location,
               initialZoom: 15.5,
               maxZoom: 17,
               minZoom: 3.5,
@@ -43,6 +43,16 @@ class MapContent extends StatelessWidget {
               userAgentPackageName: 'com.efedotov.notes_on_the_map',
               retinaMode: false,
             ),
+            if (routePoints != null)
+              PolylineLayer(
+                polylines: [
+                  Polyline(
+                    points: routePoints!,
+                    color: Colors.blue.withOpacity(0.7),
+                    strokeWidth: 4,
+                  ),
+                ],
+              ),
             BlocBuilder<MarkerCubit, MarkerState>(
               builder: (context, state) {
                 double rotation = 0;

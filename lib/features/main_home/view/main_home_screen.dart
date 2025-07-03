@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:geo_notes/features/map/map.dart';
@@ -12,11 +11,11 @@ class MainHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoTabsRouter(
       homeIndex: 2,
-      routes: const [
+      routes: [
         SearchRoute(),
-        RouteRoute(),
-        MapRoute(),
-        SavedRoute(),
+        const RouteRoute(),
+        const MapRoute(),
+        const SavedRoute(),
         SettingRoute(),
       ],
       builder: (context, child) {
@@ -24,21 +23,19 @@ class MainHomeScreen extends StatelessWidget {
         return Scaffold(
           body: Stack(
             children: [
-
               const Positioned.fill(
                 child: MapScreen(),
               ),
-           
-              if (tabsRouter.activeIndex != 2) 
+              if (tabsRouter.activeIndex != 2)
                 Positioned.fill(
                   child: child,
                 ),
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(
-            currentIndex: tabsRouter.activeIndex, 
+            currentIndex: tabsRouter.activeIndex,
             onTap: (index) {
-              tabsRouter.setActiveIndex(index); 
+              tabsRouter.setActiveIndex(index);
             },
             items: const [
               BottomNavigationBarItem(
