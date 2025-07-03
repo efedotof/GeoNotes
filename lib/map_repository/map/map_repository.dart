@@ -106,6 +106,9 @@ class MapRepository implements MapInterface {
   Future<MapLocationUpdatedModel> moveToCity({required CityModel city}) async {
     final location = LatLng(city.idx, city.idy);
     _location = location;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _mapController.move(location, 17);
+    });
 
     final cityModel = await _getCityModelFromCoordinates(
       latitude: city.idx,
@@ -124,5 +127,6 @@ class MapRepository implements MapInterface {
     required String cityName,
   }) async {
     _markerLocation = location;
+    mapController.move(_markerLocation!, 17);
   }
 }

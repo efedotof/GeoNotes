@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:geo_notes/features/map/cubit/map/map_cubit.dart';
 import 'package:geo_notes/features/map/cubit/marker/marker_cubit.dart';
 import 'package:geo_notes/features/route/cubit/route_cubit.dart';
-import 'package:geo_notes/features/search/cubit/searche_cubit.dart'; // Проверь, может файл должен быть search_cubit.dart
+import 'package:geo_notes/features/search/cubit/searche_cubit.dart';
 import 'package:geo_notes/features/splash/cubit/splash_cubit.dart';
 import 'package:geo_notes/map_repository/map/map_repository.dart';
 import 'package:geo_notes/map_repository/marker/marker_repository.dart';
