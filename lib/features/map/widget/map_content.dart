@@ -29,7 +29,7 @@ class MapContent extends StatelessWidget {
         FlutterMap(
           mapController: mapController,
           options: MapOptions(
-              initialCenter: location,
+              // initialCenter: location,
               initialZoom: 15.5,
               maxZoom: 17,
               minZoom: 3.5,

@@ -10,7 +10,7 @@ abstract class MapState with _$MapState {
     required String cityName,
   }) = _MapLocationUpdated;
   const factory MapState.mapMarkerAdded({
-    required LatLng location,
+    required LatLng markerLocation,
     required String cityName,
   }) = _MapMarkerAdded;
 }

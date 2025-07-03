@@ -60,6 +60,6 @@ class MapCubit extends Cubit<MapState> {
   }) async {
     await mapInterface.addMarkerAtLocation(
         location: location, cityName: cityName);
-    emit(MapState.mapMarkerAdded(location: location, cityName: cityName));
+    emit(MapState.mapMarkerAdded(markerLocation: location, cityName: cityName));
   }
 }

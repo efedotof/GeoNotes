@@ -167,7 +167,7 @@ extension MapStatePatterns on MapState {
     TResult Function()? mapLoading,
     TResult Function()? mapPermissionDenied,
     TResult Function(LatLng location, String cityName)? mapLocationUpdated,
-    TResult Function(LatLng location, String cityName)? mapMarkerAdded,
+    TResult Function(LatLng markerLocation, String cityName)? mapMarkerAdded,
     required TResult orElse(),
   }) {
     final _that = this;
@@ -181,7 +181,7 @@ extension MapStatePatterns on MapState {
       case _MapLocationUpdated() when mapLocationUpdated != null:
         return mapLocationUpdated(_that.location, _that.cityName);
       case _MapMarkerAdded() when mapMarkerAdded != null:
-        return mapMarkerAdded(_that.location, _that.cityName);
+        return mapMarkerAdded(_that.markerLocation, _that.cityName);
       case _:
         return orElse();
     }
@@ -207,7 +207,8 @@ extension MapStatePatterns on MapState {
     required TResult Function() mapPermissionDenied,
     required TResult Function(LatLng location, String cityName)
         mapLocationUpdated,
-    required TResult Function(LatLng location, String cityName) mapMarkerAdded,
+    required TResult Function(LatLng markerLocation, String cityName)
+        mapMarkerAdded,
   }) {
     final _that = this;
     switch (_that) {
@@ -220,7 +221,7 @@ extension MapStatePatterns on MapState {
       case _MapLocationUpdated():
         return mapLocationUpdated(_that.location, _that.cityName);
       case _MapMarkerAdded():
-        return mapMarkerAdded(_that.location, _that.cityName);
+        return mapMarkerAdded(_that.markerLocation, _that.cityName);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -244,7 +245,7 @@ extension MapStatePatterns on MapState {
     TResult? Function()? mapLoading,
     TResult? Function()? mapPermissionDenied,
     TResult? Function(LatLng location, String cityName)? mapLocationUpdated,
-    TResult? Function(LatLng location, String cityName)? mapMarkerAdded,
+    TResult? Function(LatLng markerLocation, String cityName)? mapMarkerAdded,
   }) {
     final _that = this;
     switch (_that) {
@@ -257,7 +258,7 @@ extension MapStatePatterns on MapState {
       case _MapLocationUpdated() when mapLocationUpdated != null:
         return mapLocationUpdated(_that.location, _that.cityName);
       case _MapMarkerAdded() when mapMarkerAdded != null:
-        return mapMarkerAdded(_that.location, _that.cityName);
+        return mapMarkerAdded(_that.markerLocation, _that.cityName);
       case _:
         return null;
     }
@@ -400,9 +401,9 @@ class __$MapLocationUpdatedCopyWithImpl<$Res>
 /// @nodoc
 
 class _MapMarkerAdded implements MapState {
-  const _MapMarkerAdded({required this.location, required this.cityName});
+  const _MapMarkerAdded({required this.markerLocation, required this.cityName});
 
-  final LatLng location;
+  final LatLng markerLocation;
   final String cityName;
 
   /// Create a copy of MapState
@@ -417,18 +418,18 @@ class _MapMarkerAdded implements MapState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _MapMarkerAdded &&
-            (identical(other.location, location) ||
-                other.location == location) &&
+            (identical(other.markerLocation, markerLocation) ||
+                other.markerLocation == markerLocation) &&
             (identical(other.cityName, cityName) ||
                 other.cityName == cityName));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, location, cityName);
+  int get hashCode => Object.hash(runtimeType, markerLocation, cityName);
 
   @override
   String toString() {
-    return 'MapState.mapMarkerAdded(location: $location, cityName: $cityName)';
+    return 'MapState.mapMarkerAdded(markerLocation: $markerLocation, cityName: $cityName)';
   }
 }
 
@@ -439,7 +440,7 @@ abstract mixin class _$MapMarkerAddedCopyWith<$Res>
           _MapMarkerAdded value, $Res Function(_MapMarkerAdded) _then) =
       __$MapMarkerAddedCopyWithImpl;
   @useResult
-  $Res call({LatLng location, String cityName});
+  $Res call({LatLng markerLocation, String cityName});
 }
 
 /// @nodoc
@@ -454,13 +455,13 @@ class __$MapMarkerAddedCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? location = null,
+    Object? markerLocation = null,
     Object? cityName = null,
   }) {
     return _then(_MapMarkerAdded(
-      location: null == location
-          ? _self.location
-          : location // ignore: cast_nullable_to_non_nullable
+      markerLocation: null == markerLocation
+          ? _self.markerLocation
+          : markerLocation // ignore: cast_nullable_to_non_nullable
               as LatLng,
       cityName: null == cityName
           ? _self.cityName

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geo_notes/features/map/cubit/map/map_cubit.dart';
 import 'package:geo_notes/features/map/widget/map_content.dart';
 import 'package:geo_notes/features/map/widget/map_permission_denied_content.dart';
+import 'package:latlong2/latlong.dart';
 
 @RoutePage()
 class MapScreen extends StatefulWidget {
@@ -50,9 +51,12 @@ class _MapScreenState extends State<MapScreen> {
               return MapContent(
                 mapController:
                     context.read<MapCubit>().mapInterface.mapController,
-                location: location,
+                location: context.read<MapCubit>().mapInterface.location != null
+                    ? context.read<MapCubit>().mapInterface.location!
+                    : LatLng(0, 0),
                 cityName: cityName,
-                markerLocation: location,
+                markerLocation:
+                    context.read<MapCubit>().mapInterface.markerLocation,
                 markerCityName: cityName,
               );
             },

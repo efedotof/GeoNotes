@@ -13,4 +13,6 @@ abstract interface class MapInterface {
   });
 
   MapController get mapController;
+  LatLng? get markerLocation;
+  LatLng? get location;
 }

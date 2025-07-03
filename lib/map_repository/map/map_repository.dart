@@ -11,9 +11,17 @@ import 'map_interface.dart';
 
 class MapRepository implements MapInterface {
   final MapController _mapController = MapController();
+  LatLng? _markerLocation;
+  LatLng? _location;
 
   @override
   MapController get mapController => _mapController;
+
+  @override
+  LatLng? get markerLocation => _markerLocation;
+
+  @override
+  LatLng? get location => _location;
 
   @override
   Future<MapLocationUpdatedModel> initializeMap() async {
@@ -70,14 +78,11 @@ class MapRepository implements MapInterface {
       );
 
       final location = LatLng(position.latitude, position.longitude);
+      _location = location;
       final cityModel = await _getCityModelFromCoordinates(
         latitude: position.latitude,
         longitude: position.longitude,
       );
-
-      // WidgetsBinding.instance.addPostFrameCallback((_) {
-      //   _mapController.move(location, 17);
-      // });
 
       return MapLocationUpdatedModel(
         cityModel: cityModel,
@@ -100,9 +105,7 @@ class MapRepository implements MapInterface {
   @override
   Future<MapLocationUpdatedModel> moveToCity({required CityModel city}) async {
     final location = LatLng(city.idx, city.idy);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _mapController.move(location, 17);
-    });
+    _location = location;
 
     final cityModel = await _getCityModelFromCoordinates(
       latitude: city.idx,
@@ -120,6 +123,6 @@ class MapRepository implements MapInterface {
     required LatLng location,
     required String cityName,
   }) async {
-    // Реализация добавления маркера
+    _markerLocation = location;
   }
 }
