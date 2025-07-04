@@ -19,9 +19,9 @@ class RouteButton extends StatelessWidget {
         return ElevatedButton(
           onPressed: () => context.read<RouteCubit>().fetchRoute(
               startLat: location!.latitude,
-              startLon: location!.longitude,
+              startLon: location.longitude,
               endLat: end!.idx,
-              endLon: end!.idy,
+              endLon: end.idy,
               type: type),
           child: Text(
             'Начать',

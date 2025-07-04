@@ -48,7 +48,7 @@ class MapContent extends StatelessWidget {
                 polylines: [
                   Polyline(
                     points: routePoints!,
-                    color: Colors.blue.withOpacity(0.7),
+                    color: Colors.blue.shade700,
                     strokeWidth: 4,
                   ),
                 ],

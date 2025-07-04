@@ -15,7 +15,7 @@ class LocationWidgetStart extends StatelessWidget {
             "x: ${context.read<MapCubit>().mapInterface.location!.latitude}; y: ${context.read<MapCubit>().mapInterface.location!.longitude}"),
         trailing: const Text(
           'Карта',
-          style: const TextStyle(
+          style: TextStyle(
               fontWeight: FontWeight.bold, fontSize: 16, color: Colors.grey),
         ),
         onTap: () => ScaffoldMessenger.of(context)
