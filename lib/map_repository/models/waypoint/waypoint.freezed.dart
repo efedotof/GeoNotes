@@ -14,9 +14,13 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Waypoint {
+  @HiveField(0)
   String get hint;
+  @HiveField(1)
   List<double> get location;
+  @HiveField(2)
   String get name;
+  @HiveField(3)
   double get distance;
 
   /// Create a copy of Waypoint
@@ -57,7 +61,11 @@ abstract mixin class $WaypointCopyWith<$Res> {
   factory $WaypointCopyWith(Waypoint value, $Res Function(Waypoint) _then) =
       _$WaypointCopyWithImpl;
   @useResult
-  $Res call({String hint, List<double> location, String name, double distance});
+  $Res call(
+      {@HiveField(0) String hint,
+      @HiveField(1) List<double> location,
+      @HiveField(2) String name,
+      @HiveField(3) double distance});
 }
 
 /// @nodoc
@@ -192,7 +200,10 @@ extension WaypointPatterns on Waypoint {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
-            String hint, List<double> location, String name, double distance)?
+            @HiveField(0) String hint,
+            @HiveField(1) List<double> location,
+            @HiveField(2) String name,
+            @HiveField(3) double distance)?
         $default, {
     required TResult orElse(),
   }) {
@@ -221,7 +232,10 @@ extension WaypointPatterns on Waypoint {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
-            String hint, List<double> location, String name, double distance)
+            @HiveField(0) String hint,
+            @HiveField(1) List<double> location,
+            @HiveField(2) String name,
+            @HiveField(3) double distance)
         $default,
   ) {
     final _that = this;
@@ -248,7 +262,10 @@ extension WaypointPatterns on Waypoint {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
-            String hint, List<double> location, String name, double distance)?
+            @HiveField(0) String hint,
+            @HiveField(1) List<double> location,
+            @HiveField(2) String name,
+            @HiveField(3) double distance)?
         $default,
   ) {
     final _that = this;
@@ -265,18 +282,20 @@ extension WaypointPatterns on Waypoint {
 @JsonSerializable()
 class _Waypoint implements Waypoint {
   const _Waypoint(
-      {required this.hint,
-      required final List<double> location,
-      required this.name,
-      required this.distance})
+      {@HiveField(0) required this.hint,
+      @HiveField(1) required final List<double> location,
+      @HiveField(2) required this.name,
+      @HiveField(3) required this.distance})
       : _location = location;
   factory _Waypoint.fromJson(Map<String, dynamic> json) =>
       _$WaypointFromJson(json);
 
   @override
+  @HiveField(0)
   final String hint;
   final List<double> _location;
   @override
+  @HiveField(1)
   List<double> get location {
     if (_location is EqualUnmodifiableListView) return _location;
     // ignore: implicit_dynamic_type
@@ -284,8 +303,10 @@ class _Waypoint implements Waypoint {
   }
 
   @override
+  @HiveField(2)
   final String name;
   @override
+  @HiveField(3)
   final double distance;
 
   /// Create a copy of Waypoint
@@ -333,7 +354,11 @@ abstract mixin class _$WaypointCopyWith<$Res>
       __$WaypointCopyWithImpl;
   @override
   @useResult
-  $Res call({String hint, List<double> location, String name, double distance});
+  $Res call(
+      {@HiveField(0) String hint,
+      @HiveField(1) List<double> location,
+      @HiveField(2) String name,
+      @HiveField(3) double distance});
 }
 
 /// @nodoc

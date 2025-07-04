@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geo_notes/features/saved/cubit/saved_cubit.dart';
 
 @RoutePage()
 class SettingScreen extends StatelessWidget {
@@ -23,7 +25,7 @@ class SettingScreen extends StatelessWidget {
             children: [
               Center(
                   child: Text(
-                'Setting',
+                'Настройки приложения',
                 style: Theme.of(context).textTheme.titleSmall,
               )),
               const SizedBox(
@@ -37,27 +39,20 @@ class SettingScreen extends StatelessWidget {
                   children: [
                     Card(
                       child: ListTile(
-                        title: const Text(
-                          'Notification',
-                        ),
-                        trailing: const Icon(Icons.arrow_forward_ios),
-                        leading: const Icon(Icons.notifications_outlined),
-                        onTap: () {},
-                      ),
-                    ),
-                    Card(
-                      child: ListTile(
-                        title: const Text('Clear'),
+                        title: const Text('Очистить все данные приложения'),
                         trailing: const Icon(Icons.arrow_forward_ios),
                         leading: const Icon(
                           Icons.info,
                         ),
-                        onTap: () {},
+                        onTap: () => context
+                            .read<SavedCubit>()
+                            .storeinterface
+                            .clearAll(),
                       ),
                     ),
                     Card(
                       child: ListTile(
-                        title: const Text('Support'),
+                        title: const Text('Помощь'),
                         trailing: const Icon(Icons.arrow_forward_ios),
                         leading: const Icon(Icons.support),
                         onTap: () {},

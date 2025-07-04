@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'route.dart';
+part of 'route_dop.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,30 +13,36 @@ part of 'route.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$Route {
+mixin _$RouteDop {
+  @HiveField(0)
   List<Leg> get legs;
+  @HiveField(1)
   @JsonKey(name: 'weight_name')
   String get weightName;
+  @HiveField(2)
   double get weight;
+  @HiveField(3)
   double get duration;
+  @HiveField(4)
   double get distance;
+  @HiveField(5)
   String? get summary;
 
-  /// Create a copy of Route
+  /// Create a copy of RouteDop
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $RouteCopyWith<Route> get copyWith =>
-      _$RouteCopyWithImpl<Route>(this as Route, _$identity);
+  $RouteDopCopyWith<RouteDop> get copyWith =>
+      _$RouteDopCopyWithImpl<RouteDop>(this as RouteDop, _$identity);
 
-  /// Serializes this Route to a JSON map.
+  /// Serializes this RouteDop to a JSON map.
   Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is Route &&
+            other is RouteDop &&
             const DeepCollectionEquality().equals(other.legs, legs) &&
             (identical(other.weightName, weightName) ||
                 other.weightName == weightName) &&
@@ -61,32 +67,32 @@ mixin _$Route {
 
   @override
   String toString() {
-    return 'Route(legs: $legs, weightName: $weightName, weight: $weight, duration: $duration, distance: $distance, summary: $summary)';
+    return 'RouteDop(legs: $legs, weightName: $weightName, weight: $weight, duration: $duration, distance: $distance, summary: $summary)';
   }
 }
 
 /// @nodoc
-abstract mixin class $RouteCopyWith<$Res> {
-  factory $RouteCopyWith(Route value, $Res Function(Route) _then) =
-      _$RouteCopyWithImpl;
+abstract mixin class $RouteDopCopyWith<$Res> {
+  factory $RouteDopCopyWith(RouteDop value, $Res Function(RouteDop) _then) =
+      _$RouteDopCopyWithImpl;
   @useResult
   $Res call(
-      {List<Leg> legs,
-      @JsonKey(name: 'weight_name') String weightName,
-      double weight,
-      double duration,
-      double distance,
-      String? summary});
+      {@HiveField(0) List<Leg> legs,
+      @HiveField(1) @JsonKey(name: 'weight_name') String weightName,
+      @HiveField(2) double weight,
+      @HiveField(3) double duration,
+      @HiveField(4) double distance,
+      @HiveField(5) String? summary});
 }
 
 /// @nodoc
-class _$RouteCopyWithImpl<$Res> implements $RouteCopyWith<$Res> {
-  _$RouteCopyWithImpl(this._self, this._then);
+class _$RouteDopCopyWithImpl<$Res> implements $RouteDopCopyWith<$Res> {
+  _$RouteDopCopyWithImpl(this._self, this._then);
 
-  final Route _self;
-  final $Res Function(Route) _then;
+  final RouteDop _self;
+  final $Res Function(RouteDop) _then;
 
-  /// Create a copy of Route
+  /// Create a copy of RouteDop
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -127,8 +133,8 @@ class _$RouteCopyWithImpl<$Res> implements $RouteCopyWith<$Res> {
   }
 }
 
-/// Adds pattern-matching-related methods to [Route].
-extension RoutePatterns on Route {
+/// Adds pattern-matching-related methods to [RouteDop].
+extension RouteDopPatterns on RouteDop {
   /// A variant of `map` that fallback to returning `orElse`.
   ///
   /// It is equivalent to doing:
@@ -143,12 +149,12 @@ extension RoutePatterns on Route {
 
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_Route value)? $default, {
+    TResult Function(_RouteDop value)? $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _Route() when $default != null:
+      case _RouteDop() when $default != null:
         return $default(_that);
       case _:
         return orElse();
@@ -170,11 +176,11 @@ extension RoutePatterns on Route {
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_Route value) $default,
+    TResult Function(_RouteDop value) $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _Route():
+      case _RouteDop():
         return $default(_that);
       case _:
         throw StateError('Unexpected subclass');
@@ -195,11 +201,11 @@ extension RoutePatterns on Route {
 
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_Route value)? $default,
+    TResult? Function(_RouteDop value)? $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _Route() when $default != null:
+      case _RouteDop() when $default != null:
         return $default(_that);
       case _:
         return null;
@@ -221,18 +227,18 @@ extension RoutePatterns on Route {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
-            List<Leg> legs,
-            @JsonKey(name: 'weight_name') String weightName,
-            double weight,
-            double duration,
-            double distance,
-            String? summary)?
+            @HiveField(0) List<Leg> legs,
+            @HiveField(1) @JsonKey(name: 'weight_name') String weightName,
+            @HiveField(2) double weight,
+            @HiveField(3) double duration,
+            @HiveField(4) double distance,
+            @HiveField(5) String? summary)?
         $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _Route() when $default != null:
+      case _RouteDop() when $default != null:
         return $default(_that.legs, _that.weightName, _that.weight,
             _that.duration, _that.distance, _that.summary);
       case _:
@@ -256,17 +262,17 @@ extension RoutePatterns on Route {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
-            List<Leg> legs,
-            @JsonKey(name: 'weight_name') String weightName,
-            double weight,
-            double duration,
-            double distance,
-            String? summary)
+            @HiveField(0) List<Leg> legs,
+            @HiveField(1) @JsonKey(name: 'weight_name') String weightName,
+            @HiveField(2) double weight,
+            @HiveField(3) double duration,
+            @HiveField(4) double distance,
+            @HiveField(5) String? summary)
         $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _Route():
+      case _RouteDop():
         return $default(_that.legs, _that.weightName, _that.weight,
             _that.duration, _that.distance, _that.summary);
       case _:
@@ -289,17 +295,17 @@ extension RoutePatterns on Route {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
-            List<Leg> legs,
-            @JsonKey(name: 'weight_name') String weightName,
-            double weight,
-            double duration,
-            double distance,
-            String? summary)?
+            @HiveField(0) List<Leg> legs,
+            @HiveField(1) @JsonKey(name: 'weight_name') String weightName,
+            @HiveField(2) double weight,
+            @HiveField(3) double duration,
+            @HiveField(4) double distance,
+            @HiveField(5) String? summary)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _Route() when $default != null:
+      case _RouteDop() when $default != null:
         return $default(_that.legs, _that.weightName, _that.weight,
             _that.duration, _that.distance, _that.summary);
       case _:
@@ -310,19 +316,21 @@ extension RoutePatterns on Route {
 
 /// @nodoc
 @JsonSerializable()
-class _Route implements Route {
-  const _Route(
-      {required final List<Leg> legs,
-      @JsonKey(name: 'weight_name') required this.weightName,
-      required this.weight,
-      required this.duration,
-      required this.distance,
-      this.summary})
+class _RouteDop implements RouteDop {
+  const _RouteDop(
+      {@HiveField(0) required final List<Leg> legs,
+      @HiveField(1) @JsonKey(name: 'weight_name') required this.weightName,
+      @HiveField(2) required this.weight,
+      @HiveField(3) required this.duration,
+      @HiveField(4) required this.distance,
+      @HiveField(5) this.summary})
       : _legs = legs;
-  factory _Route.fromJson(Map<String, dynamic> json) => _$RouteFromJson(json);
+  factory _RouteDop.fromJson(Map<String, dynamic> json) =>
+      _$RouteDopFromJson(json);
 
   final List<Leg> _legs;
   @override
+  @HiveField(0)
   List<Leg> get legs {
     if (_legs is EqualUnmodifiableListView) return _legs;
     // ignore: implicit_dynamic_type
@@ -330,28 +338,33 @@ class _Route implements Route {
   }
 
   @override
+  @HiveField(1)
   @JsonKey(name: 'weight_name')
   final String weightName;
   @override
+  @HiveField(2)
   final double weight;
   @override
+  @HiveField(3)
   final double duration;
   @override
+  @HiveField(4)
   final double distance;
   @override
+  @HiveField(5)
   final String? summary;
 
-  /// Create a copy of Route
+  /// Create a copy of RouteDop
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$RouteCopyWith<_Route> get copyWith =>
-      __$RouteCopyWithImpl<_Route>(this, _$identity);
+  _$RouteDopCopyWith<_RouteDop> get copyWith =>
+      __$RouteDopCopyWithImpl<_RouteDop>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$RouteToJson(
+    return _$RouteDopToJson(
       this,
     );
   }
@@ -360,7 +373,7 @@ class _Route implements Route {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Route &&
+            other is _RouteDop &&
             const DeepCollectionEquality().equals(other._legs, _legs) &&
             (identical(other.weightName, weightName) ||
                 other.weightName == weightName) &&
@@ -385,33 +398,34 @@ class _Route implements Route {
 
   @override
   String toString() {
-    return 'Route(legs: $legs, weightName: $weightName, weight: $weight, duration: $duration, distance: $distance, summary: $summary)';
+    return 'RouteDop(legs: $legs, weightName: $weightName, weight: $weight, duration: $duration, distance: $distance, summary: $summary)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$RouteCopyWith<$Res> implements $RouteCopyWith<$Res> {
-  factory _$RouteCopyWith(_Route value, $Res Function(_Route) _then) =
-      __$RouteCopyWithImpl;
+abstract mixin class _$RouteDopCopyWith<$Res>
+    implements $RouteDopCopyWith<$Res> {
+  factory _$RouteDopCopyWith(_RouteDop value, $Res Function(_RouteDop) _then) =
+      __$RouteDopCopyWithImpl;
   @override
   @useResult
   $Res call(
-      {List<Leg> legs,
-      @JsonKey(name: 'weight_name') String weightName,
-      double weight,
-      double duration,
-      double distance,
-      String? summary});
+      {@HiveField(0) List<Leg> legs,
+      @HiveField(1) @JsonKey(name: 'weight_name') String weightName,
+      @HiveField(2) double weight,
+      @HiveField(3) double duration,
+      @HiveField(4) double distance,
+      @HiveField(5) String? summary});
 }
 
 /// @nodoc
-class __$RouteCopyWithImpl<$Res> implements _$RouteCopyWith<$Res> {
-  __$RouteCopyWithImpl(this._self, this._then);
+class __$RouteDopCopyWithImpl<$Res> implements _$RouteDopCopyWith<$Res> {
+  __$RouteDopCopyWithImpl(this._self, this._then);
 
-  final _Route _self;
-  final $Res Function(_Route) _then;
+  final _RouteDop _self;
+  final $Res Function(_RouteDop) _then;
 
-  /// Create a copy of Route
+  /// Create a copy of RouteDop
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -423,7 +437,7 @@ class __$RouteCopyWithImpl<$Res> implements _$RouteCopyWith<$Res> {
     Object? distance = null,
     Object? summary = freezed,
   }) {
-    return _then(_Route(
+    return _then(_RouteDop(
       legs: null == legs
           ? _self._legs
           : legs // ignore: cast_nullable_to_non_nullable

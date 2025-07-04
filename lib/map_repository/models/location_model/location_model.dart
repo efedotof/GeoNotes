@@ -1,20 +1,24 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive_ce/hive.dart';
 
 part "location_model.freezed.dart";
 part "location_model.g.dart";
 
 @freezed
+@HiveType(typeId: 6)
 abstract class LocationModel with _$LocationModel {
   const factory LocationModel({
-    @JsonKey(name: 'display_name') required String displayName,
+    @HiveField(0) @JsonKey(name: 'display_name') required String displayName,
+    @HiveField(1)
     @JsonKey(
       name: 'lat',
       fromJson: _stringToDouble,
       toJson: _doubleToString,
     )
     required double latitude,
+    @HiveField(2)
     @JsonKey(
       name: 'lon',
       fromJson: _stringToDouble,

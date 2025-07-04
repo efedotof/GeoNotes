@@ -14,8 +14,11 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$CityModel {
+  @HiveField(0)
   String get name;
+  @HiveField(1)
   double get idx;
+  @HiveField(2)
   double get idy;
 
   /// Create a copy of CityModel
@@ -49,7 +52,10 @@ abstract mixin class $CityModelCopyWith<$Res> {
   factory $CityModelCopyWith(CityModel value, $Res Function(CityModel) _then) =
       _$CityModelCopyWithImpl;
   @useResult
-  $Res call({String name, double idx, double idy});
+  $Res call(
+      {@HiveField(0) String name,
+      @HiveField(1) double idx,
+      @HiveField(2) double idy});
 }
 
 /// @nodoc
@@ -178,7 +184,9 @@ extension CityModelPatterns on CityModel {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(String name, double idx, double idy)? $default, {
+    TResult Function(@HiveField(0) String name, @HiveField(1) double idx,
+            @HiveField(2) double idy)?
+        $default, {
     required TResult orElse(),
   }) {
     final _that = this;
@@ -205,7 +213,9 @@ extension CityModelPatterns on CityModel {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(String name, double idx, double idy) $default,
+    TResult Function(@HiveField(0) String name, @HiveField(1) double idx,
+            @HiveField(2) double idy)
+        $default,
   ) {
     final _that = this;
     switch (_that) {
@@ -230,7 +240,9 @@ extension CityModelPatterns on CityModel {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(String name, double idx, double idy)? $default,
+    TResult? Function(@HiveField(0) String name, @HiveField(1) double idx,
+            @HiveField(2) double idy)?
+        $default,
   ) {
     final _that = this;
     switch (_that) {
@@ -245,13 +257,19 @@ extension CityModelPatterns on CityModel {
 /// @nodoc
 
 class _CityModel implements CityModel {
-  const _CityModel({required this.name, required this.idx, required this.idy});
+  const _CityModel(
+      {@HiveField(0) required this.name,
+      @HiveField(1) required this.idx,
+      @HiveField(2) required this.idy});
 
   @override
+  @HiveField(0)
   final String name;
   @override
+  @HiveField(1)
   final double idx;
   @override
+  @HiveField(2)
   final double idy;
 
   /// Create a copy of CityModel
@@ -289,7 +307,10 @@ abstract mixin class _$CityModelCopyWith<$Res>
       __$CityModelCopyWithImpl;
   @override
   @useResult
-  $Res call({String name, double idx, double idy});
+  $Res call(
+      {@HiveField(0) String name,
+      @HiveField(1) double idx,
+      @HiveField(2) double idy});
 }
 
 /// @nodoc

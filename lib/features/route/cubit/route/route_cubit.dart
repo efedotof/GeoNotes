@@ -28,9 +28,14 @@ class RouteCubit extends Cubit<RouteState> {
         endLon: endLon,
         type: type,
       );
+
       emit(RouteState.loaded(route: route));
     } catch (e) {
       emit(RouteState.error("Failed to fetch route: ${e.toString()}"));
     }
+  }
+
+  void clean() {
+    emit(RouteState.initial());
   }
 }

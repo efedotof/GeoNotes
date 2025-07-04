@@ -14,7 +14,9 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$CityNameFromCoordinates {
+  @HiveField(0)
   double get latitude;
+  @HiveField(1)
   double get longitude;
 
   /// Create a copy of CityNameFromCoordinates
@@ -51,7 +53,7 @@ abstract mixin class $CityNameFromCoordinatesCopyWith<$Res> {
           $Res Function(CityNameFromCoordinates) _then) =
       _$CityNameFromCoordinatesCopyWithImpl;
   @useResult
-  $Res call({double latitude, double longitude});
+  $Res call({@HiveField(0) double latitude, @HiveField(1) double longitude});
 }
 
 /// @nodoc
@@ -176,7 +178,9 @@ extension CityNameFromCoordinatesPatterns on CityNameFromCoordinates {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(double latitude, double longitude)? $default, {
+    TResult Function(
+            @HiveField(0) double latitude, @HiveField(1) double longitude)?
+        $default, {
     required TResult orElse(),
   }) {
     final _that = this;
@@ -203,7 +207,9 @@ extension CityNameFromCoordinatesPatterns on CityNameFromCoordinates {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(double latitude, double longitude) $default,
+    TResult Function(
+            @HiveField(0) double latitude, @HiveField(1) double longitude)
+        $default,
   ) {
     final _that = this;
     switch (_that) {
@@ -228,7 +234,9 @@ extension CityNameFromCoordinatesPatterns on CityNameFromCoordinates {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(double latitude, double longitude)? $default,
+    TResult? Function(
+            @HiveField(0) double latitude, @HiveField(1) double longitude)?
+        $default,
   ) {
     final _that = this;
     switch (_that) {
@@ -243,11 +251,15 @@ extension CityNameFromCoordinatesPatterns on CityNameFromCoordinates {
 /// @nodoc
 
 class _CityNameFromCoordinates implements CityNameFromCoordinates {
-  _CityNameFromCoordinates({required this.latitude, required this.longitude});
+  _CityNameFromCoordinates(
+      {@HiveField(0) required this.latitude,
+      @HiveField(1) required this.longitude});
 
   @override
+  @HiveField(0)
   final double latitude;
   @override
+  @HiveField(1)
   final double longitude;
 
   /// Create a copy of CityNameFromCoordinates
@@ -287,7 +299,7 @@ abstract mixin class _$CityNameFromCoordinatesCopyWith<$Res>
       __$CityNameFromCoordinatesCopyWithImpl;
   @override
   @useResult
-  $Res call({double latitude, double longitude});
+  $Res call({@HiveField(0) double latitude, @HiveField(1) double longitude});
 }
 
 /// @nodoc

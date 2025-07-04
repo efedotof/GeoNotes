@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'step.dart';
+part of 'step_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,33 +13,42 @@ part of 'step.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$Step {
+mixin _$StepModel {
+  @HiveField(0)
   List<Intersection> get intersections;
+  @HiveField(1)
   @JsonKey(name: 'driving_side')
   String get drivingSide;
+  @HiveField(2)
   String get geometry;
+  @HiveField(3)
   Maneuver get maneuver;
+  @HiveField(4)
   String get name;
+  @HiveField(5)
   String get mode;
+  @HiveField(6)
   double get weight;
+  @HiveField(7)
   double get duration;
+  @HiveField(8)
   double get distance;
 
-  /// Create a copy of Step
+  /// Create a copy of StepModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $StepCopyWith<Step> get copyWith =>
-      _$StepCopyWithImpl<Step>(this as Step, _$identity);
+  $StepModelCopyWith<StepModel> get copyWith =>
+      _$StepModelCopyWithImpl<StepModel>(this as StepModel, _$identity);
 
-  /// Serializes this Step to a JSON map.
+  /// Serializes this StepModel to a JSON map.
   Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is Step &&
+            other is StepModel &&
             const DeepCollectionEquality()
                 .equals(other.intersections, intersections) &&
             (identical(other.drivingSide, drivingSide) ||
@@ -73,37 +82,37 @@ mixin _$Step {
 
   @override
   String toString() {
-    return 'Step(intersections: $intersections, drivingSide: $drivingSide, geometry: $geometry, maneuver: $maneuver, name: $name, mode: $mode, weight: $weight, duration: $duration, distance: $distance)';
+    return 'StepModel(intersections: $intersections, drivingSide: $drivingSide, geometry: $geometry, maneuver: $maneuver, name: $name, mode: $mode, weight: $weight, duration: $duration, distance: $distance)';
   }
 }
 
 /// @nodoc
-abstract mixin class $StepCopyWith<$Res> {
-  factory $StepCopyWith(Step value, $Res Function(Step) _then) =
-      _$StepCopyWithImpl;
+abstract mixin class $StepModelCopyWith<$Res> {
+  factory $StepModelCopyWith(StepModel value, $Res Function(StepModel) _then) =
+      _$StepModelCopyWithImpl;
   @useResult
   $Res call(
-      {List<Intersection> intersections,
-      @JsonKey(name: 'driving_side') String drivingSide,
-      String geometry,
-      Maneuver maneuver,
-      String name,
-      String mode,
-      double weight,
-      double duration,
-      double distance});
+      {@HiveField(0) List<Intersection> intersections,
+      @HiveField(1) @JsonKey(name: 'driving_side') String drivingSide,
+      @HiveField(2) String geometry,
+      @HiveField(3) Maneuver maneuver,
+      @HiveField(4) String name,
+      @HiveField(5) String mode,
+      @HiveField(6) double weight,
+      @HiveField(7) double duration,
+      @HiveField(8) double distance});
 
   $ManeuverCopyWith<$Res> get maneuver;
 }
 
 /// @nodoc
-class _$StepCopyWithImpl<$Res> implements $StepCopyWith<$Res> {
-  _$StepCopyWithImpl(this._self, this._then);
+class _$StepModelCopyWithImpl<$Res> implements $StepModelCopyWith<$Res> {
+  _$StepModelCopyWithImpl(this._self, this._then);
 
-  final Step _self;
-  final $Res Function(Step) _then;
+  final StepModel _self;
+  final $Res Function(StepModel) _then;
 
-  /// Create a copy of Step
+  /// Create a copy of StepModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -158,7 +167,7 @@ class _$StepCopyWithImpl<$Res> implements $StepCopyWith<$Res> {
     ));
   }
 
-  /// Create a copy of Step
+  /// Create a copy of StepModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -169,8 +178,8 @@ class _$StepCopyWithImpl<$Res> implements $StepCopyWith<$Res> {
   }
 }
 
-/// Adds pattern-matching-related methods to [Step].
-extension StepPatterns on Step {
+/// Adds pattern-matching-related methods to [StepModel].
+extension StepModelPatterns on StepModel {
   /// A variant of `map` that fallback to returning `orElse`.
   ///
   /// It is equivalent to doing:
@@ -185,12 +194,12 @@ extension StepPatterns on Step {
 
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_Step value)? $default, {
+    TResult Function(_StepModel value)? $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _Step() when $default != null:
+      case _StepModel() when $default != null:
         return $default(_that);
       case _:
         return orElse();
@@ -212,11 +221,11 @@ extension StepPatterns on Step {
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_Step value) $default,
+    TResult Function(_StepModel value) $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _Step():
+      case _StepModel():
         return $default(_that);
       case _:
         throw StateError('Unexpected subclass');
@@ -237,11 +246,11 @@ extension StepPatterns on Step {
 
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_Step value)? $default,
+    TResult? Function(_StepModel value)? $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _Step() when $default != null:
+      case _StepModel() when $default != null:
         return $default(_that);
       case _:
         return null;
@@ -263,21 +272,21 @@ extension StepPatterns on Step {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
-            List<Intersection> intersections,
-            @JsonKey(name: 'driving_side') String drivingSide,
-            String geometry,
-            Maneuver maneuver,
-            String name,
-            String mode,
-            double weight,
-            double duration,
-            double distance)?
+            @HiveField(0) List<Intersection> intersections,
+            @HiveField(1) @JsonKey(name: 'driving_side') String drivingSide,
+            @HiveField(2) String geometry,
+            @HiveField(3) Maneuver maneuver,
+            @HiveField(4) String name,
+            @HiveField(5) String mode,
+            @HiveField(6) double weight,
+            @HiveField(7) double duration,
+            @HiveField(8) double distance)?
         $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _Step() when $default != null:
+      case _StepModel() when $default != null:
         return $default(
             _that.intersections,
             _that.drivingSide,
@@ -309,20 +318,20 @@ extension StepPatterns on Step {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
-            List<Intersection> intersections,
-            @JsonKey(name: 'driving_side') String drivingSide,
-            String geometry,
-            Maneuver maneuver,
-            String name,
-            String mode,
-            double weight,
-            double duration,
-            double distance)
+            @HiveField(0) List<Intersection> intersections,
+            @HiveField(1) @JsonKey(name: 'driving_side') String drivingSide,
+            @HiveField(2) String geometry,
+            @HiveField(3) Maneuver maneuver,
+            @HiveField(4) String name,
+            @HiveField(5) String mode,
+            @HiveField(6) double weight,
+            @HiveField(7) double duration,
+            @HiveField(8) double distance)
         $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _Step():
+      case _StepModel():
         return $default(
             _that.intersections,
             _that.drivingSide,
@@ -353,20 +362,20 @@ extension StepPatterns on Step {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
-            List<Intersection> intersections,
-            @JsonKey(name: 'driving_side') String drivingSide,
-            String geometry,
-            Maneuver maneuver,
-            String name,
-            String mode,
-            double weight,
-            double duration,
-            double distance)?
+            @HiveField(0) List<Intersection> intersections,
+            @HiveField(1) @JsonKey(name: 'driving_side') String drivingSide,
+            @HiveField(2) String geometry,
+            @HiveField(3) Maneuver maneuver,
+            @HiveField(4) String name,
+            @HiveField(5) String mode,
+            @HiveField(6) double weight,
+            @HiveField(7) double duration,
+            @HiveField(8) double distance)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _Step() when $default != null:
+      case _StepModel() when $default != null:
         return $default(
             _that.intersections,
             _that.drivingSide,
@@ -385,22 +394,24 @@ extension StepPatterns on Step {
 
 /// @nodoc
 @JsonSerializable()
-class _Step implements Step {
-  const _Step(
-      {required final List<Intersection> intersections,
-      @JsonKey(name: 'driving_side') required this.drivingSide,
-      required this.geometry,
-      required this.maneuver,
-      required this.name,
-      required this.mode,
-      required this.weight,
-      required this.duration,
-      required this.distance})
+class _StepModel implements StepModel {
+  const _StepModel(
+      {@HiveField(0) required final List<Intersection> intersections,
+      @HiveField(1) @JsonKey(name: 'driving_side') required this.drivingSide,
+      @HiveField(2) required this.geometry,
+      @HiveField(3) required this.maneuver,
+      @HiveField(4) required this.name,
+      @HiveField(5) required this.mode,
+      @HiveField(6) required this.weight,
+      @HiveField(7) required this.duration,
+      @HiveField(8) required this.distance})
       : _intersections = intersections;
-  factory _Step.fromJson(Map<String, dynamic> json) => _$StepFromJson(json);
+  factory _StepModel.fromJson(Map<String, dynamic> json) =>
+      _$StepModelFromJson(json);
 
   final List<Intersection> _intersections;
   @override
+  @HiveField(0)
   List<Intersection> get intersections {
     if (_intersections is EqualUnmodifiableListView) return _intersections;
     // ignore: implicit_dynamic_type
@@ -408,34 +419,42 @@ class _Step implements Step {
   }
 
   @override
+  @HiveField(1)
   @JsonKey(name: 'driving_side')
   final String drivingSide;
   @override
+  @HiveField(2)
   final String geometry;
   @override
+  @HiveField(3)
   final Maneuver maneuver;
   @override
+  @HiveField(4)
   final String name;
   @override
+  @HiveField(5)
   final String mode;
   @override
+  @HiveField(6)
   final double weight;
   @override
+  @HiveField(7)
   final double duration;
   @override
+  @HiveField(8)
   final double distance;
 
-  /// Create a copy of Step
+  /// Create a copy of StepModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$StepCopyWith<_Step> get copyWith =>
-      __$StepCopyWithImpl<_Step>(this, _$identity);
+  _$StepModelCopyWith<_StepModel> get copyWith =>
+      __$StepModelCopyWithImpl<_StepModel>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$StepToJson(
+    return _$StepModelToJson(
       this,
     );
   }
@@ -444,7 +463,7 @@ class _Step implements Step {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Step &&
+            other is _StepModel &&
             const DeepCollectionEquality()
                 .equals(other._intersections, _intersections) &&
             (identical(other.drivingSide, drivingSide) ||
@@ -478,39 +497,41 @@ class _Step implements Step {
 
   @override
   String toString() {
-    return 'Step(intersections: $intersections, drivingSide: $drivingSide, geometry: $geometry, maneuver: $maneuver, name: $name, mode: $mode, weight: $weight, duration: $duration, distance: $distance)';
+    return 'StepModel(intersections: $intersections, drivingSide: $drivingSide, geometry: $geometry, maneuver: $maneuver, name: $name, mode: $mode, weight: $weight, duration: $duration, distance: $distance)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$StepCopyWith<$Res> implements $StepCopyWith<$Res> {
-  factory _$StepCopyWith(_Step value, $Res Function(_Step) _then) =
-      __$StepCopyWithImpl;
+abstract mixin class _$StepModelCopyWith<$Res>
+    implements $StepModelCopyWith<$Res> {
+  factory _$StepModelCopyWith(
+          _StepModel value, $Res Function(_StepModel) _then) =
+      __$StepModelCopyWithImpl;
   @override
   @useResult
   $Res call(
-      {List<Intersection> intersections,
-      @JsonKey(name: 'driving_side') String drivingSide,
-      String geometry,
-      Maneuver maneuver,
-      String name,
-      String mode,
-      double weight,
-      double duration,
-      double distance});
+      {@HiveField(0) List<Intersection> intersections,
+      @HiveField(1) @JsonKey(name: 'driving_side') String drivingSide,
+      @HiveField(2) String geometry,
+      @HiveField(3) Maneuver maneuver,
+      @HiveField(4) String name,
+      @HiveField(5) String mode,
+      @HiveField(6) double weight,
+      @HiveField(7) double duration,
+      @HiveField(8) double distance});
 
   @override
   $ManeuverCopyWith<$Res> get maneuver;
 }
 
 /// @nodoc
-class __$StepCopyWithImpl<$Res> implements _$StepCopyWith<$Res> {
-  __$StepCopyWithImpl(this._self, this._then);
+class __$StepModelCopyWithImpl<$Res> implements _$StepModelCopyWith<$Res> {
+  __$StepModelCopyWithImpl(this._self, this._then);
 
-  final _Step _self;
-  final $Res Function(_Step) _then;
+  final _StepModel _self;
+  final $Res Function(_StepModel) _then;
 
-  /// Create a copy of Step
+  /// Create a copy of StepModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -525,7 +546,7 @@ class __$StepCopyWithImpl<$Res> implements _$StepCopyWith<$Res> {
     Object? duration = null,
     Object? distance = null,
   }) {
-    return _then(_Step(
+    return _then(_StepModel(
       intersections: null == intersections
           ? _self._intersections
           : intersections // ignore: cast_nullable_to_non_nullable
@@ -565,7 +586,7 @@ class __$StepCopyWithImpl<$Res> implements _$StepCopyWith<$Res> {
     ));
   }
 
-  /// Create a copy of Step
+  /// Create a copy of StepModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')

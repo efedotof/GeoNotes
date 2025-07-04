@@ -1,43 +1,46 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'leg.dart';
+part of 'route_dop.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class LegAdapter extends TypeAdapter<Leg> {
+class RouteDopAdapter extends TypeAdapter<RouteDop> {
   @override
-  final typeId = 11;
+  final typeId = 2;
 
   @override
-  Leg read(BinaryReader reader) {
+  RouteDop read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Leg(
-      steps: (fields[0] as List).cast<StepModel>(),
-      weight: (fields[1] as num).toDouble(),
-      duration: (fields[2] as num).toDouble(),
-      distance: (fields[3] as num).toDouble(),
-      summary: fields[4] as String?,
+    return RouteDop(
+      legs: (fields[0] as List).cast<Leg>(),
+      weightName: fields[1] as String,
+      weight: (fields[2] as num).toDouble(),
+      duration: (fields[3] as num).toDouble(),
+      distance: (fields[4] as num).toDouble(),
+      summary: fields[5] as String?,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Leg obj) {
+  void write(BinaryWriter writer, RouteDop obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
-      ..write(obj.steps)
+      ..write(obj.legs)
       ..writeByte(1)
-      ..write(obj.weight)
+      ..write(obj.weightName)
       ..writeByte(2)
-      ..write(obj.duration)
+      ..write(obj.weight)
       ..writeByte(3)
-      ..write(obj.distance)
+      ..write(obj.duration)
       ..writeByte(4)
+      ..write(obj.distance)
+      ..writeByte(5)
       ..write(obj.summary);
   }
 
@@ -47,7 +50,7 @@ class LegAdapter extends TypeAdapter<Leg> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is LegAdapter &&
+      other is RouteDopAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
@@ -56,18 +59,20 @@ class LegAdapter extends TypeAdapter<Leg> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Leg _$LegFromJson(Map<String, dynamic> json) => _Leg(
-      steps: (json['steps'] as List<dynamic>)
-          .map((e) => StepModel.fromJson(e as Map<String, dynamic>))
+_RouteDop _$RouteDopFromJson(Map<String, dynamic> json) => _RouteDop(
+      legs: (json['legs'] as List<dynamic>)
+          .map((e) => Leg.fromJson(e as Map<String, dynamic>))
           .toList(),
+      weightName: json['weight_name'] as String,
       weight: (json['weight'] as num).toDouble(),
       duration: (json['duration'] as num).toDouble(),
       distance: (json['distance'] as num).toDouble(),
       summary: json['summary'] as String?,
     );
 
-Map<String, dynamic> _$LegToJson(_Leg instance) => <String, dynamic>{
-      'steps': instance.steps,
+Map<String, dynamic> _$RouteDopToJson(_RouteDop instance) => <String, dynamic>{
+      'legs': instance.legs,
+      'weight_name': instance.weightName,
       'weight': instance.weight,
       'duration': instance.duration,
       'distance': instance.distance,

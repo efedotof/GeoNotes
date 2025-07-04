@@ -14,10 +14,13 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$LocationModel {
+  @HiveField(0)
   @JsonKey(name: 'display_name')
   String get displayName;
+  @HiveField(1)
   @JsonKey(name: 'lat', fromJson: _stringToDouble, toJson: _doubleToString)
   double get latitude;
+  @HiveField(2)
   @JsonKey(name: 'lon', fromJson: _stringToDouble, toJson: _doubleToString)
   double get longitude;
 
@@ -63,9 +66,11 @@ abstract mixin class $LocationModelCopyWith<$Res> {
       _$LocationModelCopyWithImpl;
   @useResult
   $Res call(
-      {@JsonKey(name: 'display_name') String displayName,
+      {@HiveField(0) @JsonKey(name: 'display_name') String displayName,
+      @HiveField(1)
       @JsonKey(name: 'lat', fromJson: _stringToDouble, toJson: _doubleToString)
       double latitude,
+      @HiveField(2)
       @JsonKey(name: 'lon', fromJson: _stringToDouble, toJson: _doubleToString)
       double longitude});
 }
@@ -198,10 +203,12 @@ extension LocationModelPatterns on LocationModel {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
-            @JsonKey(name: 'display_name') String displayName,
+            @HiveField(0) @JsonKey(name: 'display_name') String displayName,
+            @HiveField(1)
             @JsonKey(
                 name: 'lat', fromJson: _stringToDouble, toJson: _doubleToString)
             double latitude,
+            @HiveField(2)
             @JsonKey(
                 name: 'lon', fromJson: _stringToDouble, toJson: _doubleToString)
             double longitude)?
@@ -233,10 +240,12 @@ extension LocationModelPatterns on LocationModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
-            @JsonKey(name: 'display_name') String displayName,
+            @HiveField(0) @JsonKey(name: 'display_name') String displayName,
+            @HiveField(1)
             @JsonKey(
                 name: 'lat', fromJson: _stringToDouble, toJson: _doubleToString)
             double latitude,
+            @HiveField(2)
             @JsonKey(
                 name: 'lon', fromJson: _stringToDouble, toJson: _doubleToString)
             double longitude)
@@ -266,10 +275,12 @@ extension LocationModelPatterns on LocationModel {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
-            @JsonKey(name: 'display_name') String displayName,
+            @HiveField(0) @JsonKey(name: 'display_name') String displayName,
+            @HiveField(1)
             @JsonKey(
                 name: 'lat', fromJson: _stringToDouble, toJson: _doubleToString)
             double latitude,
+            @HiveField(2)
             @JsonKey(
                 name: 'lon', fromJson: _stringToDouble, toJson: _doubleToString)
             double longitude)?
@@ -289,21 +300,26 @@ extension LocationModelPatterns on LocationModel {
 @JsonSerializable()
 class _LocationModel implements LocationModel {
   const _LocationModel(
-      {@JsonKey(name: 'display_name') required this.displayName,
+      {@HiveField(0) @JsonKey(name: 'display_name') required this.displayName,
+      @HiveField(1)
       @JsonKey(name: 'lat', fromJson: _stringToDouble, toJson: _doubleToString)
       required this.latitude,
+      @HiveField(2)
       @JsonKey(name: 'lon', fromJson: _stringToDouble, toJson: _doubleToString)
       required this.longitude});
   factory _LocationModel.fromJson(Map<String, dynamic> json) =>
       _$LocationModelFromJson(json);
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'display_name')
   final String displayName;
   @override
+  @HiveField(1)
   @JsonKey(name: 'lat', fromJson: _stringToDouble, toJson: _doubleToString)
   final double latitude;
   @override
+  @HiveField(2)
   @JsonKey(name: 'lon', fromJson: _stringToDouble, toJson: _doubleToString)
   final double longitude;
 
@@ -355,9 +371,11 @@ abstract mixin class _$LocationModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'display_name') String displayName,
+      {@HiveField(0) @JsonKey(name: 'display_name') String displayName,
+      @HiveField(1)
       @JsonKey(name: 'lat', fromJson: _stringToDouble, toJson: _doubleToString)
       double latitude,
+      @HiveField(2)
       @JsonKey(name: 'lon', fromJson: _stringToDouble, toJson: _doubleToString)
       double longitude});
 }

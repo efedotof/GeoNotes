@@ -14,10 +14,15 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Intersection {
+  @HiveField(0)
   List<double> get location;
+  @HiveField(1)
   List<int> get bearings;
+  @HiveField(2)
   List<bool> get entry;
+  @HiveField(3)
   int? get out;
+  @HiveField(4)
   int? get in_;
 
   /// Create a copy of Intersection
@@ -66,11 +71,11 @@ abstract mixin class $IntersectionCopyWith<$Res> {
       _$IntersectionCopyWithImpl;
   @useResult
   $Res call(
-      {List<double> location,
-      List<int> bearings,
-      List<bool> entry,
-      int? out,
-      int? in_});
+      {@HiveField(0) List<double> location,
+      @HiveField(1) List<int> bearings,
+      @HiveField(2) List<bool> entry,
+      @HiveField(3) int? out,
+      @HiveField(4) int? in_});
 }
 
 /// @nodoc
@@ -209,8 +214,12 @@ extension IntersectionPatterns on Intersection {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(List<double> location, List<int> bearings,
-            List<bool> entry, int? out, int? in_)?
+    TResult Function(
+            @HiveField(0) List<double> location,
+            @HiveField(1) List<int> bearings,
+            @HiveField(2) List<bool> entry,
+            @HiveField(3) int? out,
+            @HiveField(4) int? in_)?
         $default, {
     required TResult orElse(),
   }) {
@@ -239,8 +248,12 @@ extension IntersectionPatterns on Intersection {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(List<double> location, List<int> bearings,
-            List<bool> entry, int? out, int? in_)
+    TResult Function(
+            @HiveField(0) List<double> location,
+            @HiveField(1) List<int> bearings,
+            @HiveField(2) List<bool> entry,
+            @HiveField(3) int? out,
+            @HiveField(4) int? in_)
         $default,
   ) {
     final _that = this;
@@ -267,8 +280,12 @@ extension IntersectionPatterns on Intersection {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(List<double> location, List<int> bearings,
-            List<bool> entry, int? out, int? in_)?
+    TResult? Function(
+            @HiveField(0) List<double> location,
+            @HiveField(1) List<int> bearings,
+            @HiveField(2) List<bool> entry,
+            @HiveField(3) int? out,
+            @HiveField(4) int? in_)?
         $default,
   ) {
     final _that = this;
@@ -286,11 +303,11 @@ extension IntersectionPatterns on Intersection {
 @JsonSerializable()
 class _Intersection implements Intersection {
   const _Intersection(
-      {required final List<double> location,
-      required final List<int> bearings,
-      required final List<bool> entry,
-      this.out,
-      this.in_})
+      {@HiveField(0) required final List<double> location,
+      @HiveField(1) required final List<int> bearings,
+      @HiveField(2) required final List<bool> entry,
+      @HiveField(3) this.out,
+      @HiveField(4) this.in_})
       : _location = location,
         _bearings = bearings,
         _entry = entry;
@@ -299,6 +316,7 @@ class _Intersection implements Intersection {
 
   final List<double> _location;
   @override
+  @HiveField(0)
   List<double> get location {
     if (_location is EqualUnmodifiableListView) return _location;
     // ignore: implicit_dynamic_type
@@ -307,6 +325,7 @@ class _Intersection implements Intersection {
 
   final List<int> _bearings;
   @override
+  @HiveField(1)
   List<int> get bearings {
     if (_bearings is EqualUnmodifiableListView) return _bearings;
     // ignore: implicit_dynamic_type
@@ -315,6 +334,7 @@ class _Intersection implements Intersection {
 
   final List<bool> _entry;
   @override
+  @HiveField(2)
   List<bool> get entry {
     if (_entry is EqualUnmodifiableListView) return _entry;
     // ignore: implicit_dynamic_type
@@ -322,8 +342,10 @@ class _Intersection implements Intersection {
   }
 
   @override
+  @HiveField(3)
   final int? out;
   @override
+  @HiveField(4)
   final int? in_;
 
   /// Create a copy of Intersection
@@ -378,11 +400,11 @@ abstract mixin class _$IntersectionCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<double> location,
-      List<int> bearings,
-      List<bool> entry,
-      int? out,
-      int? in_});
+      {@HiveField(0) List<double> location,
+      @HiveField(1) List<int> bearings,
+      @HiveField(2) List<bool> entry,
+      @HiveField(3) int? out,
+      @HiveField(4) int? in_});
 }
 
 /// @nodoc

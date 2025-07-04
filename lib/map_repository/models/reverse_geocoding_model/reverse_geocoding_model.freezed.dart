@@ -14,8 +14,11 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$ReverseGeocodingModel {
+  @HiveField(0)
   String get displayName;
+  @HiveField(1)
   double get lat;
+  @HiveField(2)
   double get lon;
 
   /// Create a copy of ReverseGeocodingModel
@@ -56,7 +59,10 @@ abstract mixin class $ReverseGeocodingModelCopyWith<$Res> {
           $Res Function(ReverseGeocodingModel) _then) =
       _$ReverseGeocodingModelCopyWithImpl;
   @useResult
-  $Res call({String displayName, double lat, double lon});
+  $Res call(
+      {@HiveField(0) String displayName,
+      @HiveField(1) double lat,
+      @HiveField(2) double lon});
 }
 
 /// @nodoc
@@ -186,7 +192,9 @@ extension ReverseGeocodingModelPatterns on ReverseGeocodingModel {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(String displayName, double lat, double lon)? $default, {
+    TResult Function(@HiveField(0) String displayName, @HiveField(1) double lat,
+            @HiveField(2) double lon)?
+        $default, {
     required TResult orElse(),
   }) {
     final _that = this;
@@ -213,7 +221,9 @@ extension ReverseGeocodingModelPatterns on ReverseGeocodingModel {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(String displayName, double lat, double lon) $default,
+    TResult Function(@HiveField(0) String displayName, @HiveField(1) double lat,
+            @HiveField(2) double lon)
+        $default,
   ) {
     final _that = this;
     switch (_that) {
@@ -238,7 +248,9 @@ extension ReverseGeocodingModelPatterns on ReverseGeocodingModel {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(String displayName, double lat, double lon)? $default,
+    TResult? Function(@HiveField(0) String displayName,
+            @HiveField(1) double lat, @HiveField(2) double lon)?
+        $default,
   ) {
     final _that = this;
     switch (_that) {
@@ -254,15 +266,20 @@ extension ReverseGeocodingModelPatterns on ReverseGeocodingModel {
 @JsonSerializable()
 class _ReverseGeocodingModel implements ReverseGeocodingModel {
   _ReverseGeocodingModel(
-      {required this.displayName, required this.lat, required this.lon});
+      {@HiveField(0) required this.displayName,
+      @HiveField(1) required this.lat,
+      @HiveField(2) required this.lon});
   factory _ReverseGeocodingModel.fromJson(Map<String, dynamic> json) =>
       _$ReverseGeocodingModelFromJson(json);
 
   @override
+  @HiveField(0)
   final String displayName;
   @override
+  @HiveField(1)
   final double lat;
   @override
+  @HiveField(2)
   final double lon;
 
   /// Create a copy of ReverseGeocodingModel
@@ -310,7 +327,10 @@ abstract mixin class _$ReverseGeocodingModelCopyWith<$Res>
       __$ReverseGeocodingModelCopyWithImpl;
   @override
   @useResult
-  $Res call({String displayName, double lat, double lon});
+  $Res call(
+      {@HiveField(0) String displayName,
+      @HiveField(1) double lat,
+      @HiveField(2) double lon});
 }
 
 /// @nodoc

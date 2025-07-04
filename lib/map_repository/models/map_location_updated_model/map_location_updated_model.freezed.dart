@@ -14,7 +14,9 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$MapLocationUpdatedModel {
+  @HiveField(0)
   CityModel? get cityModel;
+  @HiveField(1)
   LatLng? get location;
 
   /// Create a copy of MapLocationUpdatedModel
@@ -51,7 +53,8 @@ abstract mixin class $MapLocationUpdatedModelCopyWith<$Res> {
           $Res Function(MapLocationUpdatedModel) _then) =
       _$MapLocationUpdatedModelCopyWithImpl;
   @useResult
-  $Res call({CityModel? cityModel, LatLng? location});
+  $Res call(
+      {@HiveField(0) CityModel? cityModel, @HiveField(1) LatLng? location});
 
   $CityModelCopyWith<$Res>? get cityModel;
 }
@@ -192,7 +195,9 @@ extension MapLocationUpdatedModelPatterns on MapLocationUpdatedModel {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(CityModel? cityModel, LatLng? location)? $default, {
+    TResult Function(
+            @HiveField(0) CityModel? cityModel, @HiveField(1) LatLng? location)?
+        $default, {
     required TResult orElse(),
   }) {
     final _that = this;
@@ -219,7 +224,9 @@ extension MapLocationUpdatedModelPatterns on MapLocationUpdatedModel {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(CityModel? cityModel, LatLng? location) $default,
+    TResult Function(
+            @HiveField(0) CityModel? cityModel, @HiveField(1) LatLng? location)
+        $default,
   ) {
     final _that = this;
     switch (_that) {
@@ -244,7 +251,9 @@ extension MapLocationUpdatedModelPatterns on MapLocationUpdatedModel {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(CityModel? cityModel, LatLng? location)? $default,
+    TResult? Function(
+            @HiveField(0) CityModel? cityModel, @HiveField(1) LatLng? location)?
+        $default,
   ) {
     final _that = this;
     switch (_that) {
@@ -259,11 +268,15 @@ extension MapLocationUpdatedModelPatterns on MapLocationUpdatedModel {
 /// @nodoc
 
 class _MapLocationUpdatedModel implements MapLocationUpdatedModel {
-  _MapLocationUpdatedModel({required this.cityModel, required this.location});
+  _MapLocationUpdatedModel(
+      {@HiveField(0) required this.cityModel,
+      @HiveField(1) required this.location});
 
   @override
+  @HiveField(0)
   final CityModel? cityModel;
   @override
+  @HiveField(1)
   final LatLng? location;
 
   /// Create a copy of MapLocationUpdatedModel
@@ -303,7 +316,8 @@ abstract mixin class _$MapLocationUpdatedModelCopyWith<$Res>
       __$MapLocationUpdatedModelCopyWithImpl;
   @override
   @useResult
-  $Res call({CityModel? cityModel, LatLng? location});
+  $Res call(
+      {@HiveField(0) CityModel? cityModel, @HiveField(1) LatLng? location});
 
   @override
   $CityModelCopyWith<$Res>? get cityModel;

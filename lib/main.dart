@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geo_notes/features/route/cubit/cubit/distance_and_time_cubit.dart';
+import 'package:geo_notes/features/route/cubit/distance_and_time/distance_and_time_cubit.dart';
 import 'package:geo_notes/features/route/cubit/selected_item/selected_item_cubit.dart';
+import 'package:geo_notes/hive_registrar.g.dart';
+import 'package:hive_ce/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:geo_notes/features/map/cubit/map/map_cubit.dart';
@@ -16,17 +18,23 @@ import 'package:geo_notes/map_repository/search/search_repository.dart';
 import 'package:geo_notes/map_repository/routing/routing_repository.dart';
 import 'package:geo_notes/Theme/cubit/theme_cubit.dart';
 import 'package:geo_notes/Theme/theme.dart';
+import 'features/saved/cubit/saved_cubit.dart';
 import 'route/app_route.dart';
+import 'store/repository/store_repository.dart';
 import 'theme/repositories/theme_repository.dart';
+import 'package:path_provider/path_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
+  final directory = await getApplicationDocumentsDirectory();
+  Hive.init(directory.path);
+  final storeRepository = StoreRepository();
+  await storeRepository.init();
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   final themeRepository = ThemeRepository(preferences: prefs);
   final mapRepository = MapRepository();
@@ -43,6 +51,8 @@ void main() async {
         ),
         BlocProvider(create: (context) => SelectedItemCubit()),
         BlocProvider(create: (context) => DistanceAndTimeCubit()),
+        BlocProvider(
+            create: (context) => SavedCubit(storeinterface: storeRepository)),
         BlocProvider(
           create: (context) => MapCubit(mapInterface: mapRepository),
         ),

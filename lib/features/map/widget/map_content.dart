@@ -33,6 +33,7 @@ class MapContent extends StatelessWidget {
               initialZoom: 15.5,
               maxZoom: 17,
               minZoom: 3.5,
+              keepAlive: true,
               onMapReady: () {
                 mapController.move(location, 17);
                 context.read<MarkerCubit>();

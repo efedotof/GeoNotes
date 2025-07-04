@@ -14,9 +14,14 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$RouteModel {
+  @HiveField(0)
   String get code;
-  List<Route> get routes;
+  @HiveField(1)
+  List<RouteDop> get routes;
+  @HiveField(2)
   List<Waypoint> get waypoints;
+  @HiveField(3)
+  String? get displayName;
 
   /// Create a copy of RouteModel
   /// with the given fields replaced by the non-null parameter values.
@@ -35,7 +40,9 @@ mixin _$RouteModel {
             other is RouteModel &&
             (identical(other.code, code) || other.code == code) &&
             const DeepCollectionEquality().equals(other.routes, routes) &&
-            const DeepCollectionEquality().equals(other.waypoints, waypoints));
+            const DeepCollectionEquality().equals(other.waypoints, waypoints) &&
+            (identical(other.displayName, displayName) ||
+                other.displayName == displayName));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -44,11 +51,12 @@ mixin _$RouteModel {
       runtimeType,
       code,
       const DeepCollectionEquality().hash(routes),
-      const DeepCollectionEquality().hash(waypoints));
+      const DeepCollectionEquality().hash(waypoints),
+      displayName);
 
   @override
   String toString() {
-    return 'RouteModel(code: $code, routes: $routes, waypoints: $waypoints)';
+    return 'RouteModel(code: $code, routes: $routes, waypoints: $waypoints, displayName: $displayName)';
   }
 }
 
@@ -58,7 +66,11 @@ abstract mixin class $RouteModelCopyWith<$Res> {
           RouteModel value, $Res Function(RouteModel) _then) =
       _$RouteModelCopyWithImpl;
   @useResult
-  $Res call({String code, List<Route> routes, List<Waypoint> waypoints});
+  $Res call(
+      {@HiveField(0) String code,
+      @HiveField(1) List<RouteDop> routes,
+      @HiveField(2) List<Waypoint> waypoints,
+      @HiveField(3) String? displayName});
 }
 
 /// @nodoc
@@ -76,6 +88,7 @@ class _$RouteModelCopyWithImpl<$Res> implements $RouteModelCopyWith<$Res> {
     Object? code = null,
     Object? routes = null,
     Object? waypoints = null,
+    Object? displayName = freezed,
   }) {
     return _then(_self.copyWith(
       code: null == code
@@ -85,11 +98,15 @@ class _$RouteModelCopyWithImpl<$Res> implements $RouteModelCopyWith<$Res> {
       routes: null == routes
           ? _self.routes
           : routes // ignore: cast_nullable_to_non_nullable
-              as List<Route>,
+              as List<RouteDop>,
       waypoints: null == waypoints
           ? _self.waypoints
           : waypoints // ignore: cast_nullable_to_non_nullable
               as List<Waypoint>,
+      displayName: freezed == displayName
+          ? _self.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -187,14 +204,19 @@ extension RouteModelPatterns on RouteModel {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(String code, List<Route> routes, List<Waypoint> waypoints)?
+    TResult Function(
+            @HiveField(0) String code,
+            @HiveField(1) List<RouteDop> routes,
+            @HiveField(2) List<Waypoint> waypoints,
+            @HiveField(3) String? displayName)?
         $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _RouteModel() when $default != null:
-        return $default(_that.code, _that.routes, _that.waypoints);
+        return $default(
+            _that.code, _that.routes, _that.waypoints, _that.displayName);
       case _:
         return orElse();
     }
@@ -215,13 +237,18 @@ extension RouteModelPatterns on RouteModel {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(String code, List<Route> routes, List<Waypoint> waypoints)
+    TResult Function(
+            @HiveField(0) String code,
+            @HiveField(1) List<RouteDop> routes,
+            @HiveField(2) List<Waypoint> waypoints,
+            @HiveField(3) String? displayName)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _RouteModel():
-        return $default(_that.code, _that.routes, _that.waypoints);
+        return $default(
+            _that.code, _that.routes, _that.waypoints, _that.displayName);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -242,13 +269,17 @@ extension RouteModelPatterns on RouteModel {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
-            String code, List<Route> routes, List<Waypoint> waypoints)?
+            @HiveField(0) String code,
+            @HiveField(1) List<RouteDop> routes,
+            @HiveField(2) List<Waypoint> waypoints,
+            @HiveField(3) String? displayName)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _RouteModel() when $default != null:
-        return $default(_that.code, _that.routes, _that.waypoints);
+        return $default(
+            _that.code, _that.routes, _that.waypoints, _that.displayName);
       case _:
         return null;
     }
@@ -259,19 +290,22 @@ extension RouteModelPatterns on RouteModel {
 @JsonSerializable()
 class _RouteModel implements RouteModel {
   const _RouteModel(
-      {required this.code,
-      required final List<Route> routes,
-      required final List<Waypoint> waypoints})
+      {@HiveField(0) required this.code,
+      @HiveField(1) required final List<RouteDop> routes,
+      @HiveField(2) required final List<Waypoint> waypoints,
+      @HiveField(3) required this.displayName})
       : _routes = routes,
         _waypoints = waypoints;
   factory _RouteModel.fromJson(Map<String, dynamic> json) =>
       _$RouteModelFromJson(json);
 
   @override
+  @HiveField(0)
   final String code;
-  final List<Route> _routes;
+  final List<RouteDop> _routes;
   @override
-  List<Route> get routes {
+  @HiveField(1)
+  List<RouteDop> get routes {
     if (_routes is EqualUnmodifiableListView) return _routes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_routes);
@@ -279,11 +313,16 @@ class _RouteModel implements RouteModel {
 
   final List<Waypoint> _waypoints;
   @override
+  @HiveField(2)
   List<Waypoint> get waypoints {
     if (_waypoints is EqualUnmodifiableListView) return _waypoints;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_waypoints);
   }
+
+  @override
+  @HiveField(3)
+  final String? displayName;
 
   /// Create a copy of RouteModel
   /// with the given fields replaced by the non-null parameter values.
@@ -308,7 +347,9 @@ class _RouteModel implements RouteModel {
             (identical(other.code, code) || other.code == code) &&
             const DeepCollectionEquality().equals(other._routes, _routes) &&
             const DeepCollectionEquality()
-                .equals(other._waypoints, _waypoints));
+                .equals(other._waypoints, _waypoints) &&
+            (identical(other.displayName, displayName) ||
+                other.displayName == displayName));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -317,11 +358,12 @@ class _RouteModel implements RouteModel {
       runtimeType,
       code,
       const DeepCollectionEquality().hash(_routes),
-      const DeepCollectionEquality().hash(_waypoints));
+      const DeepCollectionEquality().hash(_waypoints),
+      displayName);
 
   @override
   String toString() {
-    return 'RouteModel(code: $code, routes: $routes, waypoints: $waypoints)';
+    return 'RouteModel(code: $code, routes: $routes, waypoints: $waypoints, displayName: $displayName)';
   }
 }
 
@@ -333,7 +375,11 @@ abstract mixin class _$RouteModelCopyWith<$Res>
       __$RouteModelCopyWithImpl;
   @override
   @useResult
-  $Res call({String code, List<Route> routes, List<Waypoint> waypoints});
+  $Res call(
+      {@HiveField(0) String code,
+      @HiveField(1) List<RouteDop> routes,
+      @HiveField(2) List<Waypoint> waypoints,
+      @HiveField(3) String? displayName});
 }
 
 /// @nodoc
@@ -351,6 +397,7 @@ class __$RouteModelCopyWithImpl<$Res> implements _$RouteModelCopyWith<$Res> {
     Object? code = null,
     Object? routes = null,
     Object? waypoints = null,
+    Object? displayName = freezed,
   }) {
     return _then(_RouteModel(
       code: null == code
@@ -360,11 +407,15 @@ class __$RouteModelCopyWithImpl<$Res> implements _$RouteModelCopyWith<$Res> {
       routes: null == routes
           ? _self._routes
           : routes // ignore: cast_nullable_to_non_nullable
-              as List<Route>,
+              as List<RouteDop>,
       waypoints: null == waypoints
           ? _self._waypoints
           : waypoints // ignore: cast_nullable_to_non_nullable
               as List<Waypoint>,
+      displayName: freezed == displayName
+          ? _self.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }

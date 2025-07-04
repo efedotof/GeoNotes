@@ -1,15 +1,17 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive_ce/hive.dart';
 
 part "waypoint.freezed.dart";
 part "waypoint.g.dart";
 
 @freezed
+@HiveType(typeId: 12)
 abstract class Waypoint with _$Waypoint {
   const factory Waypoint({
-    required String hint,
-    required List<double> location,
-    required String name,
-    required double distance,
+    @HiveField(0) required String hint,
+    @HiveField(1) required List<double> location,
+    @HiveField(2) required String name,
+    @HiveField(3) required double distance,
   }) = _Waypoint;
 
   factory Waypoint.fromJson(Map<String, dynamic> json) =>

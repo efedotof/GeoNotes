@@ -14,13 +14,19 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Maneuver {
+  @HiveField(0)
   List<double> get location;
+  @HiveField(1)
   @JsonKey(name: 'bearing_after')
   int get bearingAfter;
+  @HiveField(2)
   @JsonKey(name: 'bearing_before')
   int get bearingBefore;
+  @HiveField(3)
   String get type;
+  @HiveField(4)
   String get modifier;
+  @HiveField(5)
   int? get exit;
 
   /// Create a copy of Maneuver
@@ -72,12 +78,12 @@ abstract mixin class $ManeuverCopyWith<$Res> {
       _$ManeuverCopyWithImpl;
   @useResult
   $Res call(
-      {List<double> location,
-      @JsonKey(name: 'bearing_after') int bearingAfter,
-      @JsonKey(name: 'bearing_before') int bearingBefore,
-      String type,
-      String modifier,
-      int? exit});
+      {@HiveField(0) List<double> location,
+      @HiveField(1) @JsonKey(name: 'bearing_after') int bearingAfter,
+      @HiveField(2) @JsonKey(name: 'bearing_before') int bearingBefore,
+      @HiveField(3) String type,
+      @HiveField(4) String modifier,
+      @HiveField(5) int? exit});
 }
 
 /// @nodoc
@@ -222,12 +228,12 @@ extension ManeuverPatterns on Maneuver {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
-            List<double> location,
-            @JsonKey(name: 'bearing_after') int bearingAfter,
-            @JsonKey(name: 'bearing_before') int bearingBefore,
-            String type,
-            String modifier,
-            int? exit)?
+            @HiveField(0) List<double> location,
+            @HiveField(1) @JsonKey(name: 'bearing_after') int bearingAfter,
+            @HiveField(2) @JsonKey(name: 'bearing_before') int bearingBefore,
+            @HiveField(3) String type,
+            @HiveField(4) String modifier,
+            @HiveField(5) int? exit)?
         $default, {
     required TResult orElse(),
   }) {
@@ -257,12 +263,12 @@ extension ManeuverPatterns on Maneuver {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
-            List<double> location,
-            @JsonKey(name: 'bearing_after') int bearingAfter,
-            @JsonKey(name: 'bearing_before') int bearingBefore,
-            String type,
-            String modifier,
-            int? exit)
+            @HiveField(0) List<double> location,
+            @HiveField(1) @JsonKey(name: 'bearing_after') int bearingAfter,
+            @HiveField(2) @JsonKey(name: 'bearing_before') int bearingBefore,
+            @HiveField(3) String type,
+            @HiveField(4) String modifier,
+            @HiveField(5) int? exit)
         $default,
   ) {
     final _that = this;
@@ -290,12 +296,12 @@ extension ManeuverPatterns on Maneuver {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
-            List<double> location,
-            @JsonKey(name: 'bearing_after') int bearingAfter,
-            @JsonKey(name: 'bearing_before') int bearingBefore,
-            String type,
-            String modifier,
-            int? exit)?
+            @HiveField(0) List<double> location,
+            @HiveField(1) @JsonKey(name: 'bearing_after') int bearingAfter,
+            @HiveField(2) @JsonKey(name: 'bearing_before') int bearingBefore,
+            @HiveField(3) String type,
+            @HiveField(4) String modifier,
+            @HiveField(5) int? exit)?
         $default,
   ) {
     final _that = this;
@@ -313,18 +319,21 @@ extension ManeuverPatterns on Maneuver {
 @JsonSerializable()
 class _Maneuver implements Maneuver {
   const _Maneuver(
-      {required final List<double> location,
-      @JsonKey(name: 'bearing_after') required this.bearingAfter,
-      @JsonKey(name: 'bearing_before') required this.bearingBefore,
-      required this.type,
-      required this.modifier,
-      this.exit})
+      {@HiveField(0) required final List<double> location,
+      @HiveField(1) @JsonKey(name: 'bearing_after') required this.bearingAfter,
+      @HiveField(2)
+      @JsonKey(name: 'bearing_before')
+      required this.bearingBefore,
+      @HiveField(3) required this.type,
+      @HiveField(4) required this.modifier,
+      @HiveField(5) this.exit})
       : _location = location;
   factory _Maneuver.fromJson(Map<String, dynamic> json) =>
       _$ManeuverFromJson(json);
 
   final List<double> _location;
   @override
+  @HiveField(0)
   List<double> get location {
     if (_location is EqualUnmodifiableListView) return _location;
     // ignore: implicit_dynamic_type
@@ -332,17 +341,21 @@ class _Maneuver implements Maneuver {
   }
 
   @override
+  @HiveField(1)
   @JsonKey(name: 'bearing_after')
   final int bearingAfter;
-
   @override
+  @HiveField(2)
   @JsonKey(name: 'bearing_before')
   final int bearingBefore;
   @override
+  @HiveField(3)
   final String type;
   @override
+  @HiveField(4)
   final String modifier;
   @override
+  @HiveField(5)
   final int? exit;
 
   /// Create a copy of Maneuver
@@ -401,12 +414,12 @@ abstract mixin class _$ManeuverCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<double> location,
-      @JsonKey(name: 'bearing_after') int bearingAfter,
-      @JsonKey(name: 'bearing_before') int bearingBefore,
-      String type,
-      String modifier,
-      int? exit});
+      {@HiveField(0) List<double> location,
+      @HiveField(1) @JsonKey(name: 'bearing_after') int bearingAfter,
+      @HiveField(2) @JsonKey(name: 'bearing_before') int bearingBefore,
+      @HiveField(3) String type,
+      @HiveField(4) String modifier,
+      @HiveField(5) int? exit});
 }
 
 /// @nodoc

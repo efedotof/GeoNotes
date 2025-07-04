@@ -14,7 +14,7 @@ class SearchFieldInput extends StatelessWidget {
       child: TextField(
         controller: searchController,
         decoration: InputDecoration(
-          hintText: 'Search',
+          hintText: 'Поиск',
           prefixIcon: const Icon(Icons.search),
           suffixIcon: IconButton(
             icon: const Icon(Icons.cancel),

@@ -14,10 +14,15 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Leg {
-  List<Step> get steps;
+  @HiveField(0)
+  List<StepModel> get steps;
+  @HiveField(1)
   double get weight;
+  @HiveField(2)
   double get duration;
+  @HiveField(3)
   double get distance;
+  @HiveField(4)
   String? get summary;
 
   /// Create a copy of Leg
@@ -65,11 +70,11 @@ abstract mixin class $LegCopyWith<$Res> {
   factory $LegCopyWith(Leg value, $Res Function(Leg) _then) = _$LegCopyWithImpl;
   @useResult
   $Res call(
-      {List<Step> steps,
-      double weight,
-      double duration,
-      double distance,
-      String? summary});
+      {@HiveField(0) List<StepModel> steps,
+      @HiveField(1) double weight,
+      @HiveField(2) double duration,
+      @HiveField(3) double distance,
+      @HiveField(4) String? summary});
 }
 
 /// @nodoc
@@ -94,7 +99,7 @@ class _$LegCopyWithImpl<$Res> implements $LegCopyWith<$Res> {
       steps: null == steps
           ? _self.steps
           : steps // ignore: cast_nullable_to_non_nullable
-              as List<Step>,
+              as List<StepModel>,
       weight: null == weight
           ? _self.weight
           : weight // ignore: cast_nullable_to_non_nullable
@@ -208,8 +213,12 @@ extension LegPatterns on Leg {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(List<Step> steps, double weight, double duration,
-            double distance, String? summary)?
+    TResult Function(
+            @HiveField(0) List<StepModel> steps,
+            @HiveField(1) double weight,
+            @HiveField(2) double duration,
+            @HiveField(3) double distance,
+            @HiveField(4) String? summary)?
         $default, {
     required TResult orElse(),
   }) {
@@ -238,8 +247,12 @@ extension LegPatterns on Leg {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(List<Step> steps, double weight, double duration,
-            double distance, String? summary)
+    TResult Function(
+            @HiveField(0) List<StepModel> steps,
+            @HiveField(1) double weight,
+            @HiveField(2) double duration,
+            @HiveField(3) double distance,
+            @HiveField(4) String? summary)
         $default,
   ) {
     final _that = this;
@@ -266,8 +279,12 @@ extension LegPatterns on Leg {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(List<Step> steps, double weight, double duration,
-            double distance, String? summary)?
+    TResult? Function(
+            @HiveField(0) List<StepModel> steps,
+            @HiveField(1) double weight,
+            @HiveField(2) double duration,
+            @HiveField(3) double distance,
+            @HiveField(4) String? summary)?
         $default,
   ) {
     final _that = this;
@@ -285,29 +302,34 @@ extension LegPatterns on Leg {
 @JsonSerializable()
 class _Leg implements Leg {
   const _Leg(
-      {required final List<Step> steps,
-      required this.weight,
-      required this.duration,
-      required this.distance,
-      this.summary})
+      {@HiveField(0) required final List<StepModel> steps,
+      @HiveField(1) required this.weight,
+      @HiveField(2) required this.duration,
+      @HiveField(3) required this.distance,
+      @HiveField(4) this.summary})
       : _steps = steps;
   factory _Leg.fromJson(Map<String, dynamic> json) => _$LegFromJson(json);
 
-  final List<Step> _steps;
+  final List<StepModel> _steps;
   @override
-  List<Step> get steps {
+  @HiveField(0)
+  List<StepModel> get steps {
     if (_steps is EqualUnmodifiableListView) return _steps;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_steps);
   }
 
   @override
+  @HiveField(1)
   final double weight;
   @override
+  @HiveField(2)
   final double duration;
   @override
+  @HiveField(3)
   final double distance;
   @override
+  @HiveField(4)
   final String? summary;
 
   /// Create a copy of Leg
@@ -362,11 +384,11 @@ abstract mixin class _$LegCopyWith<$Res> implements $LegCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {List<Step> steps,
-      double weight,
-      double duration,
-      double distance,
-      String? summary});
+      {@HiveField(0) List<StepModel> steps,
+      @HiveField(1) double weight,
+      @HiveField(2) double duration,
+      @HiveField(3) double distance,
+      @HiveField(4) String? summary});
 }
 
 /// @nodoc
@@ -391,7 +413,7 @@ class __$LegCopyWithImpl<$Res> implements _$LegCopyWith<$Res> {
       steps: null == steps
           ? _self._steps
           : steps // ignore: cast_nullable_to_non_nullable
-              as List<Step>,
+              as List<StepModel>,
       weight: null == weight
           ? _self.weight
           : weight // ignore: cast_nullable_to_non_nullable

@@ -39,35 +39,35 @@ class MainHomeScreen extends StatelessWidget {
             },
             items: const [
               BottomNavigationBarItem(
-                label: 'Search',
+                label: 'Поиск',
                 icon: Icon(
                   Icons.search,
                   color: Color(0xFF232425),
                 ),
               ),
               BottomNavigationBarItem(
-                label: 'Route',
+                label: 'Навигация',
                 icon: Icon(
                   Icons.route,
                   color: Color(0xFF232425),
                 ),
               ),
               BottomNavigationBarItem(
-                label: 'Map',
+                label: 'Карта',
                 icon: Icon(
                   Icons.map_outlined,
                   color: Color(0xFF232425),
                 ),
               ),
               BottomNavigationBarItem(
-                label: 'Saved',
+                label: 'Сохраненные',
                 icon: Icon(
                   Icons.book_outlined,
                   color: Color(0xFF232425),
                 ),
               ),
               BottomNavigationBarItem(
-                label: 'Setting',
+                label: 'Настройки',
                 icon: Icon(
                   Icons.settings,
                   color: Color(0xFF232425),
