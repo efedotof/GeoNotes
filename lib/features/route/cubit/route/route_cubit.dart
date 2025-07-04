@@ -35,6 +35,10 @@ class RouteCubit extends Cubit<RouteState> {
     }
   }
 
+  void localRoute({required RouteModel model}) {
+    emit(RouteState.loaded(route: model));
+  }
+
   void clean() {
     emit(RouteState.initial());
   }

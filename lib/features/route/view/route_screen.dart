@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geo_notes/features/route/cubit/route/route_cubit.dart';
 import 'package:geo_notes/features/route/widget/widget.dart';
 
 @RoutePage()
@@ -72,10 +74,28 @@ class _RouteScreenState extends State<RouteScreen>
                                 selectedTransport.value = option.key;
                               }
                             },
-                            child: TransportOption(
-                              key: ValueKey(option.key),
-                              isSelected: isSelected,
-                              icon: option.icon,
+                            child: BlocBuilder<RouteCubit, RouteState>(
+                              builder: (context, routeState) {
+                                return TransportOption(
+                                  key: ValueKey(option.key),
+                                  isSelected: isSelected,
+                                  icon: option.icon,
+                                  duration: isSelected
+                                      ? routeState.maybeWhen(
+                                          loaded: (route) =>
+                                              route.routes[0].duration,
+                                          orElse: () => null,
+                                        )
+                                      : null,
+                                  distance: isSelected
+                                      ? routeState.maybeWhen(
+                                          loaded: (route) =>
+                                              route.routes[0].distance,
+                                          orElse: () => null,
+                                        )
+                                      : null,
+                                );
+                              },
                             ),
                           ),
                         );

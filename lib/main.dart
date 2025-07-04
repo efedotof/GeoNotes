@@ -3,10 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geo_notes/features/route/cubit/distance_and_time/distance_and_time_cubit.dart';
 import 'package:geo_notes/features/route/cubit/selected_item/selected_item_cubit.dart';
-import 'package:geo_notes/hive_registrar.g.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:geo_notes/features/map/cubit/map/map_cubit.dart';
 import 'package:geo_notes/features/map/cubit/marker/marker_cubit.dart';
 import 'package:geo_notes/features/route/cubit/route/route_cubit.dart';

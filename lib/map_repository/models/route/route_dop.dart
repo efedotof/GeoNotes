@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geo_notes/map_repository/models/leg/leg.dart';
 import 'package:hive_ce/hive.dart';

@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geo_notes/map_repository/models/intersection/intersection.dart';
 import 'package:geo_notes/map_repository/models/maneuver/maneuver.dart';

@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geo_notes/features/route/cubit/distance_and_time/distance_and_time_cubit.dart';
 
 class TransportOption extends StatelessWidget {
   const TransportOption({
     super.key,
     required this.isSelected,
     required this.icon,
+    required this.distance,
+    required this.duration,
   });
 
   final bool isSelected;
   final IconData? icon;
-
+  final double? distance;
+  final double? duration;
   @override
   Widget build(BuildContext context) {
     final width = isSelected
@@ -53,7 +58,11 @@ class TransportOption extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '1 hr, 05 min',
+                            duration != null
+                                ? context
+                                    .read<DistanceAndTimeCubit>()
+                                    .formatDuration(duration!)
+                                : "Время",
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
@@ -61,7 +70,11 @@ class TransportOption extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                           Text(
-                            '6 km',
+                            distance != null
+                                ? context
+                                    .read<DistanceAndTimeCubit>()
+                                    .formatDistance(distance!)
+                                : "Расстояние",
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ],
