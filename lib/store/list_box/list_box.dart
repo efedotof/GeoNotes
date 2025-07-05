@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'package:hive_ce/hive.dart';
 
 part 'list_box.g.dart';
@@ -19,11 +20,15 @@ class ListBox extends HiveObject {
   @HiveField(4)
   final String description;
 
+  @HiveField(5)
+  final List<Uint8List> images;
+
   ListBox({
     required this.id,
     required this.latitude,
     required this.longitude,
     required this.displayName,
     required this.description,
+    required this.images,
   });
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:geo_notes/map_repository/models/models.dart';
 import 'package:geo_notes/store/list_box/list_box.dart';
+import 'package:geo_notes/store/list_box/uint_8_list_adapter.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 
 import 'store_interface.dart';
@@ -100,6 +101,7 @@ class StoreRepository implements StoreInterface {
     Hive.registerAdapter(RouteModelAdapter());
     Hive.registerAdapter(StepModelAdapter());
     Hive.registerAdapter(WaypointAdapter());
+    Hive.registerAdapter(Uint8ListAdapter());
 
     //открытие боксов
     _listBox = await Hive.openBox<ListBox>('list_box');

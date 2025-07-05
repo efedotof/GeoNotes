@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geo_notes/features/map/view/create_marker/cubit/create_marker_cubit.dart';
 import 'package:geo_notes/features/route/cubit/distance_and_time/distance_and_time_cubit.dart';
 import 'package:geo_notes/features/route/cubit/selected_item/selected_item_cubit.dart';
 import 'package:hive_ce/hive.dart';
@@ -47,6 +48,9 @@ void main() async {
         BlocProvider(
           create: (context) => ThemeCubit(themeInterface: themeRepository),
         ),
+        BlocProvider(
+            create: (context) =>
+                CreateMarkerCubit(storeInterface: storeRepository)),
         BlocProvider(create: (context) => SelectedItemCubit()),
         BlocProvider(create: (context) => DistanceAndTimeCubit()),
         BlocProvider(

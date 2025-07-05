@@ -22,13 +22,14 @@ class ListBoxAdapter extends TypeAdapter<ListBox> {
       longitude: (fields[2] as num).toDouble(),
       displayName: fields[3] as String,
       description: fields[4] as String,
+      images: (fields[5] as List).cast<Uint8List>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, ListBox obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class ListBoxAdapter extends TypeAdapter<ListBox> {
       ..writeByte(3)
       ..write(obj.displayName)
       ..writeByte(4)
-      ..write(obj.description);
+      ..write(obj.description)
+      ..writeByte(5)
+      ..write(obj.images);
   }
 
   @override

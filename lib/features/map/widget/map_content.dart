@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geo_notes/features/map/cubit/marker/marker_cubit.dart';
+import 'package:geo_notes/features/saved/cubit/saved_cubit.dart';
 import 'package:latlong2/latlong.dart';
+import 'add_local_button.dart';
+import 'custom_image_marker.dart';
 import 'location_button.dart';
 import 'city_name_display.dart';
 
@@ -13,6 +16,7 @@ class MapContent extends StatelessWidget {
   final LatLng? markerLocation;
   final String? markerCityName;
   final List<LatLng>? routePoints;
+
   const MapContent({
     super.key,
     required this.mapController,
@@ -30,16 +34,16 @@ class MapContent extends StatelessWidget {
         FlutterMap(
           mapController: mapController,
           options: MapOptions(
-              initialZoom: 15.5,
-              maxZoom: 17,
-              minZoom: 3.5,
-              keepAlive: false,
-              onMapReady: () {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  mapController.move(location, 17);
-                  context.read<MarkerCubit>();
-                });
-              }),
+            initialZoom: 15.5,
+            maxZoom: 17,
+            minZoom: 3.5,
+            keepAlive: false,
+            onMapReady: () {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                mapController.move(location, 17);
+              });
+            },
+          ),
           children: [
             TileLayer(
               urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -65,40 +69,68 @@ class MapContent extends StatelessWidget {
                   markerRotationUpdated: (heading) => rotation = heading,
                 );
 
-                return MarkerLayer(
-                  markers: [
-                    if (markerLocation != null)
+                return ValueListenableBuilder(
+                  valueListenable: context
+                      .read<SavedCubit>()
+                      .storeinterface
+                      .listenableListBox,
+                  builder: (context, box, _) {
+                    final markers = <Marker>[];
+
+                    final items = box.values.toList();
+
+                    for (int i = 0; i < items.length; i++) {
+                      final item = items[i];
+
+                      markers.add(
+                        Marker(
+                          point: LatLng(item.latitude, item.longitude),
+                          width: 30,
+                          height: 30,
+                          child: CustomImageMarker(
+                            imageBytes: item.images.first,
+                            marker: item,
+                            index: i,
+                          ),
+                        ),
+                      );
+                    }
+                    if (markerLocation != null) {
+                      markers.add(
+                        Marker(
+                          point: markerLocation!,
+                          width: 40,
+                          height: 40,
+                          child: Transform.rotate(
+                            angle: rotation * (3.14159 / 180),
+                            child: const Icon(Icons.flag, color: Colors.red),
+                          ),
+                        ),
+                      );
+                    }
+
+                    markers.add(
                       Marker(
-                        point: markerLocation!,
+                        point: location,
                         width: 40,
                         height: 40,
                         child: Transform.rotate(
                           angle: rotation * (3.14159 / 180),
-                          child: const Icon(
-                            Icons.flag,
-                            color: Colors.red,
-                          ),
+                          child: const Icon(Icons.send_rounded,
+                              color: Color(0xFF10282E)),
                         ),
                       ),
-                    Marker(
-                      point: location,
-                      width: 40,
-                      height: 40,
-                      child: Transform.rotate(
-                        angle: rotation * (3.14159 / 180),
-                        child: const Icon(
-                          Icons.send_rounded,
-                          color: Color(0xFF10282E),
-                        ),
-                      ),
-                    ),
-                  ],
+                    );
+
+                    return MarkerLayer(markers: markers);
+                  },
                 );
               },
             ),
           ],
         ),
         LocationButton(mapController: mapController),
+        AddLocalButton(),
         CityNameDisplay(cityName: cityName),
       ],
     );
