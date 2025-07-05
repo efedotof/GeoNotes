@@ -1,7 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:geo_notes/features/map/cubit/map/map_cubit.dart';
+import 'package:geo_notes/features/search/cubit/searche_cubit.dart';
 import 'package:geo_notes/map_repository/models/route_model/route_model.dart';
 import 'package:geo_notes/map_repository/routing/routing_interface.dart';
+import 'package:latlong2/latlong.dart';
 
 part 'route_cubit.freezed.dart';
 part 'route_state.dart';
@@ -35,7 +39,16 @@ class RouteCubit extends Cubit<RouteState> {
     }
   }
 
-  void localRoute({required RouteModel model}) {
+  void localRoute({required BuildContext context, required RouteModel model}) {
+    final location =
+        LatLng(model.location!.latitude, model.location!.longitude);
+    context.read<MapCubit>().addMarkerAtLocation(
+        location: location, cityName: model.location!.displayName);
+    context.read<SearcheCubit>().onTapSearcheResult(
+          context: context,
+          location: model.location!,
+          isLocal: true,
+        );
     emit(RouteState.loaded(route: model));
   }
 

@@ -21,13 +21,14 @@ class RouteModelAdapter extends TypeAdapter<RouteModel> {
       routes: (fields[1] as List).cast<RouteDop>(),
       waypoints: (fields[2] as List).cast<Waypoint>(),
       displayName: fields[3] as String?,
+      location: fields[4] as LocationModel?,
     );
   }
 
   @override
   void write(BinaryWriter writer, RouteModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.code)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class RouteModelAdapter extends TypeAdapter<RouteModel> {
       ..writeByte(2)
       ..write(obj.waypoints)
       ..writeByte(3)
-      ..write(obj.displayName);
+      ..write(obj.displayName)
+      ..writeByte(4)
+      ..write(obj.location);
   }
 
   @override
@@ -62,6 +65,9 @@ _RouteModel _$RouteModelFromJson(Map<String, dynamic> json) => _RouteModel(
           .map((e) => Waypoint.fromJson(e as Map<String, dynamic>))
           .toList(),
       displayName: json['displayName'] as String?,
+      location: json['location'] == null
+          ? null
+          : LocationModel.fromJson(json['location'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$RouteModelToJson(_RouteModel instance) =>
@@ -70,4 +76,5 @@ Map<String, dynamic> _$RouteModelToJson(_RouteModel instance) =>
       'routes': instance.routes,
       'waypoints': instance.waypoints,
       'displayName': instance.displayName,
+      'location': instance.location,
     };

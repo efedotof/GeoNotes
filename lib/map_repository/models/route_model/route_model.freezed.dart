@@ -22,6 +22,8 @@ mixin _$RouteModel {
   List<Waypoint> get waypoints;
   @HiveField(3)
   String? get displayName;
+  @HiveField(4)
+  LocationModel? get location;
 
   /// Create a copy of RouteModel
   /// with the given fields replaced by the non-null parameter values.
@@ -42,7 +44,9 @@ mixin _$RouteModel {
             const DeepCollectionEquality().equals(other.routes, routes) &&
             const DeepCollectionEquality().equals(other.waypoints, waypoints) &&
             (identical(other.displayName, displayName) ||
-                other.displayName == displayName));
+                other.displayName == displayName) &&
+            (identical(other.location, location) ||
+                other.location == location));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -52,11 +56,12 @@ mixin _$RouteModel {
       code,
       const DeepCollectionEquality().hash(routes),
       const DeepCollectionEquality().hash(waypoints),
-      displayName);
+      displayName,
+      location);
 
   @override
   String toString() {
-    return 'RouteModel(code: $code, routes: $routes, waypoints: $waypoints, displayName: $displayName)';
+    return 'RouteModel(code: $code, routes: $routes, waypoints: $waypoints, displayName: $displayName, location: $location)';
   }
 }
 
@@ -70,7 +75,10 @@ abstract mixin class $RouteModelCopyWith<$Res> {
       {@HiveField(0) String code,
       @HiveField(1) List<RouteDop> routes,
       @HiveField(2) List<Waypoint> waypoints,
-      @HiveField(3) String? displayName});
+      @HiveField(3) String? displayName,
+      @HiveField(4) LocationModel? location});
+
+  $LocationModelCopyWith<$Res>? get location;
 }
 
 /// @nodoc
@@ -89,6 +97,7 @@ class _$RouteModelCopyWithImpl<$Res> implements $RouteModelCopyWith<$Res> {
     Object? routes = null,
     Object? waypoints = null,
     Object? displayName = freezed,
+    Object? location = freezed,
   }) {
     return _then(_self.copyWith(
       code: null == code
@@ -107,7 +116,25 @@ class _$RouteModelCopyWithImpl<$Res> implements $RouteModelCopyWith<$Res> {
           ? _self.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
               as String?,
+      location: freezed == location
+          ? _self.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as LocationModel?,
     ));
+  }
+
+  /// Create a copy of RouteModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LocationModelCopyWith<$Res>? get location {
+    if (_self.location == null) {
+      return null;
+    }
+
+    return $LocationModelCopyWith<$Res>(_self.location!, (value) {
+      return _then(_self.copyWith(location: value));
+    });
   }
 }
 
@@ -208,15 +235,16 @@ extension RouteModelPatterns on RouteModel {
             @HiveField(0) String code,
             @HiveField(1) List<RouteDop> routes,
             @HiveField(2) List<Waypoint> waypoints,
-            @HiveField(3) String? displayName)?
+            @HiveField(3) String? displayName,
+            @HiveField(4) LocationModel? location)?
         $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _RouteModel() when $default != null:
-        return $default(
-            _that.code, _that.routes, _that.waypoints, _that.displayName);
+        return $default(_that.code, _that.routes, _that.waypoints,
+            _that.displayName, _that.location);
       case _:
         return orElse();
     }
@@ -241,14 +269,15 @@ extension RouteModelPatterns on RouteModel {
             @HiveField(0) String code,
             @HiveField(1) List<RouteDop> routes,
             @HiveField(2) List<Waypoint> waypoints,
-            @HiveField(3) String? displayName)
+            @HiveField(3) String? displayName,
+            @HiveField(4) LocationModel? location)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _RouteModel():
-        return $default(
-            _that.code, _that.routes, _that.waypoints, _that.displayName);
+        return $default(_that.code, _that.routes, _that.waypoints,
+            _that.displayName, _that.location);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -272,14 +301,15 @@ extension RouteModelPatterns on RouteModel {
             @HiveField(0) String code,
             @HiveField(1) List<RouteDop> routes,
             @HiveField(2) List<Waypoint> waypoints,
-            @HiveField(3) String? displayName)?
+            @HiveField(3) String? displayName,
+            @HiveField(4) LocationModel? location)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _RouteModel() when $default != null:
-        return $default(
-            _that.code, _that.routes, _that.waypoints, _that.displayName);
+        return $default(_that.code, _that.routes, _that.waypoints,
+            _that.displayName, _that.location);
       case _:
         return null;
     }
@@ -293,7 +323,8 @@ class _RouteModel implements RouteModel {
       {@HiveField(0) required this.code,
       @HiveField(1) required final List<RouteDop> routes,
       @HiveField(2) required final List<Waypoint> waypoints,
-      @HiveField(3) required this.displayName})
+      @HiveField(3) required this.displayName,
+      @HiveField(4) required this.location})
       : _routes = routes,
         _waypoints = waypoints;
   factory _RouteModel.fromJson(Map<String, dynamic> json) =>
@@ -323,6 +354,9 @@ class _RouteModel implements RouteModel {
   @override
   @HiveField(3)
   final String? displayName;
+  @override
+  @HiveField(4)
+  final LocationModel? location;
 
   /// Create a copy of RouteModel
   /// with the given fields replaced by the non-null parameter values.
@@ -349,7 +383,9 @@ class _RouteModel implements RouteModel {
             const DeepCollectionEquality()
                 .equals(other._waypoints, _waypoints) &&
             (identical(other.displayName, displayName) ||
-                other.displayName == displayName));
+                other.displayName == displayName) &&
+            (identical(other.location, location) ||
+                other.location == location));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -359,11 +395,12 @@ class _RouteModel implements RouteModel {
       code,
       const DeepCollectionEquality().hash(_routes),
       const DeepCollectionEquality().hash(_waypoints),
-      displayName);
+      displayName,
+      location);
 
   @override
   String toString() {
-    return 'RouteModel(code: $code, routes: $routes, waypoints: $waypoints, displayName: $displayName)';
+    return 'RouteModel(code: $code, routes: $routes, waypoints: $waypoints, displayName: $displayName, location: $location)';
   }
 }
 
@@ -379,7 +416,11 @@ abstract mixin class _$RouteModelCopyWith<$Res>
       {@HiveField(0) String code,
       @HiveField(1) List<RouteDop> routes,
       @HiveField(2) List<Waypoint> waypoints,
-      @HiveField(3) String? displayName});
+      @HiveField(3) String? displayName,
+      @HiveField(4) LocationModel? location});
+
+  @override
+  $LocationModelCopyWith<$Res>? get location;
 }
 
 /// @nodoc
@@ -398,6 +439,7 @@ class __$RouteModelCopyWithImpl<$Res> implements _$RouteModelCopyWith<$Res> {
     Object? routes = null,
     Object? waypoints = null,
     Object? displayName = freezed,
+    Object? location = freezed,
   }) {
     return _then(_RouteModel(
       code: null == code
@@ -416,7 +458,25 @@ class __$RouteModelCopyWithImpl<$Res> implements _$RouteModelCopyWith<$Res> {
           ? _self.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
               as String?,
+      location: freezed == location
+          ? _self.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as LocationModel?,
     ));
+  }
+
+  /// Create a copy of RouteModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LocationModelCopyWith<$Res>? get location {
+    if (_self.location == null) {
+      return null;
+    }
+
+    return $LocationModelCopyWith<$Res>(_self.location!, (value) {
+      return _then(_self.copyWith(location: value));
+    });
   }
 }
 

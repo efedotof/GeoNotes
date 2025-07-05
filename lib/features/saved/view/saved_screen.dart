@@ -1,7 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geo_notes/features/saved/cubit/saved_cubit.dart';
+import 'package:geo_notes/features/saved/widget/widget.dart';
+import 'package:hive_ce/hive.dart';
 
 @RoutePage()
 class SavedScreen extends StatelessWidget {
@@ -9,6 +12,29 @@ class SavedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> titleList = [
+      'Сохраненные места',
+      'Сохраненные маршруты',
+      'История поиска'
+    ];
+
+    List<String> subtitleList = [
+      'Список сохраненных мест',
+      'Список сохраненных маршрутов',
+      'Здесь отображаются ваши маршруты'
+    ];
+
+    List<Box> boxList = [
+      context.read<SavedCubit>().storeinterface.listBox,
+      context.read<SavedCubit>().storeinterface.routeModel,
+      context.read<SavedCubit>().storeinterface.locationModel
+    ];
+
+    List<ValueListenable<Box<dynamic>>> listenableList = [
+      context.read<SavedCubit>().storeinterface.listenableListBox,
+      context.read<SavedCubit>().storeinterface.listenableRouteModel,
+      context.read<SavedCubit>().storeinterface.listenableLocationModel
+    ];
     return DraggableScrollableSheet(
       initialChildSize: 0.3,
       minChildSize: 0.1,
@@ -24,94 +50,73 @@ class SavedScreen extends StatelessWidget {
               ),
               color: Color(0xFFF7F6F2),
             ),
-            child: ListView(
-              controller: scrollController,
-              children: [
-                Center(
-                  child: Text(
-                    'Ваш список',
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                ),
-                const SizedBox(height: 30),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * 0.05),
-                  child: Wrap(
-                    runSpacing: 15,
-                    children: [
-                      Card(
-                        child: ListTile(
-                          title: Text('Сохраненные места',
-                              style: Theme.of(context).textTheme.titleMedium),
-                          subtitle: Text('Список сохраненных мест',
-                              style: Theme.of(context).textTheme.titleSmall),
-                          trailing: const Icon(Icons.arrow_forward_ios),
-                          onTap: () => context.read<SavedCubit>().showInnerSheet(
-                              context: context,
-                              title: 'Сохраненные места',
-                              subtitle:
-                                  'Здесь отображаются ваши сохранённые места',
-                              box: context
-                                  .read<SavedCubit>()
-                                  .storeinterface
-                                  .listBox,
-                              listanable: context
-                                  .read<SavedCubit>()
-                                  .storeinterface
-                                  .listenableListBox),
-                        ),
-                      ),
-                      Card(
-                        child: ListTile(
-                          title: Text('Сохраненные маршруты',
-                              style: Theme.of(context).textTheme.titleMedium),
-                          subtitle: Text('Список сохраненных маршрутов',
-                              style: Theme.of(context).textTheme.titleSmall),
-                          trailing: const Icon(Icons.arrow_forward_ios),
-                          onTap: () => context
-                              .read<SavedCubit>()
-                              .showInnerSheet(
-                                context: context,
-                                title: 'Сохраненные маршруты',
-                                subtitle: 'Здесь отображаются ваши маршруты',
-                                box: context
-                                    .read<SavedCubit>()
-                                    .storeinterface
-                                    .routeModel,
-                                listanable: context
-                                    .read<SavedCubit>()
-                                    .storeinterface
-                                    .listenableRouteModel,
+            child: BlocBuilder<SavedCubit, SavedState>(
+              builder: (context, state) {
+                return ListView(
+                  controller: scrollController,
+                  children: state.when(
+                      initial: () => [
+                            Center(
+                              child: Text(
+                                'Ваш список',
+                                style: Theme.of(context).textTheme.titleSmall,
                               ),
-                        ),
-                      ),
-                      Card(
-                        child: ListTile(
-                          title: Text('История поиска',
-                              style: Theme.of(context).textTheme.titleMedium),
-                          subtitle: Text('Список запросов поиска',
-                              style: Theme.of(context).textTheme.titleSmall),
-                          trailing: const Icon(Icons.arrow_forward_ios),
-                          onTap: () => context.read<SavedCubit>().showInnerSheet(
-                              context: context,
-                              title: 'История поиска',
-                              subtitle:
-                                  'Здесь отображаются последние поисковые запросы',
-                              box: context
-                                  .read<SavedCubit>()
-                                  .storeinterface
-                                  .locationModel,
-                              listanable: context
-                                  .read<SavedCubit>()
-                                  .storeinterface
-                                  .listenableLocationModel),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
+                            ),
+                            const SizedBox(height: 30),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.05),
+                              child: Wrap(
+                                runSpacing: 15,
+                                children: List.generate(
+                                    titleList.length,
+                                    (index) => ItemWidget(
+                                        title: titleList[index],
+                                        subtitle: subtitleList[index],
+                                        listanable: listenableList[index],
+                                        box: boxList[index])),
+                              ),
+                            )
+                          ],
+                      savedPlaces: (String title, String subtitle,
+                          ValueListenable<Box<dynamic>> listanable, Box box) {
+                        return [
+                          HiveElementShow(
+                            title: title,
+                            subtitle: subtitle,
+                            listanable: listanable,
+                            box: box,
+                            icon: Icons.location_pin,
+                          )
+                        ];
+                      },
+                      savedRoutes: (String title, String subtitle,
+                          ValueListenable<Box<dynamic>> listanable, Box box) {
+                        return [
+                          HiveElementShow(
+                            title: title,
+                            subtitle: subtitle,
+                            listanable: listanable,
+                            box: box,
+                            icon: Icons.bookmark,
+                          )
+                        ];
+                      },
+                      searchHistory: (String title, String subtitle,
+                          ValueListenable<Box<dynamic>> listanable, Box box) {
+                        return [
+                          HiveElementShow(
+                            title: title,
+                            subtitle: subtitle,
+                            listanable: listanable,
+                            box: box,
+                            icon: Icons.search,
+                          )
+                        ];
+                      }),
+                );
+              },
             ),
           ),
         );

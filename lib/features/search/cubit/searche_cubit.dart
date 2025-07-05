@@ -46,7 +46,9 @@ class SearcheCubit extends Cubit<SearcheState> {
   }
 
   void Function()? onTapSearcheResult(
-      {required BuildContext context, required LocationModel location}) {
+      {required BuildContext context,
+      required LocationModel location,
+      required bool isLocal}) {
     final latLng = LatLng(location.latitude, location.longitude);
     context
         .read<MapCubit>()
@@ -55,11 +57,14 @@ class SearcheCubit extends Cubit<SearcheState> {
         name: location.displayName,
         idx: location.latitude,
         idy: location.longitude));
-    context.read<SavedCubit>().storeinterface.addLocationModel(
-        item: LocationModel(
-            displayName: location.displayName,
-            latitude: location.latitude,
-            longitude: location.longitude));
+
+    if (!isLocal) {
+      context.read<SavedCubit>().storeinterface.addLocationModel(
+          item: LocationModel(
+              displayName: location.displayName,
+              latitude: location.latitude,
+              longitude: location.longitude));
+    }
     return null;
   }
 }

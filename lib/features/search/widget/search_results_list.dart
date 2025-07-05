@@ -31,6 +31,7 @@ class SearchResultsList extends StatelessWidget {
                   onTap: () => context.read<SearcheCubit>().onTapSearcheResult(
                         context: context,
                         location: location,
+                        isLocal: false,
                       ),
                 ),
               );

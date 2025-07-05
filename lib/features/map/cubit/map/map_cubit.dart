@@ -8,7 +8,9 @@ part 'map_state.dart';
 part 'map_cubit.freezed.dart';
 
 class MapCubit extends Cubit<MapState> {
-  MapCubit({required this.mapInterface}) : super(const MapState.initial());
+  MapCubit({required this.mapInterface}) : super(const MapState.initial()) {
+    initializeMap();
+  }
 
   final MapInterface mapInterface;
 
@@ -21,7 +23,6 @@ class MapCubit extends Cubit<MapState> {
   Future<void> initializeMap() async {
     emit(const MapState.mapLoading());
     final result = await mapInterface.initializeMap();
-
     if (result.location != null && result.cityModel != null) {
       emit(MapState.mapLocationUpdated(
         location: result.location!,

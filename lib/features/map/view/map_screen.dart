@@ -16,59 +16,73 @@ class MapScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<MapCubit>().initializeMap();
     return Scaffold(
-      body: BlocBuilder<MapCubit, MapState>(
-        builder: (context, mapState) {
-          return BlocBuilder<RouteCubit, RouteState>(
-            builder: (context, routeState) {
-              return mapState.when(
-                initial: () => const Center(child: CircularProgressIndicator()),
-                mapLoading: () =>
-                    const Center(child: CircularProgressIndicator()),
-                mapPermissionDenied: () => const MapPermissionDeniedContent(),
-                mapLocationUpdated: (location, cityName) {
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<MapCubit, MapState>(
+            listenWhen: (previous, current) => current.maybeMap(
+              mapLocationUpdated: (_) => true,
+              mapMarkerAdded: (_) => true,
+              orElse: () => false,
+            ),
+            listener: (context, mapState) {
+              mapState.maybeMap(
+                mapLocationUpdated: (state) {
+                  final mapController =
+                      context.read<MapCubit>().mapInterface.mapController;
                   WidgetsBinding.instance.addPostFrameCallback((_) {
-                    context
-                        .read<MapCubit>()
-                        .mapInterface
-                        .mapController
-                        .move(location, 17);
+                    mapController.move(state.location, 17);
                   });
-                  return MapContent(
-                    mapController:
-                        context.read<MapCubit>().mapInterface.mapController,
-                    location: location,
-                    cityName: cityName,
-                  );
                 },
-                mapMarkerAdded: (location, cityName) {
+                mapMarkerAdded: (state) {
+                  final mapController =
+                      context.read<MapCubit>().mapInterface.mapController;
                   WidgetsBinding.instance.addPostFrameCallback((_) {
-                    context
-                        .read<MapCubit>()
-                        .mapInterface
-                        .mapController
-                        .move(location, 17);
+                    mapController.move(state.markerLocation, 17);
                   });
-                  return MapContent(
-                    mapController:
-                        context.read<MapCubit>().mapInterface.mapController,
-                    location:
-                        context.read<MapCubit>().mapInterface.location != null
-                            ? context.read<MapCubit>().mapInterface.location!
-                            : LatLng(0, 0),
-                    cityName: cityName,
-                    markerLocation:
-                        context.read<MapCubit>().mapInterface.markerLocation,
-                    markerCityName: cityName,
-                    routePoints: routeState.maybeWhen(
-                      loaded: (route) => _convertRouteToPoints(route),
-                      orElse: () => null,
-                    ),
-                  );
                 },
+                orElse: () {},
               );
             },
-          );
-        },
+          ),
+        ],
+        child: BlocBuilder<MapCubit, MapState>(
+          builder: (context, mapState) {
+            return BlocBuilder<RouteCubit, RouteState>(
+              builder: (context, routeState) {
+                return mapState.maybeWhen(
+                  orElse: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  mapPermissionDenied: () => const MapPermissionDeniedContent(),
+                  mapLocationUpdated: (location, cityName) {
+                    return MapContent(
+                      mapController:
+                          context.read<MapCubit>().mapInterface.mapController,
+                      location: location,
+                      cityName: cityName,
+                    );
+                  },
+                  mapMarkerAdded: (location, cityName) {
+                    return MapContent(
+                      mapController:
+                          context.read<MapCubit>().mapInterface.mapController,
+                      location:
+                          context.read<MapCubit>().mapInterface.location ??
+                              LatLng(0, 0),
+                      cityName: cityName,
+                      markerLocation:
+                          context.read<MapCubit>().mapInterface.markerLocation,
+                      markerCityName: cityName,
+                      routePoints: routeState.maybeWhen(
+                        loaded: (route) => _convertRouteToPoints(route),
+                        orElse: () => null,
+                      ),
+                    );
+                  },
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }

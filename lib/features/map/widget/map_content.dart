@@ -33,10 +33,12 @@ class MapContent extends StatelessWidget {
               initialZoom: 15.5,
               maxZoom: 17,
               minZoom: 3.5,
-              keepAlive: true,
+              keepAlive: false,
               onMapReady: () {
-                mapController.move(location, 17);
-                context.read<MarkerCubit>();
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  mapController.move(location, 17);
+                  context.read<MarkerCubit>();
+                });
               }),
           children: [
             TileLayer(

@@ -18,7 +18,7 @@ class MapPermissionDeniedContent extends StatelessWidget {
         TileLayer(
           urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
           userAgentPackageName: 'com.efedotov.notes_on_the_map',
-          retinaMode: true,
+          retinaMode: false,
         ),
       ],
     );

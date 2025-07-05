@@ -9,72 +9,76 @@ class MainHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AutoTabsRouter(
+    return AutoTabsScaffold(
       homeIndex: 2,
       routes: [
         SearchRoute(),
-        const RouteRoute(),
-        const MapRoute(),
-        const SavedRoute(),
+        RouteRoute(),
+        MapRoute(),
+        SavedRoute(),
         SettingRoute(),
       ],
-      builder: (context, child) {
-        final tabsRouter = AutoTabsRouter.of(context);
-        return Scaffold(
-          body: Stack(
-            children: [
-              const Positioned.fill(
-                child: MapScreen(),
+      bottomNavigationBuilder: (_, tabsRouter) {
+        return BottomNavigationBar(
+          currentIndex: tabsRouter.activeIndex,
+          onTap: tabsRouter.setActiveIndex,
+          items: const [
+            BottomNavigationBarItem(
+              label: 'Поиск',
+              icon: Icon(
+                Icons.search,
+                color: Color(0xFF232425),
               ),
-              if (tabsRouter.activeIndex != 2)
-                Positioned.fill(
+            ),
+            BottomNavigationBarItem(
+              label: 'Навигация',
+              icon: Icon(
+                Icons.route,
+                color: Color(0xFF232425),
+              ),
+            ),
+            BottomNavigationBarItem(
+              label: 'Карта',
+              icon: Icon(
+                Icons.map_outlined,
+                color: Color(0xFF232425),
+              ),
+            ),
+            BottomNavigationBarItem(
+              label: 'Сохраненные',
+              icon: Icon(
+                Icons.book_outlined,
+                color: Color(0xFF232425),
+              ),
+            ),
+            BottomNavigationBarItem(
+              label: 'Настройки',
+              icon: Icon(
+                Icons.settings,
+                color: Color(0xFF232425),
+              ),
+            ),
+          ],
+        );
+      },
+      transitionBuilder: (context, child, animation) {
+        final tabsRouter = AutoTabsRouter.of(context);
+
+        return Stack(
+          children: [
+            // Карта всегда на фоне
+            const Positioned.fill(
+              child: MapScreen(),
+            ),
+            // Если выбрана вкладка 2 (карта), показываем только карту без наложения
+            if (tabsRouter.activeIndex != 2)
+              Positioned.fill(
+                child: FadeTransition(
+                  opacity: animation,
                   child: child,
                 ),
-            ],
-          ),
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: tabsRouter.activeIndex,
-            onTap: (index) {
-              tabsRouter.setActiveIndex(index);
-            },
-            items: const [
-              BottomNavigationBarItem(
-                label: 'Поиск',
-                icon: Icon(
-                  Icons.search,
-                  color: Color(0xFF232425),
-                ),
               ),
-              BottomNavigationBarItem(
-                label: 'Навигация',
-                icon: Icon(
-                  Icons.route,
-                  color: Color(0xFF232425),
-                ),
-              ),
-              BottomNavigationBarItem(
-                label: 'Карта',
-                icon: Icon(
-                  Icons.map_outlined,
-                  color: Color(0xFF232425),
-                ),
-              ),
-              BottomNavigationBarItem(
-                label: 'Сохраненные',
-                icon: Icon(
-                  Icons.book_outlined,
-                  color: Color(0xFF232425),
-                ),
-              ),
-              BottomNavigationBarItem(
-                label: 'Настройки',
-                icon: Icon(
-                  Icons.settings,
-                  color: Color(0xFF232425),
-                ),
-              ),
-            ],
-          ),
+          ],
         );
       },
     );

@@ -5,6 +5,7 @@ import 'package:geo_notes/features/route/cubit/route/route_cubit.dart';
 import 'package:geo_notes/features/route/cubit/selected_item/selected_item_cubit.dart';
 import 'package:geo_notes/features/saved/cubit/saved_cubit.dart';
 import 'package:geo_notes/map_repository/models/city_model/city_model.dart';
+import 'package:geo_notes/map_repository/models/location_model/location_model.dart';
 import 'package:geo_notes/map_repository/models/route_model/route_model.dart';
 
 class RouteButton extends StatefulWidget {
@@ -75,6 +76,10 @@ class _RouteButtonState extends State<RouteButton> {
                                     routes: data.route.routes,
                                     waypoints: data.route.waypoints,
                                     displayName: end!.name,
+                                    location: LocationModel(
+                                        displayName: end.name,
+                                        latitude: end.idx,
+                                        longitude: end.idy),
                                   ),
                                 );
                           },
