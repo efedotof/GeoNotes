@@ -1,4 +1,4 @@
-package com.efedotov.notes_on_the_map
+package com.efedotov.nms
 
 import io.flutter.embedding.android.FlutterActivity
 
