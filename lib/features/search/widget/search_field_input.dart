@@ -31,10 +31,16 @@ class SearchFieldInput extends StatelessWidget {
           fillColor: Colors.grey[200],
         ),
         onChanged: (value) {
-          if (value.isEmpty) {
+          searchController.text = value;
+        },
+        onSubmitted: (value) {
+          debugPrint(searchController.text);
+          if (searchController.text.isEmpty) {
             context.read<SearcheCubit>().clearSearch();
           } else {
-            context.read<SearcheCubit>().searchLocations(query: value);
+            context
+                .read<SearcheCubit>()
+                .searchLocations(query: searchController.text);
           }
         },
       ),

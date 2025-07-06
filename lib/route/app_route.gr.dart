@@ -27,22 +27,6 @@ class CreateMarkerRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [HomeScreen]
-class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute({List<PageRouteInfo>? children})
-    : super(HomeRoute.name, initialChildren: children);
-
-  static const String name = 'HomeRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const HomeScreen();
-    },
-  );
-}
-
-/// generated route for
 /// [MainHomeScreen]
 class MainHomeRoute extends PageRouteInfo<void> {
   const MainHomeRoute({List<PageRouteInfo>? children})

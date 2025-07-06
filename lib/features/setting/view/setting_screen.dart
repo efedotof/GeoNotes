@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geo_notes/features/saved/cubit/saved_cubit.dart';
+import 'package:geo_notes/features/setting/cubit/setting_cubit.dart';
 
 @RoutePage()
 class SettingScreen extends StatelessWidget {
@@ -45,9 +45,8 @@ class SettingScreen extends StatelessWidget {
                           Icons.info,
                         ),
                         onTap: () => context
-                            .read<SavedCubit>()
-                            .storeinterface
-                            .clearAll(),
+                            .read<SettingCubit>()
+                            .showDeleateModal(context: context),
                       ),
                     ),
                     Card(

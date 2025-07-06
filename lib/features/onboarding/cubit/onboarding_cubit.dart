@@ -30,4 +30,9 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('onboarding_isSave', true);
   }
+
+  void skip({required BuildContext context}) {
+    context.replaceRoute(const MainHomeRoute());
+    _setDataFromStorage();
+  }
 }

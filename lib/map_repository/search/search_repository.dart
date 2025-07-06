@@ -5,7 +5,8 @@ import "search_interface.dart";
 import "package:dio/dio.dart";
 
 class SearchRepository implements SearchInterface {
-  final Dio _dio = Dio();
+  final Dio _dio = Dio(BaseOptions(
+      headers: {'User-Agent': 'geo_notes/1.0.1 (fedmehol@icloud.com)'}));
 
   @override
   Future<List<LocationModel>> searchLocation({required String query}) async {

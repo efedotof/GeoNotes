@@ -102,16 +102,12 @@ class _PinTailPainter extends CustomPainter {
       ..lineTo(size.width / 2, size.height)
       ..lineTo(size.width, 0)
       ..close();
-
-    // Тень
     final shadowPaint = Paint()
       ..color = shadowColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5;
 
     canvas.drawPath(path, shadowPaint);
-
-    // Основная заливка
     final paint = Paint()
       ..color = color
       ..style = PaintingStyle.fill;

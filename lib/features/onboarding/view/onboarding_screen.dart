@@ -36,7 +36,11 @@ class OnboardingScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TextButton(onPressed: () {}, child: const Text('Skip')),
+                  TextButton(
+                      onPressed: () => context
+                          .read<OnboardingCubit>()
+                          .skip(context: context),
+                      child: const Text('Пропустить')),
                   GestureDetector(
                     onTap: () => context
                         .read<OnboardingCubit>()
@@ -52,7 +56,7 @@ class OnboardingScreen extends StatelessWidget {
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Text('Next',
+                          Text('Далее',
                               style: TextStyle(
                                 color: Colors.white,
                               )),

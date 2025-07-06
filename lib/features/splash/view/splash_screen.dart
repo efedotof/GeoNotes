@@ -15,7 +15,13 @@ class SplashScreen extends StatelessWidget {
     return BlocBuilder<SplashCubit, SplashState>(
       builder: (context, state) {
         return const Scaffold(
-          backgroundColor: Color(0xFF102930),
+          body: Center(
+            child: Text(
+              "GeoNotes",
+              style: TextStyle(fontSize: 30),
+            ),
+          ),
+          // backgroundColor: Color(0xFF102930),
         );
       },
     );

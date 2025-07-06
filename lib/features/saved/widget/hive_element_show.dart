@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geo_notes/features/map/view/create_marker/cubit/create_marker_cubit.dart';
 import 'package:geo_notes/features/route/cubit/route/route_cubit.dart';
 import 'package:geo_notes/features/saved/cubit/saved_cubit.dart';
 import 'package:geo_notes/features/search/cubit/searche_cubit.dart';
@@ -46,23 +47,43 @@ class _HiveElementShowState extends State<HiveElementShow> {
               ],
             ),
             ValueListenableBuilder(
-                valueListenable: widget.listanable,
-                builder: (context, box, _) {
-                  debugPrint(box.name);
-                  final items = box.values.toList();
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: items.length,
-                    itemBuilder: (context, index) {
-                      final item = items[index];
-                      return Material(
+              valueListenable: widget.listanable,
+              builder: (context, box, _) {
+                debugPrint(box.name);
+                final keys = box.keys.toList();
+                return ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: keys.length,
+                  itemBuilder: (context, index) {
+                    final key = keys[index];
+                    final item = box.get(key);
+
+                    return Dismissible(
+                      key: ValueKey(key),
+                      direction: DismissDirection.endToStart,
+                      background: Container(
+                        alignment: Alignment.centerRight,
+                        padding: const EdgeInsets.only(right: 20),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Icon(Icons.delete, color: Colors.white),
+                      ),
+                      onDismissed: (direction) {
+                        widget.box.delete(key);
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Элемент удалён')),
+                        );
+                      },
+                      child: Material(
                         borderRadius: BorderRadius.circular(12),
                         child: InkWell(
                           borderRadius: BorderRadius.circular(12),
                           onTap: () {
                             if (item is LocationModel) {
-                              debugPrint("Это LocationModel");
                               context.read<SavedCubit>().cancel();
                               context.read<SearcheCubit>().onTapSearcheResult(
                                     context: context,
@@ -71,13 +92,20 @@ class _HiveElementShowState extends State<HiveElementShow> {
                                   );
                               context.replaceRoute(RouteRoute());
                             } else if (item is RouteModel) {
-                              debugPrint("Это RouteModel");
                               context.read<SavedCubit>().cancel();
                               context
                                   .read<RouteCubit>()
                                   .localRoute(context: context, model: item);
                             } else {
-                              debugPrint("Это ListBox");
+                              context
+                                  .read<CreateMarkerCubit>()
+                                  .showSavedNoteDialog(
+                                      context: context,
+                                      marker: item,
+                                      onDelete: () => context
+                                          .read<SavedCubit>()
+                                          .storeinterface
+                                          .deleteListBox(index: index));
                             }
                           },
                           child: Padding(
@@ -105,9 +133,7 @@ class _HiveElementShowState extends State<HiveElementShow> {
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleMedium
-                                        ?.copyWith(
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                        ?.copyWith(fontWeight: FontWeight.w600),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -120,10 +146,12 @@ class _HiveElementShowState extends State<HiveElementShow> {
                             ),
                           ),
                         ),
-                      );
-                    },
-                  );
-                }),
+                      ),
+                    );
+                  },
+                );
+              },
+            )
           ],
         );
       },
