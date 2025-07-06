@@ -27,9 +27,9 @@ class CreateMarkerCubit extends Cubit<CreateMarkerState> {
 
   Future<void> addImages() async {
     try {
-      final List<XFile>? picked = await _picker.pickMultiImage(limit: 20);
+      final List<XFile> picked = await _picker.pickMultiImage(limit: 20);
 
-      if (picked != null && picked.isNotEmpty) {
+      if (picked.isNotEmpty) {
         final files = picked.map((x) => File(x.path)).toList();
         emit(state.copyWith(images: [...state.images, ...files]));
       }
@@ -89,7 +89,6 @@ class CreateMarkerCubit extends Cubit<CreateMarkerState> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Заголовок с кнопкой удаления
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -113,9 +112,7 @@ class CreateMarkerCubit extends Cubit<CreateMarkerState> {
                     ),
                   ],
                 ),
-
                 const SizedBox(height: 16),
-
                 SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -183,7 +180,6 @@ class CreateMarkerCubit extends Cubit<CreateMarkerState> {
                     ],
                   ),
                 ),
-
                 const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,

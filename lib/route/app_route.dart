@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:geo_notes/features/about/view/about_screen.dart';
 import 'package:geo_notes/features/main_home/main_home.dart';
 import 'package:geo_notes/features/map/map.dart';
 import 'package:geo_notes/features/map/view/create_marker/view/create_marker_screen.dart';
@@ -33,5 +34,6 @@ class AppRouter extends RootStackRouter {
           AutoRoute(page: SettingRoute.page, path: 'setting'),
         ]),
         AutoRoute(page: CreateMarkerRoute.page, path: '/create_marker'),
+        AutoRoute(page: AboutRoute.page, path: "/about")
       ];
 }

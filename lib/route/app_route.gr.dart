@@ -11,6 +11,22 @@
 part of 'app_route.dart';
 
 /// generated route for
+/// [AboutScreen]
+class AboutRoute extends PageRouteInfo<void> {
+  const AboutRoute({List<PageRouteInfo>? children})
+    : super(AboutRoute.name, initialChildren: children);
+
+  static const String name = 'AboutRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const AboutScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [CreateMarkerScreen]
 class CreateMarkerRoute extends PageRouteInfo<void> {
   const CreateMarkerRoute({List<PageRouteInfo>? children})

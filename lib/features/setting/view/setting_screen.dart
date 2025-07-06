@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geo_notes/features/setting/cubit/setting_cubit.dart';
+import 'package:geo_notes/route/app_route.dart';
 
 @RoutePage()
 class SettingScreen extends StatelessWidget {
@@ -51,10 +52,10 @@ class SettingScreen extends StatelessWidget {
                     ),
                     Card(
                       child: ListTile(
-                        title: const Text('Помощь'),
+                        title: const Text('О приложении'),
                         trailing: const Icon(Icons.arrow_forward_ios),
                         leading: const Icon(Icons.support),
-                        onTap: () {},
+                        onTap: () => context.pushRoute(AboutRoute()),
                       ),
                     ),
                   ],
