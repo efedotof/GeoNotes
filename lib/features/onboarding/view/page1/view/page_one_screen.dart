@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:lottie/lottie.dart';
 
 @RoutePage()
 class PageOneScreen extends StatelessWidget {
@@ -7,9 +8,32 @@ class PageOneScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('page 1'),
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            const Spacer(),
+            Lottie.asset(
+              'assets/map.json',
+              width: 250,
+              height: 250,
+              fit: BoxFit.contain,
+            ),
+            const SizedBox(height: 32),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Text(
+                'Одна карта — а много воспоминаний',
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const Spacer(),
+          ],
+        ),
       ),
     );
   }

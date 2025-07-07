@@ -11,7 +11,7 @@ class AboutScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('О приложении'),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,6 +29,19 @@ class AboutScreen extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             const Text(
+              'Как пользоваться приложением',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              '• Чтобы добавить метку, зайдите на экран "Карта" и нажмите на кнопку "+".\n'
+              '• Чтобы поставить точку в указанном месте, перейдите на вкладку "Поиск", введите нужное место и нажмите на появившееся место.\n'
+              '• Чтобы построить маршрут, сначала укажите точку на вкладке "Поиск", затем перейдите на вкладку "Навигация", '
+              'выберите способ добраться туда и нажмите на кнопку "Начать".',
+              style: TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 24),
+            const Text(
               'Связаться с нами',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
             ),
@@ -39,7 +52,7 @@ class AboutScreen extends StatelessWidget {
               style: TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 8),
-            SelectableText(
+            const SelectableText(
               'fedmehol@icloud.com',
               style: TextStyle(
                 fontSize: 16,

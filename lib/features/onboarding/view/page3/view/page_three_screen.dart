@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:lottie/lottie.dart';
 
 @RoutePage()
 class PageThreeScreen extends StatelessWidget {
@@ -7,9 +8,32 @@ class PageThreeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('page 3'),
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            const Spacer(),
+            Lottie.asset(
+              'assets/save.json',
+              width: 250,
+              height: 250,
+              fit: BoxFit.contain,
+            ),
+            const SizedBox(height: 32),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Text(
+                'Сохраняй маршруты, заметки, историю поиска',
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const Spacer(),
+          ],
+        ),
       ),
     );
   }
