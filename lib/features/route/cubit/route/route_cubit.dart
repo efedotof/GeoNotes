@@ -55,4 +55,14 @@ class RouteCubit extends Cubit<RouteState> {
   void clean() {
     emit(RouteState.initial());
   }
+
+  List<LatLng>? convertRouteToPoints(RouteModel route) {
+    if (route.routes.isEmpty || route.routes.first.legs.isEmpty) return null;
+
+    final steps = route.routes.first.legs.first.steps;
+    return steps
+        .map((step) =>
+            LatLng(step.maneuver.location[1], step.maneuver.location[0]))
+        .toList();
+  }
 }

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:geo_notes/features/map/cubit/location/location_cubit.dart';
+import 'package:geo_notes/features/map/cubit/map/map_cubit.dart';
 import 'package:geo_notes/features/map/cubit/marker/marker_cubit.dart';
+import 'package:geo_notes/features/route/cubit/route/route_cubit.dart';
 import 'package:geo_notes/features/saved/cubit/saved_cubit.dart';
 import 'package:latlong2/latlong.dart';
 import 'add_local_button.dart';
+import 'close_route_and_marker.dart';
 import 'custom_image_marker.dart';
 import 'location_button.dart';
 import 'city_name_display.dart';
@@ -15,7 +19,6 @@ class MapContent extends StatelessWidget {
   final String cityName;
   final LatLng? markerLocation;
   final String? markerCityName;
-  final List<LatLng>? routePoints;
 
   const MapContent({
     super.key,
@@ -24,7 +27,6 @@ class MapContent extends StatelessWidget {
     required this.cityName,
     this.markerLocation,
     this.markerCityName,
-    this.routePoints,
   });
 
   @override
@@ -34,6 +36,7 @@ class MapContent extends StatelessWidget {
         FlutterMap(
           mapController: mapController,
           options: MapOptions(
+            initialCenter: location,
             initialZoom: 15.5,
             maxZoom: 17,
             minZoom: 3.5,
@@ -50,16 +53,27 @@ class MapContent extends StatelessWidget {
               userAgentPackageName: 'com.efedotov.notes_on_the_map',
               retinaMode: false,
             ),
-            if (routePoints != null)
-              PolylineLayer(
-                polylines: [
-                  Polyline(
-                    points: routePoints!,
-                    color: Colors.blue.shade700,
-                    strokeWidth: 4,
-                  ),
-                ],
-              ),
+            BlocBuilder<RouteCubit, RouteState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                  loaded: (route) {
+                    final points =
+                        context.read<RouteCubit>().convertRouteToPoints(route);
+                    if (points == null) return const SizedBox.shrink();
+                    return PolylineLayer(
+                      polylines: [
+                        Polyline(
+                          points: points,
+                          color: Colors.blue.shade700,
+                          strokeWidth: 4,
+                        ),
+                      ],
+                    );
+                  },
+                  orElse: () => const SizedBox.shrink(),
+                );
+              },
+            ),
             BlocBuilder<MarkerCubit, MarkerState>(
               builder: (context, state) {
                 double rotation = 0;
@@ -76,12 +90,10 @@ class MapContent extends StatelessWidget {
                       .listenableListBox,
                   builder: (context, box, _) {
                     final markers = <Marker>[];
-
                     final items = box.values.toList();
 
                     for (int i = 0; i < items.length; i++) {
                       final item = items[i];
-
                       markers.add(
                         Marker(
                           point: LatLng(item.latitude, item.longitude),
@@ -95,6 +107,7 @@ class MapContent extends StatelessWidget {
                         ),
                       );
                     }
+
                     if (markerLocation != null) {
                       markers.add(
                         Marker(
@@ -106,18 +119,29 @@ class MapContent extends StatelessWidget {
                       );
                     }
 
-                    markers.add(
-                      Marker(
-                        point: location,
-                        width: 40,
-                        height: 40,
-                        child: Transform.rotate(
-                          angle: rotation * (3.14159 / 180),
-                          child: const Icon(Icons.send_rounded,
-                              color: Color(0xFF10282E)),
-                        ),
-                      ),
+                    final locationMarker =
+                        context.select<LocationCubit, Marker?>(
+                      (cubit) {
+                        final state = cubit.state;
+                        return state.maybeMap(
+                          loaded: (loadedState) => Marker(
+                            point: loadedState.location,
+                            width: 40,
+                            height: 40,
+                            child: Transform.rotate(
+                              angle: rotation * (3.14159 / 180),
+                              child: const Icon(Icons.send_rounded,
+                                  color: Color(0xFF10282E)),
+                            ),
+                          ),
+                          orElse: () => null,
+                        );
+                      },
                     );
+
+                    if (locationMarker != null) {
+                      markers.add(locationMarker);
+                    }
 
                     return MarkerLayer(markers: markers);
                   },
@@ -128,6 +152,25 @@ class MapContent extends StatelessWidget {
         ),
         LocationButton(mapController: mapController),
         AddLocalButton(),
+        BlocBuilder<MapCubit, MapState>(
+          builder: (context, mapState) {
+            return BlocBuilder<RouteCubit, RouteState>(
+              builder: (context, routeState) {
+                final showClose = mapState.maybeMap(
+                      mapMarkerAdded: (_) => true,
+                      orElse: () => false,
+                    ) ||
+                    routeState.maybeMap(
+                      loaded: (_) => true,
+                      orElse: () => false,
+                    );
+                return showClose
+                    ? const CloseRouteAndMarker()
+                    : const SizedBox.shrink();
+              },
+            );
+          },
+        ),
         CityNameDisplay(cityName: cityName),
       ],
     );

@@ -18,6 +18,7 @@ import 'package:geo_notes/map_repository/search/search_repository.dart';
 import 'package:geo_notes/map_repository/routing/routing_repository.dart';
 import 'package:geo_notes/Theme/cubit/theme_cubit.dart';
 import 'package:geo_notes/Theme/theme.dart';
+import 'features/map/cubit/location/location_cubit.dart';
 import 'features/saved/cubit/saved_cubit.dart';
 import 'route/app_route.dart';
 import 'store/repository/store_repository.dart';
@@ -53,6 +54,8 @@ void main() async {
             create: (context) =>
                 CreateMarkerCubit(storeInterface: storeRepository)),
         BlocProvider(create: (context) => SelectedItemCubit()),
+        BlocProvider(
+            create: (context) => LocationCubit(mapInterface: mapRepository)),
         BlocProvider(
             create: (context) => SettingCubit(storeInterface: storeRepository)),
         BlocProvider(create: (context) => DistanceAndTimeCubit()),

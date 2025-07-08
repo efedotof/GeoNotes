@@ -15,4 +15,6 @@ abstract interface class MapInterface {
   MapController get mapController;
   LatLng? get markerLocation;
   LatLng? get location;
+  Stream<LatLng> getLocationStream();
+  Future<CityModel?> getCityFromLocation(LatLng location);
 }

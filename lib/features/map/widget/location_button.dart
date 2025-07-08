@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geo_notes/features/map/cubit/map/map_cubit.dart';
+import 'package:geo_notes/features/map/cubit/location/location_cubit.dart';
 
 class LocationButton extends StatelessWidget {
   final MapController mapController;
@@ -14,7 +14,7 @@ class LocationButton extends StatelessWidget {
       bottom: 30,
       right: 10,
       child: GestureDetector(
-        onTap: () => context.read<MapCubit>().updateCurrentLocation(),
+        onTap: () => context.read<LocationCubit>().fetchCurrentLocation(),
         child: Container(
           width: 50,
           height: 50,

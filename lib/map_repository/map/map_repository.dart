@@ -129,4 +129,23 @@ class MapRepository implements MapInterface {
     _markerLocation = location;
     mapController.move(_markerLocation!, 17);
   }
+
+  @override
+  Stream<LatLng> getLocationStream() {
+    return Geolocator.getPositionStream(
+      locationSettings: const LocationSettings(
+        accuracy: LocationAccuracy.high,
+        distanceFilter: 2,
+      ),
+    ).map((position) => LatLng(position.latitude, position.longitude));
+  }
+
+  @override
+  Future<CityModel?> getCityFromLocation(LatLng location) async {
+    final cityModel = await _getCityModelFromCoordinates(
+      latitude: location.latitude,
+      longitude: location.longitude,
+    );
+    return cityModel;
+  }
 }
