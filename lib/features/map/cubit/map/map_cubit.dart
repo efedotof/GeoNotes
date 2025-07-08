@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geo_notes/map_repository/map/map_interface.dart';
@@ -13,6 +14,7 @@ class MapCubit extends Cubit<MapState> {
   }
 
   final MapInterface mapInterface;
+  Timer? _locationUpdateTimer;
 
   final List<CityModel> cities = [
     CityModel(name: 'New York', idx: 40.7128, idy: -74.0060),
@@ -28,15 +30,14 @@ class MapCubit extends Cubit<MapState> {
         location: result.location!,
         cityName: result.cityModel!.name,
       ));
+      _startAutoUpdate();
     } else {
       emit(const MapState.mapPermissionDenied());
     }
   }
 
   Future<void> updateCurrentLocation() async {
-    emit(const MapState.mapLoading());
     final result = await mapInterface.updateCurrentLocation();
-
     if (result.location != null && result.cityModel != null) {
       emit(MapState.mapLocationUpdated(
         location: result.location!,
@@ -62,5 +63,24 @@ class MapCubit extends Cubit<MapState> {
     await mapInterface.addMarkerAtLocation(
         location: location, cityName: cityName);
     emit(MapState.mapMarkerAdded(markerLocation: location, cityName: cityName));
+  }
+
+  void _startAutoUpdate(
+      {Duration interval = const Duration(milliseconds: 500)}) {
+    _locationUpdateTimer?.cancel();
+    _locationUpdateTimer = Timer.periodic(interval, (_) {
+      updateCurrentLocation();
+    });
+  }
+
+  void stopAutoUpdate() {
+    _locationUpdateTimer?.cancel();
+    _locationUpdateTimer = null;
+  }
+
+  @override
+  Future<void> close() {
+    stopAutoUpdate();
+    return super.close();
   }
 }

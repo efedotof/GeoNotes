@@ -13,11 +13,13 @@ class PageOneScreen extends StatelessWidget {
         child: Column(
           children: [
             const Spacer(),
-            Lottie.asset(
-              'assets/map.json',
-              width: 250,
-              height: 250,
-              fit: BoxFit.contain,
+            Center(
+              child: Lottie.asset(
+                'assets/map.json',
+                width: 250,
+                height: 250,
+                fit: BoxFit.contain,
+              ),
             ),
             const SizedBox(height: 32),
             Padding(

@@ -101,10 +101,7 @@ class MapContent extends StatelessWidget {
                           point: markerLocation!,
                           width: 40,
                           height: 40,
-                          child: Transform.rotate(
-                            angle: rotation * (3.14159 / 180),
-                            child: const Icon(Icons.flag, color: Colors.red),
-                          ),
+                          child: const Icon(Icons.flag, color: Colors.red),
                         ),
                       );
                     }
